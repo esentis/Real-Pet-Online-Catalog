@@ -79,6 +79,7 @@ class _SearchProductState extends State<SearchProduct> {
                   final productName = product.data['name'];
                   final productPrice = product.data['price'];
                   final id = product.documentID;
+                  final category = product.data['category'];
                   final desc =
                       product.data['desc'] ?? 'No description added yet';
                   final img =
@@ -89,7 +90,8 @@ class _SearchProductState extends State<SearchProduct> {
                     productPrice,
                     img,
                     productSKU,
-                    desc
+                    desc,
+                    category
                   ];
                   final productWidget = ListTile(
                     onTap: () {
@@ -139,15 +141,13 @@ class _SearchProductState extends State<SearchProduct> {
                         ),
                       )
                     : Padding(
-                      padding: const EdgeInsets.only(top : 40.0),
-                      child: Text(
+                        padding: const EdgeInsets.only(top: 40.0),
+                        child: Text(
                           'Δυστυχώς δεν βρέθηκαν προϊόντα \nμε τον κωδικό που δώσατε',
                           textAlign: TextAlign.center,
-                  style: GoogleFonts.comfortaa(
-                      fontSize: 20
-                  ),
+                          style: GoogleFonts.comfortaa(fontSize: 20),
                         ),
-                    );
+                      );
               },
             ),
           ],

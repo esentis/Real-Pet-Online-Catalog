@@ -73,6 +73,7 @@ class _ResultsPageState extends State<ResultsPage> {
                   final productName = product.data['name'];
                   final productPrice = product.data['price'];
                   final id = product.documentID;
+                  final category = product.data['category'];
                   final desc =
                       product.data['desc'] ?? 'No description added yet';
                   final img =
@@ -83,7 +84,8 @@ class _ResultsPageState extends State<ResultsPage> {
                     productPrice,
                     img,
                     productSKU,
-                    desc
+                    desc,
+                    category
                   ];
                   final productWidget = ListTile(
                     onTap: () {

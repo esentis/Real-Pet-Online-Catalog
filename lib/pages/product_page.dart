@@ -9,6 +9,7 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List finalPrices = Get.arguments[1];
+    print(Get.arguments[5].toString());
     return Scaffold(
         body: SafeArea(
       child: Center(
@@ -123,7 +124,7 @@ class ProductPage extends StatelessWidget {
                           headingRowHeight: 55,
                           horizontalMargin: 0,
                           dataRowHeight: 45,
-                          columnSpacing: 25,
+                          columnSpacing: 22,
                           dividerThickness: 3,
                           columns: [
                             DataColumn(
@@ -145,7 +146,7 @@ class ProductPage extends StatelessWidget {
                                 numeric: false,
                                 label: Flexible(
                                   child: Text(
-                                    '-10%',
+                                    Get.arguments[5].toString()=='dogFood'|| Get.arguments[5].toString()=='catFood' ? '-20%':'-10%',
                                     style: GoogleFonts.comfortaa(fontSize: 15),
                                   ),
                                 )),
