@@ -71,7 +71,8 @@ class _ResultsPageState extends State<ResultsPage> {
                 List<ListTile> productWidgets = [];
                 for (var product in products) {
                   final productName = product.data['name'];
-                  final productPrice = product.data['price'];
+                  final productPrice = product.data['price'][0].toString();
+                  final prices = product.data['price'];
                   final id = product.documentID;
                   final category = product.data['category'];
                   final desc =
@@ -81,7 +82,7 @@ class _ResultsPageState extends State<ResultsPage> {
                   final productSKU = product.data['sku'];
                   List arguments = [
                     productName,
-                    productPrice,
+                    prices,
                     img,
                     productSKU,
                     desc,

@@ -8,8 +8,8 @@ import 'package:transparent_image/transparent_image.dart';
 class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List finalPrices = Get.arguments[1];
     print(Get.arguments[5].toString());
+    print(Get.arguments[1].toString());
     return Scaffold(
         body: SafeArea(
       child: Center(
@@ -124,7 +124,7 @@ class ProductPage extends StatelessWidget {
                           headingRowHeight: 55,
                           horizontalMargin: 0,
                           dataRowHeight: 45,
-                          columnSpacing: 22,
+                          columnSpacing: 18,
                           dividerThickness: 3,
                           columns: [
                             DataColumn(
@@ -178,7 +178,7 @@ class ProductPage extends StatelessWidget {
                               DataCell(Row(
                                 children: <Widget>[
                                   Text(
-                                    '${finalPrices[0]}',
+                                    '${Get.arguments[1][0]}',
                                     style:
                                     GoogleFonts.comfortaa(fontSize: 17,
                                     color: Colors.white),
@@ -190,7 +190,7 @@ class ProductPage extends StatelessWidget {
                                 Row(
                                   children: <Widget>[
                                     Text(
-                                      '${finalPrices[1]}',
+                                      '${Get.arguments[1][1]}',
                                       style:
                                           GoogleFonts.comfortaa(fontSize: 17,
                                           color : Colors.white),
@@ -203,7 +203,7 @@ class ProductPage extends StatelessWidget {
                                 Row(
                                   children: <Widget>[
                                     Text(
-                                      '${finalPrices[2]}',
+                                      '${Get.arguments[1][2]}',
                                       style:
                                           GoogleFonts.comfortaa(fontSize: 17,
                                           color: Colors.white),
@@ -216,7 +216,7 @@ class ProductPage extends StatelessWidget {
                                 Row(
                                   children: <Widget>[
                                     Text(
-                                      '${finalPrices[3]}',
+                                      '${Get.arguments[1][3]}',
                                       style:
                                           GoogleFonts.comfortaa(fontSize: 17,
                                           color: Colors.white),
