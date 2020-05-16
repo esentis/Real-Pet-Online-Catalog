@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "554604192795",
+    "firebase_url": "https://realpetshop-8035b.firebaseio.com",
+    "project_id": "realpetshop-8035b",
+    "storage_bucket": "realpetshop-8035b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554604192795:android:4b1aafbf33c71e18c384be",
+        "android_client_info": {
+          "package_name": "gr.esentis.realpet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554604192795-1u2jc5jaab3sjtrbkf13mh9jtn7v878d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl2SY0WsrIjHl1kPg5FvQgweLGUxwt_8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554604192795-1u2jc5jaab3sjtrbkf13mh9jtn7v878d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
