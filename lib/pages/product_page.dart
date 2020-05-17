@@ -114,123 +114,120 @@ class ProductPage extends StatelessWidget {
                   ),
                 ),
                 //PRODUCT DETAILS
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Flexible(
-                        child: DataTable(
-                          headingRowHeight: 55,
-                          horizontalMargin: 0,
-                          dataRowHeight: 45,
-                          columnSpacing: 18,
-                          dividerThickness: 3,
-                          columns: [
-                            DataColumn(
-                                label: Flexible(
-                              child: Text(
-                                'SKU',
-                                style: GoogleFonts.comfortaa(fontSize: 15),
-                              ),
-                            )),
-                            DataColumn(
-                                numeric: false,
-                                label: Flexible(
-                                  child: Text(
-                                    'Αρχική',
-                                    style: GoogleFonts.comfortaa(fontSize: 15),
-                                  ),
-                                )),
-                            DataColumn(
-                                numeric: false,
-                                label: Flexible(
-                                  child: Text(
-                                    Get.arguments[5].toString()=='dogFood'|| Get.arguments[5].toString()=='catFood' ? '-20%':'-10%',
-                                    style: GoogleFonts.comfortaa(fontSize: 15),
-                                  ),
-                                )),
-                            DataColumn(
-                                numeric: false,
-                                label: Flexible(
-                                  child: Text(
-                                    '-10% \nμετρητοίς',
-                                    style: GoogleFonts.comfortaa(fontSize: 15),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                )),
-                            DataColumn(
-                                numeric: false,
-                                label: Flexible(
-                                  child: Text(
-                                    'Λιανική',
-                                    style: GoogleFonts.comfortaa(fontSize: 15,),
-                                  ),
-                                )),
-                          ],
-                          rows: [
-                            DataRow(cells: [
-                              DataCell(Text('${Get.arguments[3]}',
-                              style: GoogleFonts.comfortaa(
-                                color: Colors.white,
-                                fontSize: 17
-                              ),)),
-                              DataCell(Row(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Flexible(
+                      child: DataTable(
+                        headingRowHeight: 55,
+                        horizontalMargin: 0,
+                        dataRowHeight: 45,
+                        columnSpacing: 18,
+                        dividerThickness: 3,
+                        columns: [
+                          DataColumn(
+                              label: Flexible(
+                            child: Text(
+                              'SKU',
+                              style: GoogleFonts.comfortaa(fontSize: 15),
+                            ),
+                          )),
+                          DataColumn(
+                              numeric: false,
+                              label: Flexible(
+                                child: Text(
+                                  'Αρχική',
+                                  style: GoogleFonts.comfortaa(fontSize: 15),
+                                ),
+                              )),
+                          DataColumn(
+                              numeric: false,
+                              label: Flexible(
+                                child: Text(
+                                  Get.arguments[5].toString()=='dogFood'|| Get.arguments[5].toString()=='catFood' ? '-20%':'-10%',
+                                  style: GoogleFonts.comfortaa(fontSize: 15),
+                                ),
+                              )),
+                          DataColumn(
+                              numeric: false,
+                              label: Flexible(
+                                child: Text(
+                                  '-10% \nμετρητοίς',
+                                  style: GoogleFonts.comfortaa(fontSize: 15),
+                                  textAlign: TextAlign.left,
+                                ),
+                              )),
+                          DataColumn(
+                              numeric: false,
+                              label: Flexible(
+                                child: Text(
+                                  'Λιανική',
+                                  style: GoogleFonts.comfortaa(fontSize: 15,),
+                                ),
+                              )),
+                        ],
+                        rows: [
+                          DataRow(cells: [
+                            DataCell(Text('${Get.arguments[3]}',
+                            style: GoogleFonts.comfortaa(
+                              color: Colors.white,
+                              fontSize: 17
+                            ),)),
+                            DataCell(Row(
+                              children: <Widget>[
+                                Text(
+                                  '${Get.arguments[1][0]}',
+                                  style:
+                                  GoogleFonts.comfortaa(fontSize: 17,
+                                  color: Colors.white),
+                                ),
+                                Icon(Icons.euro_symbol,size: 17,)
+                              ],
+                            ),),
+                            DataCell(
+                              Row(
                                 children: <Widget>[
                                   Text(
-                                    '${Get.arguments[1][0]}',
+                                    '${Get.arguments[1][1]}',
                                     style:
-                                    GoogleFonts.comfortaa(fontSize: 17,
-                                    color: Colors.white),
+                                        GoogleFonts.comfortaa(fontSize: 17,
+                                        color : Colors.white),
                                   ),
                                   Icon(Icons.euro_symbol,size: 17,)
                                 ],
-                              ),),
-                              DataCell(
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      '${Get.arguments[1][1]}',
-                                      style:
-                                          GoogleFonts.comfortaa(fontSize: 17,
-                                          color : Colors.white),
-                                    ),
-                                    Icon(Icons.euro_symbol,size: 17,)
-                                  ],
-                                ),
                               ),
-                              DataCell(
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      '${Get.arguments[1][2]}',
-                                      style:
-                                          GoogleFonts.comfortaa(fontSize: 17,
-                                          color: Colors.white),
-                                    ),
-                                    Icon(Icons.euro_symbol,size: 17,)
-                                  ],
-                                ),
+                            ),
+                            DataCell(
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    '${Get.arguments[1][2]}',
+                                    style:
+                                        GoogleFonts.comfortaa(fontSize: 17,
+                                        color: Colors.white),
+                                  ),
+                                  Icon(Icons.euro_symbol,size: 17,)
+                                ],
                               ),
-                              DataCell(
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      '${Get.arguments[1][3]}',
-                                      style:
-                                          GoogleFonts.comfortaa(fontSize: 17,
-                                          color: Colors.white),
-                                    ),
-                                    Icon(Icons.euro_symbol,size: 17,)
-                                  ],
-                                ),
+                            ),
+                            DataCell(
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    '${Get.arguments[1][3]}',
+                                    style:
+                                        GoogleFonts.comfortaa(fontSize: 17,
+                                        color: Colors.white),
+                                  ),
+                                  Icon(Icons.euro_symbol,size: 17,)
+                                ],
                               ),
-                            ])
-                          ],
-                        ),
+                            ),
+                          ])
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 )
               ],
             ),
