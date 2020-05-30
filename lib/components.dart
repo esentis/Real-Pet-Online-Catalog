@@ -1,338 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:realpet/pages/shop_logic.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:transparent_image/transparent_image.dart';
 
-class AllProducts extends StatelessWidget {
-  const AllProducts({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance
-          .collection('products')
-          .orderBy('name', descending: false)
-          .snapshots(),
-      // ignore: missing_return
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Center(
-            child: CircularProgressIndicator(
-              backgroundColor: Colors.blue,
-            ),
-          );
-        }
-
-        final products = snapshot.data.documents;
-        List<ListTile> productWidgets = [];
-        for (var product in products) {
-          final productName = product.data['name'];
-          final productPrice = product.data['price'];
-          final id = product.documentID;
-          final productCategory = product.data['category'];
-          final productSKU =
-              product.data['sku'] == '' ? '000-000' : product.data['sku'];
-          final productWidget = ListTile(
-            onTap: () {
-              Get.bottomSheet(
-                  ProductsEditScreen(productName: productName, id: id),
-                  elevation: 30,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                    topRight: Radius.elliptical(50, 0),
-                    topLeft: Radius.circular(30),
-                  )));
-            },
-            leading: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Icons.pets,
-                  color: Colors.white,
-                ),
-                Text(productCategory ?? 'N/A'),
-              ],
-            ),
-            title: Text(
-              '$productName',
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
-            ),
-            subtitle: Text(
-              '$productSKU',
-              textAlign: TextAlign.left,
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
-            trailing: Text(
-              '$productPrice€',
-              style: TextStyle(fontWeight: FontWeight.w900),
-            ),
-          );
-          productWidgets.add(productWidget);
-        }
-        return Expanded(
-          child: ListView(
-            reverse: false,
-            children: productWidgets,
-          ),
-        );
-      },
-    );
-  }
-}
-
-class ProductsEditScreen extends StatelessWidget {
-  const ProductsEditScreen({
-    @required this.productName,
-    @required this.id,
-  });
-
-  final productName;
-  final String id;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Wrap(
-        children: <Widget>[
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'ΠΡΟΣΘΗΚΗ ΣΕ ΚΑΤΗΓΟΡΙΑ',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      print('$productName has been deleted from products');
-                      Firestore.instance
-                          .collection('products')
-                          .document(id)
-                          .delete();
-                    },
-                    child: Icon(
-                      Icons.close,
-                      color: Colors.red,
-                      size: 35,
-                      semanticLabel: 'Διαγραφη Προϊόντος',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Container(
-            width: 250,
-            height: 250,
-            child: ListView(
-              reverse: false,
-              children: <Widget>[
-                ListTile(
-                  onTap: () {
-                    print('$productName added to Grooming category');
-                    Firestore.instance
-                        .collection('products')
-                        .document(id)
-                        .updateData(
-                      {'category': 'grooming'},
-                    );
-                  },
-                  title: Text(
-                    'Grooming',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    print('$productName added to Shampoo category');
-                    Firestore.instance
-                        .collection('products')
-                        .document(id)
-                        .updateData(
-                      {'category': 'shampoo'},
-                    );
-                  },
-                  title: Text(
-                    'Σαμπουάν',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    print('$productName added to Toys category');
-                    Firestore.instance
-                        .collection('products')
-                        .document(id)
-                        .updateData(
-                      {'category': 'toys'},
-                    );
-                  },
-                  title: Text(
-                    'Παιχνίδια',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    print('$productName added to Dog food category');
-                    Firestore.instance
-                        .collection('products')
-                        .document(id)
-                        .updateData(
-                      {'category': 'dogFood'},
-                    );
-                  },
-                  title: Text(
-                    'Τροφες Σκυλου',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    print('$productName added to Catfood category');
-                    Firestore.instance
-                        .collection('products')
-                        .document(id)
-                        .updateData(
-                      {'category': 'catFood'},
-                    );
-                  },
-                  title: Text(
-                    'Τροφες Γάτας',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    print('$productName added to Bones category');
-                    Firestore.instance
-                        .collection('products')
-                        .document(id)
-                        .updateData(
-                      {'category': 'bones'},
-                    );
-                  },
-                  title: Text(
-                    'Κοκκαλα',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    print('$productName added to Vitamines category');
-                    Firestore.instance
-                        .collection('products')
-                        .document(id)
-                        .updateData(
-                      {'category': 'vitamines'},
-                    );
-                  },
-                  title: Text(
-                    'Βιταμίνες',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    print('$productName added to Bowl category');
-                    Firestore.instance
-                        .collection('products')
-                        .document(id)
-                        .updateData(
-                      {'category': 'bowl'},
-                    );
-                  },
-                  title: Text(
-                    'Μπωλ τροφών',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    print('$productName added to Misc category');
-                    Firestore.instance
-                        .collection('products')
-                        .document(id)
-                        .updateData(
-                      {'category': 'misc'},
-                    );
-                  },
-                  title: Text(
-                    'Διάφορα',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  onTap: () {
-                    print('$productName added to Bird category');
-                    Firestore.instance
-                        .collection('products')
-                        .document(id)
-                        .updateData(
-                      {'category': 'bird'},
-                    );
-                  },
-                  title: Text(
-                    'Πουλια',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
+// STOREFRONT'S CATEGORIES
 class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -350,68 +24,68 @@ class Categories extends StatelessWidget {
               children: <Widget>[
                 CategoryIcon(
                   text: 'Τροφή σκύλου',
-                  categoryName: 'dogFood',
+                  categoryId: 2,
                   categoryIcon: FontAwesomeIcons.dog,
                   iconColor: Colors.white,
                   color: Color(0xFF00a1ab),
                 ),
                 CategoryIcon(
                   text: 'Τροφή γάτας',
-                  categoryName: 'catFood',
+                  categoryId: 1,
                   categoryIcon: FontAwesomeIcons.cat,
                   color: Color(0xFF00a1ab),
                 ),
                 CategoryIcon(
                   text: 'Grooming',
-                  categoryName: 'grooming',
+                  categoryId: 4,
                   categoryIcon: FontAwesomeIcons.cut,
                   color: Color(0xFF00a1ab),
                 ),
                 CategoryIcon(
                   text: 'Σαμπουάν',
-                  categoryName: 'shampoo',
+                  categoryId: 3,
                   categoryIcon: FontAwesomeIcons.soap,
                   color: Color(0xFF00a1ab),
                 ),
                 CategoryIcon(
                   text: 'Μπωλ φαγητού',
-                  categoryName: 'bowl',
+                  categoryId: 7,
                   categoryIcon: Icons.fastfood,
                   color: Color(0xFF00a1ab),
                 ),
                 CategoryIcon(
                   text: 'Παιχνίδια',
-                  categoryName: 'toys',
+                  categoryId: 10,
                   categoryIcon: Icons.toys,
                   color: Color(0xFF00a1ab),
                 ),
                 CategoryIcon(
                   text: 'Κόκκαλα',
-                  categoryName: 'bones',
+                  categoryId: 6,
                   categoryIcon: FontAwesomeIcons.bone,
                   color: Color(0xFF00a1ab),
                 ),
                 CategoryIcon(
                   text: 'Βιταμίνες',
-                  categoryName: 'vitamines',
+                  categoryId: 11,
                   categoryIcon: FontAwesomeIcons.tablets,
                   color: Color(0xFF00a1ab),
                 ),
                 CategoryIcon(
                   text: 'Πουλιά',
-                  categoryName: 'bird',
+                  categoryId: 5,
                   categoryIcon: FontAwesomeIcons.dove,
                   color: Color(0xFF00a1ab),
                 ),
                 CategoryIcon(
                   text: 'Επαγγελματικά',
-                  categoryName: 'pro',
+                  categoryId: 8,
                   categoryIcon: FontAwesomeIcons.userMd,
                   color: Color(0xFF00a1ab),
                 ),
                 CategoryIcon(
                   text: 'Διάφορα',
-                  categoryName: 'misc',
+                  categoryId: 9,
                   categoryIcon: FontAwesomeIcons.ellipsisH,
                   color: Color(0xFF00a1ab),
                 ),
@@ -424,29 +98,32 @@ class Categories extends StatelessWidget {
   }
 }
 
+// CATEGORIES' ICON
 class CategoryIcon extends StatelessWidget {
   CategoryIcon({
     this.text,
-    this.categoryName,
+    this.categoryId,
     this.color,
     this.categoryIcon,
     this.iconColor,
   });
   final String text;
-  final String categoryName;
+  final int categoryId;
   final Color color;
   final List argumentsList = [];
   final IconData categoryIcon;
   final Color iconColor;
   @override
   Widget build(BuildContext context) {
-    argumentsList.add(categoryName);
+    argumentsList.add(categoryId);
     argumentsList.add(text);
     argumentsList.add(categoryIcon);
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         print('tapped');
-        Get.toNamed('/results', arguments: argumentsList);
+        List products = await getCategoryProducts(categoryId);
+        print(products);
+        Get.toNamed('/results', arguments: products);
       },
       child: Material(
         color: color,
@@ -495,11 +172,11 @@ class CategoryIcon extends StatelessWidget {
   }
 }
 
+// SEARCH PRODUCT WIDGET
 class SearchProduct extends StatelessWidget {
-  var _sku;
-
   @override
   Widget build(BuildContext context) {
+    var _sku;
     return GestureDetector(
       onTap: () {
         Alert(
@@ -528,17 +205,15 @@ class SearchProduct extends StatelessWidget {
                   fontSize: 30,
                 ),
                 textAlign: TextAlign.center,
-                onChanged: (typed){
-                  _sku=typed;
+                onChanged: (typed) {
+                  _sku = typed;
                 },
                 enabled: true,
                 decoration: InputDecoration(
                   icon: Icon(FontAwesomeIcons.fingerprint),
                   hintText: 'Κωδικός προϊόντος',
                   hintStyle: GoogleFonts.comfortaa(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w900
-                  ),
+                      fontSize: 15, fontWeight: FontWeight.w900),
                   border: OutlineInputBorder(
                     gapPadding: 15,
                     borderRadius: BorderRadius.only(
@@ -554,7 +229,7 @@ class SearchProduct extends StatelessWidget {
               DialogButton(
                 color: Colors.white,
                 onPressed: () {
-                  Get.toNamed('/search',arguments : _sku);
+                  Get.toNamed('/search', arguments: _sku);
                 },
                 radius: BorderRadius.only(
                     topLeft: Radius.circular(60),
@@ -570,7 +245,116 @@ class SearchProduct extends StatelessWidget {
               )
             ]).show();
       },
-      child: Icon(FontAwesomeIcons.search,size: 30,),
+      child: Icon(
+        FontAwesomeIcons.search,
+        size: 30,
+      ),
+    );
+  }
+}
+
+// SEARCH RESULTS PAGE
+class SearchResults extends StatefulWidget {
+  @override
+  _SearchResultsState createState() => _SearchResultsState();
+}
+// SEARCH RESULTS PAGE STATE
+class _SearchResultsState extends State<SearchResults> {
+  List products = [];
+  @override
+  void initState() {
+    super.initState();
+    products = Get.arguments;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          child: Center(
+            child: ListView.builder(
+              itemCount: products.length ?? 1,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ResultsTile(
+                    categoryId: products[index]['categoryId'],
+                    img: products[index]['img'],
+                    desc: products[index]['description'],
+                    originalPrice: products[index]['originalPrice'],
+                    productName: products[index]['name'],
+                    productSKU: products[index]['sku'],
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// RESULTS' TILE
+class ResultsTile extends StatelessWidget {
+  ResultsTile({
+    this.productName,
+    this.originalPrice,
+    this.productSKU,
+    this.img,
+    this.desc,
+    this.categoryId,
+  });
+  final int categoryId;
+  final String productName;
+  final String productSKU;
+  final double originalPrice;
+  final String img;
+  final String desc;
+  @override
+  Widget build(BuildContext context) {
+    List argumentsList = [
+      productName,
+      originalPrice,
+      img,
+      productSKU,
+      desc,
+      categoryId
+    ];
+    return ListTile(
+      onTap: () {
+        Get.toNamed('/product', arguments: argumentsList);
+      },
+      leading: CircleAvatar(
+        maxRadius: 30,
+        backgroundColor: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(9.0),
+          child: FadeInImage.memoryNetwork(
+            placeholder: kTransparentImage,
+            image: img,
+          ),
+        ),
+      ),
+      title: Text(
+        '$productName',
+        textAlign: TextAlign.left,
+        style: GoogleFonts.comfortaa(
+          fontWeight: FontWeight.w900,
+        ),
+      ),
+      subtitle: Text(
+        '$productSKU',
+        textAlign: TextAlign.left,
+        style: GoogleFonts.comfortaa(),
+      ),
+      trailing: Text(
+        '${originalPrice.toString()}€',
+        style: GoogleFonts.comfortaa(
+          fontSize: 18,
+        ),
+      ),
     );
   }
 }

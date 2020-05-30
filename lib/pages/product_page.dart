@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -8,8 +7,7 @@ import 'package:transparent_image/transparent_image.dart';
 class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print(Get.arguments[5].toString());
-    print(Get.arguments[1].toString());
+    final List arguments = Get.arguments;
     return Scaffold(
         body: SafeArea(
       child: Center(
@@ -66,7 +64,7 @@ class ProductPage extends StatelessWidget {
                       padding: const EdgeInsets.all(60.0),
                       child: FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage,
-                        image: Get.arguments[2],
+                        image: arguments[2],
                       ),
                     ),
                   ),
@@ -76,7 +74,7 @@ class ProductPage extends StatelessWidget {
                 ),
                 Flexible(
                   child: Text(
-                    Get.arguments[0],
+                    arguments[0],
                     textAlign: TextAlign.center,
                     style: GoogleFonts.comfortaa(
                       fontSize: 18,
@@ -100,7 +98,7 @@ class ProductPage extends StatelessWidget {
                       padding: EdgeInsets.all(12.0),
                       child: Center(
                         child: Text(
-                          '${Get.arguments[4]}',
+                          '${arguments[3]}',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.comfortaa(
                             fontSize: 17,
@@ -144,7 +142,10 @@ class ProductPage extends StatelessWidget {
                               numeric: false,
                               label: Flexible(
                                 child: Text(
-                                  Get.arguments[5].toString()=='dogFood'|| Get.arguments[5].toString()=='catFood' ? '-20%':'-10%',
+                                  arguments[5].toString() == 'dogFood' ||
+                                          arguments[5].toString() == 'catFood'
+                                      ? '-20%'
+                                      : '-10%',
                                   style: GoogleFonts.comfortaa(fontSize: 15),
                                 ),
                               )),
@@ -162,38 +163,31 @@ class ProductPage extends StatelessWidget {
                               label: Flexible(
                                 child: Text(
                                   'Λιανική',
-                                  style: GoogleFonts.comfortaa(fontSize: 15,),
+                                  style: GoogleFonts.comfortaa(
+                                    fontSize: 15,
+                                  ),
                                 ),
                               )),
                         ],
                         rows: [
                           DataRow(cells: [
-                            DataCell(Text('${Get.arguments[3]}',
-                            style: GoogleFonts.comfortaa(
-                              color: Colors.white,
-                              fontSize: 17
-                            ),)),
-                            DataCell(Row(
-                              children: <Widget>[
-                                Text(
-                                  '${Get.arguments[1][0]}',
-                                  style:
-                                  GoogleFonts.comfortaa(fontSize: 17,
-                                  color: Colors.white),
-                                ),
-                                Icon(Icons.euro_symbol,size: 17,)
-                              ],
-                            ),),
+                            DataCell(Text(
+                              '${arguments[1].toString()}',
+                              style: GoogleFonts.comfortaa(
+                                  color: Colors.white, fontSize: 17),
+                            )),
                             DataCell(
                               Row(
                                 children: <Widget>[
                                   Text(
-                                    '${Get.arguments[1][1]}',
-                                    style:
-                                        GoogleFonts.comfortaa(fontSize: 17,
-                                        color : Colors.white),
+                                    '${arguments[1].toString()}',
+                                    style: GoogleFonts.comfortaa(
+                                        fontSize: 17, color: Colors.white),
                                   ),
-                                  Icon(Icons.euro_symbol,size: 17,)
+                                  Icon(
+                                    Icons.euro_symbol,
+                                    size: 17,
+                                  )
                                 ],
                               ),
                             ),
@@ -201,12 +195,14 @@ class ProductPage extends StatelessWidget {
                               Row(
                                 children: <Widget>[
                                   Text(
-                                    '${Get.arguments[1][2]}',
-                                    style:
-                                        GoogleFonts.comfortaa(fontSize: 17,
-                                        color: Colors.white),
+                                    '${arguments[1].toString()}',
+                                    style: GoogleFonts.comfortaa(
+                                        fontSize: 17, color: Colors.white),
                                   ),
-                                  Icon(Icons.euro_symbol,size: 17,)
+                                  Icon(
+                                    Icons.euro_symbol,
+                                    size: 17,
+                                  )
                                 ],
                               ),
                             ),
@@ -214,12 +210,29 @@ class ProductPage extends StatelessWidget {
                               Row(
                                 children: <Widget>[
                                   Text(
-                                    '${Get.arguments[1][3]}',
-                                    style:
-                                        GoogleFonts.comfortaa(fontSize: 17,
-                                        color: Colors.white),
+                                    '${arguments[1].toString()}',
+                                    style: GoogleFonts.comfortaa(
+                                        fontSize: 17, color: Colors.white),
                                   ),
-                                  Icon(Icons.euro_symbol,size: 17,)
+                                  Icon(
+                                    Icons.euro_symbol,
+                                    size: 17,
+                                  )
+                                ],
+                              ),
+                            ),
+                            DataCell(
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    '${arguments[1].toString()}',
+                                    style: GoogleFonts.comfortaa(
+                                        fontSize: 17, color: Colors.white),
+                                  ),
+                                  Icon(
+                                    Icons.euro_symbol,
+                                    size: 17,
+                                  )
                                 ],
                               ),
                             ),

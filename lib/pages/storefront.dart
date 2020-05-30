@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -11,11 +10,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../components.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'shop_logic.dart';
 
 ListView productsListView;
 List<ListTile> productsListTiles;
 bool searching = false;
-bool sortOrder = false;
 bool initialised = false;
 var currentUser;
 String logoAnimation = 'idle';
@@ -37,6 +36,10 @@ class _StoreFrontState extends State<StoreFront>
       Get.offAllNamed('/login');
     } else {
       print('${currentUser.email} is logged');
+//      getConnection();
+//    await testDbB();
+//      getProducts();
+//      postHttp();
     }
   }
 
@@ -59,7 +62,12 @@ class _StoreFrontState extends State<StoreFront>
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[SizedBox(width: 30,),SearchProduct()],
+                  children: <Widget>[
+                    SizedBox(
+                      width: 30,
+                    ),
+                    SearchProduct()
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -108,12 +116,40 @@ class _StoreFrontState extends State<StoreFront>
                 SizedBox(
                   height: 5,
                 ),
-                FlatButton(
-                  onPressed: () async {
-                    await FirebaseAuth.instance.signOut();
-                    Get.offAllNamed('/login');
-                  },
-                  child: Text('LOGOUT'),
+                Row(
+                  children: [
+                    FlatButton(
+                      onPressed: () async {
+                        await FirebaseAuth.instance.signOut();
+                        Get.offAllNamed('/login');
+                      },
+                      child: Text('LOGOUT'),
+                    ),
+                    FlatButton(
+                      onPressed: () async {
+                        searching = true;
+                        setState(() {});
+                        List products = await getProducts();
+                        print(products);
+                        searching = false;
+                        setState(() {});
+                        Get.toNamed('/test', arguments: products);
+                      },
+                      child: Text('TEST'),
+                    ),
+                    FlatButton(
+                      onPressed: () async {
+                        searching = true;
+                        setState(() {});
+                        List products = await getCategoryProducts(3);
+                        print(products);
+                        searching = false;
+                        setState(() {});
+                        Get.toNamed('/test2', arguments: products);
+                      },
+                      child: Text('TEST 2'),
+                    ),
+                  ],
                 ),
                 Expanded(
                   flex: 1,

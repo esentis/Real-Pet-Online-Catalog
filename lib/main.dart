@@ -6,13 +6,13 @@ import 'package:realpet/pages/results.dart';
 import 'package:realpet/pages/search_product_page.dart';
 import 'pages/storefront.dart';
 import 'package:realpet/pages/product_page.dart';
+import 'package:realpet/pages/test_page.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/register': GetRoute(page: RegisterPage()),
         '/product': GetRoute(page: ProductPage()),
         '/search': GetRoute(page: SearchProduct()),
+        '/test': GetRoute(page: TestPage()),
       },
     );
   }
