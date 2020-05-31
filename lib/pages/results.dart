@@ -41,12 +41,12 @@ class _ResultsPageState extends State<ResultsPage> {
                   ),
                 ),
                 Text(
-                  "TEST",
+                  arguments[0]['categoryId'],
                   style: GoogleFonts.comfortaa(
                     fontSize: 30,
                   ),
                 ),
-                SearchProduct(),
+                SizedBox(width: 150,)
               ],
             ),
             SizedBox(

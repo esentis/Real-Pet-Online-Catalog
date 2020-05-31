@@ -31,6 +31,20 @@ getCategoryProducts(categoryId) async {
   return response.data;
 }
 
+// METHOD FOR SEARCHING PRODUCTS
+searchProducts(term) async {
+  Response response;
+  try {
+    response =
+    await dio.get("http://10.0.2.2:5000/api/product/search/$term");
+    print(response.statusCode);
+    print("Data length ${response.data.length}");
+  } catch (e) {
+    print(e);
+  }
+  return response.data;
+}
+
 // METHOD FOR ADDING A NEW PRODUCT
 addProduct({
   @required int categoryId,

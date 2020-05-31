@@ -66,7 +66,7 @@ class _StoreFrontState extends State<StoreFront>
                     SizedBox(
                       width: 30,
                     ),
-                    SearchProduct()
+                    SearchForm()
                   ],
                 ),
                 Padding(

@@ -173,10 +173,10 @@ class CategoryIcon extends StatelessWidget {
 }
 
 // SEARCH PRODUCT WIDGET
-class SearchProduct extends StatelessWidget {
+class SearchForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var _sku;
+    var _searchTerm;
     return GestureDetector(
       onTap: () {
         Alert(
@@ -196,7 +196,7 @@ class SearchProduct extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            title: "Αναζήτηση προϊόντος με βάση τον κωδικό",
+            title: "Αναζήτηση προϊόντος",
             content: Padding(
               padding: EdgeInsets.only(top: 25.0),
               child: TextField(
@@ -206,16 +206,16 @@ class SearchProduct extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
                 onChanged: (typed) {
-                  _sku = typed;
+                  _searchTerm = typed;
                 },
                 enabled: true,
                 decoration: InputDecoration(
-                  icon: Icon(FontAwesomeIcons.fingerprint),
+                  icon: Icon(FontAwesomeIcons.search),
                   hintText: 'Κωδικός προϊόντος',
                   hintStyle: GoogleFonts.comfortaa(
                       fontSize: 15, fontWeight: FontWeight.w900),
                   border: OutlineInputBorder(
-                    gapPadding: 15,
+                    gapPadding: 10,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(60),
                       bottomRight: Radius.circular(60),
@@ -228,8 +228,43 @@ class SearchProduct extends StatelessWidget {
             buttons: [
               DialogButton(
                 color: Colors.white,
-                onPressed: () {
-                  Get.toNamed('/search', arguments: _sku);
+                onPressed: () async {
+                  var response = await searchProducts(_searchTerm);
+                  if (response.length == 0) {
+                    Alert(
+                      context: context,
+                      style: AlertStyle(
+                        animationType: AnimationType.grow,
+                        isCloseButton: false,
+                        isOverlayTapDismiss: false,
+                        animationDuration: Duration(milliseconds: 400),
+                        alertBorder: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                          side: BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        titleStyle: GoogleFonts.comfortaa(),
+                        descStyle: GoogleFonts.comfortaa(),
+                      ),
+                      type: AlertType.error,
+                      title: "Ούπς !!",
+                      desc: "Δέν βρέθηκαν προϊόντα με τα στοιχεία αναζήτησης που δώσατε.",
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "OK",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          color: Color.fromRGBO(0, 179, 134, 1.0),
+                          radius: BorderRadius.circular(20.0),
+                        ),
+                      ],
+                    ).show();
+                  } else {
+                    Get.toNamed('/search', arguments: response);
+                  }
                 },
                 radius: BorderRadius.only(
                     topLeft: Radius.circular(60),
@@ -258,6 +293,7 @@ class SearchResults extends StatefulWidget {
   @override
   _SearchResultsState createState() => _SearchResultsState();
 }
+
 // SEARCH RESULTS PAGE STATE
 class _SearchResultsState extends State<SearchResults> {
   List products = [];
