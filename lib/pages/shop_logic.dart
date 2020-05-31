@@ -35,8 +35,7 @@ getCategoryProducts(categoryId) async {
 searchProducts(term) async {
   Response response;
   try {
-    response =
-    await dio.get("http://10.0.2.2:5000/api/product/search/$term");
+    response = await dio.post("http://10.0.2.2:5000/api/product/search?searchTerm=$term");
     print(response.statusCode);
     print("Data length ${response.data.length}");
   } catch (e) {
