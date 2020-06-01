@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:realpet/components/general_widgets.dart';
 import 'components/categories.dart';
 
 // CONNECTION SETTINGS WITH OUR DB
@@ -86,127 +87,52 @@ addProduct({
 bool checkResponse(response) {
   if (response == DioErrorType.CONNECT_TIMEOUT) {
     logger.e("Received ERROR $response");
-    Get.snackbar(
-      '', // title
-      '', // message
-      icon: Icon(
-        FontAwesomeIcons.times,
-        color: Colors.redAccent,
-      ),
-      titleText: Text(
-        'Σφάλμα',
-        style: GoogleFonts.comfortaa(
-          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
-        ),
-      ),
-      messageText: Text("Η σύνδεση με τον διακομιστή απέτυχε"),
-      shouldIconPulse: true,
-      onTap: (value) {
-        print(value);
-      },
-      barBlur: 300,
-      isDismissible: true,
-      duration: Duration(seconds: 3),
+    snackBar(
+      iconData: FontAwesomeIcons.times,
+      iconColor: Colors.redAccent,
+      text: "Η σύνδεση με τον διακομιστή απέτυχε",
+      title: "Σφάλμα",
+      duration: 3,
     );
     return false;
   } else if (response == DioErrorType.RECEIVE_TIMEOUT) {
     logger.e("Received ERROR $response");
-    Get.snackbar(
-      '', // title
-      '', // message
-      icon: Icon(
-        FontAwesomeIcons.times,
-        color: Colors.redAccent,
-      ),
-      titleText: Text(
-        'Σφάλμα',
-        style: GoogleFonts.comfortaa(
-          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
-        ),
-      ),
-      messageText: Text("Η απάντηση του διακομιστή απέτυχε"),
-      shouldIconPulse: true,
-      onTap: (value) {
-        print(value);
-      },
-      barBlur: 300,
-      isDismissible: true,
-      duration: Duration(seconds: 3),
+    snackBar(
+      iconData: FontAwesomeIcons.times,
+      iconColor: Colors.redAccent,
+      text: "Η απάντηση του διακομιστή απέτυχε",
+      title: "Σφάλμα",
+      duration: 3,
     );
     return false;
   } else if (response == DioErrorType.RESPONSE) {
     logger.e("Received ERROR $response");
-    Get.snackbar(
-      '', // title
-      '', // message
-      icon: Icon(
-        FontAwesomeIcons.times,
-        color: Colors.redAccent,
-      ),
-      titleText: Text(
-        'Σφάλμα',
-        style: GoogleFonts.comfortaa(
-          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
-        ),
-      ),
-      messageText: Text("Λανθασμένη απάντηση του διακομιστή"),
-      shouldIconPulse: true,
-      onTap: (value) {
-        print(value);
-      },
-      barBlur: 300,
-      isDismissible: true,
-      duration: Duration(seconds: 3),
+    snackBar(
+      iconData: FontAwesomeIcons.times,
+      iconColor: Colors.redAccent,
+      text: "Λανθασμένη απάντηση του διακομιστή",
+      title: "Σφάλμα",
+      duration: 3,
     );
     return false;
   } else if (response == DioErrorType.CANCEL) {
     logger.e("Received ERROR $response");
-    Get.snackbar(
-      '', // title
-      '', // message
-      icon: Icon(
-        FontAwesomeIcons.times,
-        color: Colors.redAccent,
-      ),
-      titleText: Text(
-        'Σφάλμα',
-        style: GoogleFonts.comfortaa(
-          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
-        ),
-      ),
-      messageText: Text("Η κλήση προς τον διακομιστή ακυρώθηκε"),
-      shouldIconPulse: true,
-      onTap: (value) {
-        print(value);
-      },
-      barBlur: 300,
-      isDismissible: true,
-      duration: Duration(seconds: 3),
+    snackBar(
+      iconData: FontAwesomeIcons.times,
+      iconColor: Colors.redAccent,
+      text: "Η κλήση προς τον διακομιστή ακυρώθηκε",
+      title: "Σφάλμα",
+      duration: 3,
     );
     return false;
   } else if (response == DioErrorType.DEFAULT) {
     logger.e("Received ERROR $response");
-    Get.snackbar(
-      '', // title
-      '', // message
-      icon: Icon(
-        FontAwesomeIcons.times,
-        color: Colors.redAccent,
-      ),
-      titleText: Text(
-        'Σφάλμα',
-        style: GoogleFonts.comfortaa(
-          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
-        ),
-      ),
-      messageText: Text("Άγνωστο σφάλμα διακομιστή"),
-      shouldIconPulse: true,
-      onTap: (value) {
-        print(value);
-      },
-      barBlur: 300,
-      isDismissible: true,
-      duration: Duration(seconds: 3),
+    snackBar(
+      iconData: FontAwesomeIcons.times,
+      iconColor: Colors.redAccent,
+      text: "Άγνωστο σφάλμα διακομιστή",
+      title: "Σφάλμα",
+      duration: 3,
     );
     return false;
   }
