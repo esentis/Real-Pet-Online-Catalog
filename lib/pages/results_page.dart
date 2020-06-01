@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:realpet/components.dart';
+import 'package:realpet/components/results_page_components.dart';
 
 class ResultsPage extends StatefulWidget {
   @override

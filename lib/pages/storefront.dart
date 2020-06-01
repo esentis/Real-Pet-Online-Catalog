@@ -5,16 +5,15 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:realpet/components/categories.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import '../components.dart';
+import 'package:realpet/components/search_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'shop_logic.dart';
 
-ListView _productsListView;
-List<ListTile> _productsListTiles;
+
 bool _loading = false;
 var _currentUser;
 String _logoAnimation = 'idle';
@@ -52,6 +51,7 @@ class _StoreFrontState extends State<StoreFront>
 
   @override
   Widget build(BuildContext context) {
+
     return ModalProgressHUD(
       inAsyncCall: _loading,
       child: Scaffold(
@@ -78,6 +78,12 @@ class _StoreFrontState extends State<StoreFront>
                         Get.offAllNamed('/login');
                       },
                       child: Text('LOGOUT'),
+                    ),
+                    FlatButton(
+                      onPressed: (){
+
+                      },
+                      child: Text("CLICK ME"),
                     ),
                   ],
                 ),
@@ -111,8 +117,8 @@ class _StoreFrontState extends State<StoreFront>
                               });
                             },
                             child: Container(
-                              width: 270,
-                              height: 170,
+                              width: 200,
+                              height: 120,
                               child: FlareActor(
                                 'assets/logo.flr',
                                 animation: _logoAnimation,

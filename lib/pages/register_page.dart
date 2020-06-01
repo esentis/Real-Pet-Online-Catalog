@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:realpet/components/general_widgets.dart';
 
 var _password;
 var _email;
@@ -173,30 +174,15 @@ class _RegisterPageState extends State<RegisterPage> {
                             } catch (e) {
                               _registering = false;
                               setState(() {
-                                Get.snackbar(
-                                  '', // title
-                                  '', // message
-                                  icon: Icon(Icons.error),
-                                  titleText: Text(
-                                    'Σφάλμα !',
-                                    style: GoogleFonts.comfortaa(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          letterSpacing: .5),
-                                    ),
-                                  ),
-                                  messageText: Text(e.toString()),
-                                  shouldIconPulse: true,
-                                  onTap: (value) {
-                                    print(value);
-                                  },
-                                  barBlur: 300,
-                                  isDismissible: true,
-                                  duration: Duration(seconds: 3),
+                                snackBar(
+                                  title: "Σφάλμα εγγραφής",
+                                  duration: 4,
+                                  text: e.toString(),
+                                  iconColor: Colors.redAccent,
+                                  iconData: FontAwesomeIcons.times,
                                 );
                               });
                             }
-
                             _registering = false;
                             setState(() {});
                             if (await FirebaseAuth.instance.currentUser() !=

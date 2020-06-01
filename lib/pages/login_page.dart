@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:realpet/components/general_widgets.dart';
 
 final TextEditingController _emailTextController = new TextEditingController();
 final TextEditingController _passwordTextController =
@@ -17,8 +17,8 @@ var _email;
 var _password;
 var _currentUser;
 FirebaseAuth _auth = FirebaseAuth.instance;
-class LoginPage extends StatefulWidget {
 
+class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -33,11 +33,13 @@ class _LoginPageState extends State<LoginPage> {
       print('No user logged, log with your credentials');
     }
   }
+
   @override
   void initState() {
     super.initState();
     checkUser();
   }
+
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -75,7 +77,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-
                 Column(
                   children: <Widget>[
                     Text(
@@ -84,7 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 30,
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Padding(
                       padding: EdgeInsets.only(left: 30.0, right: 30),
                       child: TextField(
@@ -191,32 +194,19 @@ class _LoginPageState extends State<LoginPage> {
                               print(e);
                               _logging = false;
                               setState(() {
-                                Get.snackbar(
-                                  '', // title
-                                  '', // message
-                                  icon: Icon(Icons.error),
-                                  titleText: Text(
-                                    'Σφάλμα !',
-                                    style: GoogleFonts.comfortaa(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          letterSpacing: .5),
-                                    ),
-                                  ),
-                                  messageText: Text(e.toString()),
-                                  shouldIconPulse: true,
-                                  onTap: (value) {
-                                    print(value);
-                                  },
-                                  barBlur: 300,
-                                  isDismissible: true,
-                                  duration: Duration(seconds: 3),
+                                snackBar(
+                                  iconData: FontAwesomeIcons.times,
+                                  iconColor: Colors.redAccent,
+                                  text: e.toString(),
+                                  duration: 4,
+                                  title: 'Σφάλμα σύνδεσης'
                                 );
                               });
                             }
                             _logging = false;
                             setState(() {});
-                            if (await FirebaseAuth.instance.currentUser()!=null){
+                            if (await FirebaseAuth.instance.currentUser() !=
+                                null) {
                               Get.offAllNamed('/');
                             }
                           },

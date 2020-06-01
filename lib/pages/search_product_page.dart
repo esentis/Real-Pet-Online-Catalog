@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:realpet/components.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:realpet/components/results_page_components.dart';
 
 class SearchProduct extends StatefulWidget {
   @override

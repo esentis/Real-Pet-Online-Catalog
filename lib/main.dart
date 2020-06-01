@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realpet/pages/login_page.dart';
 import 'package:realpet/pages/register_page.dart';
-import 'package:realpet/pages/results.dart';
+import 'package:realpet/pages/results_page.dart';
 import 'package:realpet/pages/search_product_page.dart';
 import 'pages/storefront.dart';
 import 'package:realpet/pages/product_page.dart';
-import 'package:realpet/pages/test_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +28,6 @@ class MyApp extends StatelessWidget {
         '/register': GetRoute(page: RegisterPage()),
         '/product': GetRoute(page: ProductPage()),
         '/search': GetRoute(page: SearchProduct()),
-        '/test': GetRoute(page: TestPage()),
       },
     );
   }

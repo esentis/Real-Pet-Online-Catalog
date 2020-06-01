@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-bool _loading=false;
 class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,12 +14,16 @@ class ProductPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            SizedBox(height: 5,),
+            SizedBox(
+              height: 5,
+            ),
             //BACK BUTTON
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                SizedBox(width: 15,),
+                SizedBox(
+                  width: 15,
+                ),
                 //BACK BUTTON
                 GestureDetector(
                   onTap: () {
@@ -41,7 +43,9 @@ class ProductPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 5,),
+            SizedBox(
+              height: 5,
+            ),
             Flexible(
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -55,7 +59,9 @@ class ProductPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 5,),
+            SizedBox(
+              height: 5,
+            ),
             //PRODUCT IMAGE CONTAINER
             Material(
               elevation: 20,
@@ -78,9 +84,12 @@ class ProductPage extends StatelessWidget {
                 maxRadius: 170,
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    image: arguments[2],
+                  child: Hero(
+                    tag: arguments[6],
+                    child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: arguments[2],
+                    ),
                   ),
                 ),
               ),
@@ -88,7 +97,6 @@ class ProductPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            // PRODUCT TITLE
             //PRODUCT DESCRIPTION
             Expanded(
               flex: 3,
@@ -99,7 +107,7 @@ class ProductPage extends StatelessWidget {
                 ),
                 itemCount: 1,
                 itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.only(right : 15.0,left:45.0),
+                  padding: EdgeInsets.only(right: 15.0, left: 45.0),
                   child: Center(
                     child: Text(
                       '${arguments[4]}',
@@ -115,137 +123,6 @@ class ProductPage extends StatelessWidget {
                 ),
               ),
             ),
-            //PRODUCT DETAILS
-//                Row(
-//                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                  children: <Widget>[
-////                    Flexible(
-////                      child: DataTable(
-////                        headingRowHeight: 55,
-////                        horizontalMargin: 0,
-////                        dataRowHeight: 45,
-////                        columnSpacing: 18,
-////                        dividerThickness: 3,
-////                        columns: [
-////                          DataColumn(
-////                              label: Flexible(
-////                            child: Text(
-////                              'SKU',
-////                              style: GoogleFonts.comfortaa(fontSize: 15),
-////                            ),
-////                          )),
-////                          DataColumn(
-////                              numeric: false,
-////                              label: Flexible(
-////                                child: Text(
-////                                  'Αρχική',
-////                                  style: GoogleFonts.comfortaa(fontSize: 15),
-////                                ),
-////                              )),
-////                          DataColumn(
-////                              numeric: false,
-////                              label: Flexible(
-////                                child: Text(
-////                                  arguments[5].toString() == 'dogFood' ||
-////                                          arguments[5].toString() == 'catFood'
-////                                      ? '-20%'
-////                                      : '-10%',
-////                                  style: GoogleFonts.comfortaa(fontSize: 15),
-////                                ),
-////                              )),
-////                          DataColumn(
-////                              numeric: false,
-////                              label: Flexible(
-////                                child: Text(
-////                                  '-10% \nμετρητοίς',
-////                                  style: GoogleFonts.comfortaa(fontSize: 15),
-////                                  textAlign: TextAlign.left,
-////                                ),
-////                              )),
-////                          DataColumn(
-////                              numeric: false,
-////                              label: Flexible(
-////                                child: Text(
-////                                  'Λιανική',
-////                                  style: GoogleFonts.comfortaa(
-////                                    fontSize: 15,
-////                                  ),
-////                                ),
-////                              )),
-////                        ],
-////                        rows: [
-////                          DataRow(cells: [
-////                            DataCell(Text(
-////                              '${arguments[1].toString()}',
-////                              style: GoogleFonts.comfortaa(
-////                                  color: Colors.white, fontSize: 17),
-////                            )),
-////                            DataCell(
-////                              Row(
-////                                children: <Widget>[
-////                                  Text(
-////                                    '${arguments[1].toString()}',
-////                                    style: GoogleFonts.comfortaa(
-////                                        fontSize: 17, color: Colors.white),
-////                                  ),
-////                                  Icon(
-////                                    Icons.euro_symbol,
-////                                    size: 17,
-////                                  )
-////                                ],
-////                              ),
-////                            ),
-////                            DataCell(
-////                              Row(
-////                                children: <Widget>[
-////                                  Text(
-////                                    '${arguments[1].toString()}',
-////                                    style: GoogleFonts.comfortaa(
-////                                        fontSize: 17, color: Colors.white),
-////                                  ),
-////                                  Icon(
-////                                    Icons.euro_symbol,
-////                                    size: 17,
-////                                  )
-////                                ],
-////                              ),
-////                            ),
-////                            DataCell(
-////                              Row(
-////                                children: <Widget>[
-////                                  Text(
-////                                    '${arguments[1].toString()}',
-////                                    style: GoogleFonts.comfortaa(
-////                                        fontSize: 17, color: Colors.white),
-////                                  ),
-////                                  Icon(
-////                                    Icons.euro_symbol,
-////                                    size: 17,
-////                                  )
-////                                ],
-////                              ),
-////                            ),
-////                            DataCell(
-////                              Row(
-////                                children: <Widget>[
-////                                  Text(
-////                                    '${arguments[1].toString()}',
-////                                    style: GoogleFonts.comfortaa(
-////                                        fontSize: 17, color: Colors.white),
-////                                  ),
-////                                  Icon(
-////                                    Icons.euro_symbol,
-////                                    size: 17,
-////                                  )
-////                                ],
-////                              ),
-////                            ),
-////                          ])
-////                        ],
-////                      ),
-////                    ),
-//                  ],
-//                )
           ],
         ),
       ),
