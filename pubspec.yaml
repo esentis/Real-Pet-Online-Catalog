@@ -41,6 +41,8 @@ dependencies:
   transparent_image: ^1.0.0
   rflutter_alert: ^1.0.3
   dio: ^3.0.9
+  logger: ^0.9.1
+  flutter_spinkit: ^4.1.2+1
 
 dev_dependencies:
   flutter_test:

@@ -1,18 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:realpet/components.dart';
 
-Dio dio = new Dio();
+// CONNECTION SETTINGS WITH OUR DB
+BaseOptions dioOptions = new BaseOptions(
+    baseUrl: "http://10.0.2.2:5000",
+    receiveDataWhenStatusError: true,
+    connectTimeout: 6 * 1000, // 6 seconds
+    receiveTimeout: 6 * 1000 // 6 seconds
+    );
+Dio dio = new Dio(dioOptions);
 
 // METHOD FOR RETRIEVING ALL PRODUCTS
 getProducts() async {
   Response response;
   try {
-    response = await dio.get("http://10.0.2.2:5000/api/product");
+    response = await dio.get("/api/product");
     print(response.statusCode);
     print(response.data.length);
-  } catch (e) {
-    print(e);
+  } on DioError catch (e) {
+    return e.type;
   }
   return response.data;
 }
@@ -21,12 +33,11 @@ getProducts() async {
 getCategoryProducts(categoryId) async {
   Response response;
   try {
-    response =
-        await dio.get("http://10.0.2.2:5000/api/product/category/$categoryId");
+    response = await dio.get("/api/product/category/$categoryId");
     print(response.statusCode);
     print(response.data.length);
-  } catch (e) {
-    print(e);
+  } on DioError catch (e) {
+    return e.type;
   }
   return response.data;
 }
@@ -35,11 +46,11 @@ getCategoryProducts(categoryId) async {
 searchProducts(term) async {
   Response response;
   try {
-    response = await dio.post("http://10.0.2.2:5000/api/product/search?searchTerm=$term");
+    response = await dio.post("/api/product/search?searchTerm=$term");
     print(response.statusCode);
     print("Data length ${response.data.length}");
-  } catch (e) {
-    print(e);
+  } on DioError catch (e) {
+    return e.type;
   }
   return response.data;
 }
@@ -56,7 +67,7 @@ addProduct({
 }) async {
   Response response;
   try {
-    response = await dio.post("http://10.0.2.2:5000/api/product", data: {
+    response = await dio.post("/api/product", data: {
       "categoryId": categoryId,
       "name": name,
       "img": img,
@@ -66,10 +77,140 @@ addProduct({
       "description": description,
     });
     print(response);
-  } catch (e) {
-    print(e);
+  } on DioError catch (e) {
+    return e.type;
   }
   return response;
+}
+
+bool checkResponse(response) {
+  if (response == DioErrorType.CONNECT_TIMEOUT) {
+    logger.e("Received ERROR $response");
+    Get.snackbar(
+      '', // title
+      '', // message
+      icon: Icon(
+        FontAwesomeIcons.times,
+        color: Colors.redAccent,
+      ),
+      titleText: Text(
+        'Σφάλμα',
+        style: GoogleFonts.comfortaa(
+          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
+        ),
+      ),
+      messageText: Text("Η σύνδεση με τον διακομιστή απέτυχε"),
+      shouldIconPulse: true,
+      onTap: (value) {
+        print(value);
+      },
+      barBlur: 300,
+      isDismissible: true,
+      duration: Duration(seconds: 3),
+    );
+    return false;
+  } else if (response == DioErrorType.RECEIVE_TIMEOUT) {
+    logger.e("Received ERROR $response");
+    Get.snackbar(
+      '', // title
+      '', // message
+      icon: Icon(
+        FontAwesomeIcons.times,
+        color: Colors.redAccent,
+      ),
+      titleText: Text(
+        'Σφάλμα',
+        style: GoogleFonts.comfortaa(
+          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
+        ),
+      ),
+      messageText: Text("Η απάντηση του διακομιστή απέτυχε"),
+      shouldIconPulse: true,
+      onTap: (value) {
+        print(value);
+      },
+      barBlur: 300,
+      isDismissible: true,
+      duration: Duration(seconds: 3),
+    );
+    return false;
+  } else if (response == DioErrorType.RESPONSE) {
+    logger.e("Received ERROR $response");
+    Get.snackbar(
+      '', // title
+      '', // message
+      icon: Icon(
+        FontAwesomeIcons.times,
+        color: Colors.redAccent,
+      ),
+      titleText: Text(
+        'Σφάλμα',
+        style: GoogleFonts.comfortaa(
+          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
+        ),
+      ),
+      messageText: Text("Λανθασμένη απάντηση του διακομιστή"),
+      shouldIconPulse: true,
+      onTap: (value) {
+        print(value);
+      },
+      barBlur: 300,
+      isDismissible: true,
+      duration: Duration(seconds: 3),
+    );
+    return false;
+  } else if (response == DioErrorType.CANCEL) {
+    logger.e("Received ERROR $response");
+    Get.snackbar(
+      '', // title
+      '', // message
+      icon: Icon(
+        FontAwesomeIcons.times,
+        color: Colors.redAccent,
+      ),
+      titleText: Text(
+        'Σφάλμα',
+        style: GoogleFonts.comfortaa(
+          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
+        ),
+      ),
+      messageText: Text("Η κλήση προς τον διακομιστή ακυρώθηκε"),
+      shouldIconPulse: true,
+      onTap: (value) {
+        print(value);
+      },
+      barBlur: 300,
+      isDismissible: true,
+      duration: Duration(seconds: 3),
+    );
+    return false;
+  } else if (response == DioErrorType.DEFAULT) {
+    logger.e("Received ERROR $response");
+    Get.snackbar(
+      '', // title
+      '', // message
+      icon: Icon(
+        FontAwesomeIcons.times,
+        color: Colors.redAccent,
+      ),
+      titleText: Text(
+        'Σφάλμα',
+        style: GoogleFonts.comfortaa(
+          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
+        ),
+      ),
+      messageText: Text("Άγνωστο σφάλμα διακομιστή"),
+      shouldIconPulse: true,
+      onTap: (value) {
+        print(value);
+      },
+      barBlur: 300,
+      isDismissible: true,
+      duration: Duration(seconds: 3),
+    );
+    return false;
+  }
+  return true;
 }
 
 // A METHOD FOR COPYING MY FIREBASE TO postgresql

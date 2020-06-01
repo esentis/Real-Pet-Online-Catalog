@@ -7,20 +7,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../components.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'shop_logic.dart';
 
-ListView productsListView;
-List<ListTile> productsListTiles;
-bool searching = false;
-bool initialised = false;
-var currentUser;
-String logoAnimation = 'idle';
-final FlareControls controls = FlareControls();
+ListView _productsListView;
+List<ListTile> _productsListTiles;
+bool _loading = false;
+var _currentUser;
+String _logoAnimation = 'idle';
+final FlareControls _controls = FlareControls();
 FirebaseAuth _auth = FirebaseAuth.instance;
 var db = Firestore.instance;
+var logger = Logger();
 
 class StoreFront extends StatefulWidget {
   @override
@@ -30,12 +31,12 @@ class StoreFront extends StatefulWidget {
 class _StoreFrontState extends State<StoreFront>
     with SingleTickerProviderStateMixin {
   Future checkUser() async {
-    currentUser = await _auth.currentUser();
-    if (currentUser == null) {
-      print('No authenticated user found, in the StoreFront');
+    _currentUser = await _auth.currentUser();
+    if (_currentUser == null) {
+      logger.i('No authenticated user found, in the StoreFront');
       Get.offAllNamed('/login');
     } else {
-      print('${currentUser.email} is logged');
+      logger.i('${_currentUser.email} is logged');
 //      getConnection();
 //    await testDbB();
 //      getProducts();
@@ -52,7 +53,7 @@ class _StoreFrontState extends State<StoreFront>
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-      inAsyncCall: searching,
+      inAsyncCall: _loading,
       child: Scaffold(
         body: SafeArea(
           child: Center(
@@ -66,7 +67,18 @@ class _StoreFrontState extends State<StoreFront>
                     SizedBox(
                       width: 30,
                     ),
-                    SearchForm()
+                    SearchForm(),
+                    FlatButton(
+                      onPressed: () async {
+                        _loading = true;
+                        setState(() {});
+                        await FirebaseAuth.instance.signOut();
+                        _loading = false;
+                        setState(() {});
+                        Get.offAllNamed('/login');
+                      },
+                      child: Text('LOGOUT'),
+                    ),
                   ],
                 ),
                 Padding(
@@ -89,12 +101,12 @@ class _StoreFrontState extends State<StoreFront>
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                logoAnimation = 'touch';
+                                _logoAnimation = 'touch';
                               });
                               Future.delayed(const Duration(milliseconds: 100),
                                   () {
                                 setState(() {
-                                  logoAnimation = 'idle';
+                                  _logoAnimation = 'idle';
                                 });
                               });
                             },
@@ -103,8 +115,8 @@ class _StoreFrontState extends State<StoreFront>
                               height: 170,
                               child: FlareActor(
                                 'assets/logo.flr',
-                                animation: logoAnimation,
-                                controller: controls,
+                                animation: _logoAnimation,
+                                controller: _controls,
                               ),
                             ),
                           ),
@@ -116,48 +128,13 @@ class _StoreFrontState extends State<StoreFront>
                 SizedBox(
                   height: 5,
                 ),
-                Row(
-                  children: [
-                    FlatButton(
-                      onPressed: () async {
-                        await FirebaseAuth.instance.signOut();
-                        Get.offAllNamed('/login');
-                      },
-                      child: Text('LOGOUT'),
-                    ),
-                    FlatButton(
-                      onPressed: () async {
-                        searching = true;
-                        setState(() {});
-                        List products = await getProducts();
-                        print(products);
-                        searching = false;
-                        setState(() {});
-                        Get.toNamed('/test', arguments: products);
-                      },
-                      child: Text('TEST'),
-                    ),
-                    FlatButton(
-                      onPressed: () async {
-                        searching = true;
-                        setState(() {});
-                        List products = await getCategoryProducts(3);
-                        print(products);
-                        searching = false;
-                        setState(() {});
-                        Get.toNamed('/test2', arguments: products);
-                      },
-                      child: Text('TEST 2'),
-                    ),
-                  ],
-                ),
                 Expanded(
                   flex: 1,
                   child: Padding(
                     padding: EdgeInsets.all(13.0),
                     child: FadeAnimatedTextKit(
                         onTap: () {
-                          print("Animated text tap event");
+                          logger.i("Animated text tap event");
                         },
                         text: [
                           "Μεγάλη ποικιλία προϊόντων",

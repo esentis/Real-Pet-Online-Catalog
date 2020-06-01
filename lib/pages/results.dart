@@ -22,8 +22,9 @@ class _ResultsPageState extends State<ResultsPage> {
               height: 20,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
+                // BACK BUTTON
                 GestureDetector(
                   onTap: () {
                     Get.offAllNamed('/');
@@ -40,13 +41,16 @@ class _ResultsPageState extends State<ResultsPage> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  width: 50,
+                ),
+                // CATEGORY TITLE
                 Text(
-                  arguments[0]['categoryId'],
+                  arguments[0]['category'],
                   style: GoogleFonts.comfortaa(
                     fontSize: 30,
                   ),
                 ),
-                SizedBox(width: 150,)
               ],
             ),
             SizedBox(
