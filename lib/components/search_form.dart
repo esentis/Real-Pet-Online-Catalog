@@ -12,6 +12,11 @@ var logger = new Logger();
 
 // SEARCH PRODUCT WIDGET
 class SearchForm extends StatefulWidget {
+  SearchForm({this.leadingIconColor, this.leadingIconSize, this.leadingIcon});
+  final Color leadingIconColor;
+  final double leadingIconSize;
+  final IconData leadingIcon;
+
   @override
   _SearchFormState createState() => _SearchFormState();
 }
@@ -23,7 +28,27 @@ class _SearchFormState extends State<SearchForm> {
   Widget build(BuildContext context) {
     var _searchTerm;
     var _controller = new TextEditingController();
-    return GestureDetector(
+    return ListTile(
+      leading: Icon(
+        widget.leadingIcon,
+        color: widget.leadingIconColor,
+        size: widget.leadingIconSize,
+      ),
+      title: Container(
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 5.0,bottom: 5.0),
+          child: Text(
+            "Αναζήτηση",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.comfortaa(
+              fontWeight: FontWeight.w900,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
       onTap: () {
         Alert(
             context: context,
@@ -129,10 +154,6 @@ class _SearchFormState extends State<SearchForm> {
               )
             ]).show();
       },
-      child: Icon(
-        FontAwesomeIcons.search,
-        size: 30,
-      ),
     );
   }
 }
