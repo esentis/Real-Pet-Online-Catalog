@@ -12,27 +12,29 @@ snackBar({
   int duration,
   IconData iconData,
   Color iconColor,
+  TickerProvider context,
 }) {
   return Get.snackbar(
-    '', // title
-    '', // message
-    icon: Icon(
-      iconData,
-      color: iconColor,
-    ),
-    titleText: Text(
-      title,
-      style: GoogleFonts.comfortaa(
-        textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
+      '', // title
+      '', // message
+      icon: Icon(
+        iconData,
+        color: iconColor,
       ),
-    ),
-    messageText: Text(text),
-    shouldIconPulse: true,
-    onTap: (value) {
-      print(value);
-    },
-    barBlur: 300,
-    isDismissible: true,
-    duration: Duration(seconds: duration),
-  );
+      titleText: Text(
+        title,
+        style: GoogleFonts.comfortaa(
+          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
+        ),
+      ),
+      messageText: Text(text),
+      shouldIconPulse: true, onTap: (value) {
+    print(value);
+  },
+      showProgressIndicator: true,
+      isDismissible: true,
+      duration: Duration(seconds: duration),
+      progressIndicatorBackgroundColor: Colors.red,
+      barBlur: 999999,
+      snackStyle: SnackStyle.FLOATING);
 }

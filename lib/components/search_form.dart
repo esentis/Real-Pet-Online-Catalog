@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
+import 'package:progress_state_button/progress_button.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../shop_logic.dart';
 import 'general_widgets.dart';
@@ -151,7 +152,8 @@ class _SearchFormState extends State<SearchForm> {
                     fontSize: 20,
                   ),
                 ),
-              )
+              ),
+
             ]).show();
       },
     );

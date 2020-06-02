@@ -44,6 +44,7 @@ dependencies:
   logger: ^0.9.1
   flutter_spinkit: ^4.1.2+1
   foldable_sidebar: ^1.0.0
+  progress_state_button: ^1.0.1
 
 dev_dependencies:
   flutter_test:

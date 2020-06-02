@@ -6,6 +6,9 @@ import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foldable_sidebar/foldable_sidebar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:progress_state_button/iconed_button.dart';
+import 'package:progress_state_button/progress_button.dart';
 import 'package:realpet/components/categories.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +16,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:realpet/components/drawer.dart';
 import 'package:realpet/components/search_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:realpet/components/spinning_button.dart';
 
 bool _loading = false;
 var _currentUser;
@@ -26,11 +30,8 @@ class StoreFront extends StatefulWidget {
   _StoreFrontState createState() => _StoreFrontState();
 }
 
-
 class _StoreFrontState extends State<StoreFront>
     with SingleTickerProviderStateMixin {
-
-
   Future checkUser() async {
     _currentUser = await _auth.currentUser();
     if (_currentUser == null) {
@@ -48,6 +49,7 @@ class _StoreFrontState extends State<StoreFront>
   }
 
   FSBStatus drawerStatus;
+  ButtonState _buttonState = ButtonState.idle;
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -73,6 +75,20 @@ class _StoreFrontState extends State<StoreFront>
                     children: <Widget>[
                       SizedBox(
                         width: 30,
+                      ),
+                      SpinningButton(
+                        onPress: () async {
+                          setState(() {
+                            _buttonState = ButtonState.loading;
+                          });
+                          await Future.delayed(Duration(seconds: 2));
+                          setState(() {
+                            _buttonState = ButtonState.fail;
+                          });
+                        },
+                        buttonState: _buttonState,
+                        idleIcon: FontAwesomeIcons.sign,
+                        idleText: "TEST",
                       ),
                     ],
                   ),

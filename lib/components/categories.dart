@@ -133,7 +133,7 @@ class _CategoryIconState extends State<CategoryIcon> {
     argumentsList.add(widget.categoryIcon);
     return ModalProgressHUD(
       progressIndicator: SpinKitWave(
-        color: Color(0xFF00263b).withOpacity(0.9),
+        color: Color(0xFF00263b).withOpacity(0.8),
         size: 30.0,
       ),
       inAsyncCall: _loading,
@@ -161,8 +161,8 @@ class _CategoryIconState extends State<CategoryIcon> {
             ),
             borderRadius: BorderRadius.only(
               topLeft: Radius.zero,
-              topRight: Radius.circular(100),
-              bottomLeft: Radius.circular(100),
+              topRight: Radius.elliptical(10, 90),
+              bottomLeft: Radius.elliptical(10, 90),
               bottomRight: Radius.circular(100),
             ),
           ),
