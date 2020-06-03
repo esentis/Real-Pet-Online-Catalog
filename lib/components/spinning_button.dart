@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:progress_state_button/iconed_button.dart';
 import 'package:progress_state_button/progress_button.dart';
 
@@ -26,12 +27,12 @@ class _SpinningButtonState extends State<SpinningButton> {
       iconedButtons: {
         ButtonState.idle: IconedButton(
             text: widget.idleText,
-            icon: Icon(Icons.send, color: Colors.white),
-            color: Colors.deepPurple.shade500),
+            icon: Icon(widget.idleIcon, color: Colors.white),
+            color: Colors.green),
         ButtonState.loading:
-            IconedButton(text: "Loading", color: Colors.deepPurple.shade700),
+            IconedButton(text: "ΦΟΡΤΩΣΗ", color: Colors.lightBlueAccent),
         ButtonState.fail: IconedButton(
-            text: "Failed",
+            text: "ΣΦΑΛΜΑ",
             icon: Icon(Icons.cancel, color: Colors.white),
             color: Colors.red.shade300),
         ButtonState.success: IconedButton(

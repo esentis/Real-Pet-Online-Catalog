@@ -44,15 +44,20 @@ getCategoryProducts(categoryId) async {
 }
 
 // METHOD FOR SEARCHING PRODUCTS
-searchProducts(term) async {
+searchProducts({term, page, category, lowestPrice, highestPrice}) async {
   Response response;
   try {
-    response = await dio.post("/api/product/search?searchTerm=$term");
-    print(response.statusCode);
-    print("Data length ${response.data.length}");
+    response = await dio.post("/api/product/search", data: {
+      "page": page,
+      "category": category,
+      "lowestPrice": lowestPrice,
+      "highestPrice": highestPrice,
+      "searchTerm": term ?? "",
+    });
   } on DioError catch (e) {
     return e.type;
   }
+
   return response.data;
 }
 

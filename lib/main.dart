@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realpet/pages/login_page.dart';
 import 'package:realpet/pages/register_page.dart';
-import 'package:realpet/pages/results_page.dart';
-import 'package:realpet/pages/search_product_page.dart';
+import 'package:realpet/pages/search_page.dart';
+import 'package:realpet/pages/search_results_page.dart';
 import 'pages/storefront.dart';
 import 'package:realpet/pages/product_page.dart';
 
@@ -23,11 +23,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       namedRoutes: {
         '/': GetRoute(page: StoreFront()),
-        '/results': GetRoute(page: ResultsPage()),
         '/login': GetRoute(page: LoginPage()),
         '/register': GetRoute(page: RegisterPage()),
         '/product': GetRoute(page: ProductPage()),
-        '/search': GetRoute(page: SearchProduct()),
+        '/search': GetRoute(page: SearchPage()),
+        '/searchResults': GetRoute(page: SearchProductResults()),
       },
     );
   }

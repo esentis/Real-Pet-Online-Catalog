@@ -9,7 +9,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'file:///D:/Flutter_apps/real_pet/lib/shop_logic.dart';
 import 'general_widgets.dart';
 
-
 bool _loading = false;
 
 // STOREFRONT'S CATEGORIES
@@ -142,13 +141,16 @@ class _CategoryIconState extends State<CategoryIcon> {
           logger.i("Category tapped for search");
           _loading = true;
           setState(() {});
-          dynamic response = await getCategoryProducts(widget.categoryId);
+//          dynamic response = await getCategoryProducts(widget.categoryId);
+//          dynamic response =
+//              await searchProducts(page: 1,category: widget.categoryId);
+          var response = await searchProducts(category:widget.categoryId,page: 1,term: "");
           logger.i(response);
           _loading = false;
           setState(() {});
           bool responseCheck = checkResponse(response);
           if (responseCheck) {
-            Get.toNamed('/results', arguments: response);
+            Get.toNamed('/searchResults', arguments: response);
           }
         },
         child: Material(

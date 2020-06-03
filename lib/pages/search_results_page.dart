@@ -1,16 +1,20 @@
+import 'package:flare_flutter/flare_actor.dart';
+import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:realpet/components/results_page_components.dart';
 
-class ResultsPage extends StatefulWidget {
+class SearchProductResults extends StatefulWidget {
   @override
-  _ResultsPageState createState() => _ResultsPageState();
+  _SearchProductResultsState createState() => _SearchProductResultsState();
 }
 
-class _ResultsPageState extends State<ResultsPage> {
-  List arguments = Get.arguments;
+String _logoAnimation = 'idle';
+final FlareControls _controls = FlareControls();
+
+class _SearchProductResultsState extends State<SearchProductResults> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,12 +26,11 @@ class _ResultsPageState extends State<ResultsPage> {
               height: 20,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                // BACK BUTTON
                 GestureDetector(
                   onTap: () {
-                    Get.offAllNamed('/');
+                    Get.back();
                   },
                   child: Container(
                     width: 50,
@@ -41,22 +44,35 @@ class _ResultsPageState extends State<ResultsPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 50,
-                ),
-                // CATEGORY TITLE
-                Text(
-                  arguments[0]['category'],
-                  style: GoogleFonts.comfortaa(
-                    fontSize: 30,
+                // TITLE
+                Hero(
+                  tag: "TEST",
+                  child: Container(
+                    width: 150,
+                    height: 90,
+                    child: FlareActor(
+                      'assets/logo.flr',
+                      animation: _logoAnimation,
+                      controller: _controls,
+                      color: Colors.white,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
+                ),
+                SizedBox(
+                  width: 35,
                 ),
               ],
             ),
             SizedBox(
               height: 20,
             ),
-            Expanded(child: SearchResults()),
+            // RESULTS
+            Expanded(
+              child: SearchResults(
+                products: Get.arguments,
+              ),
+            ),
           ],
         ),
       ),

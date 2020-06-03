@@ -9,17 +9,17 @@ var logger = new Logger();
 
 // SEARCH RESULTS PAGE
 class SearchResults extends StatefulWidget {
+  SearchResults({this.products});
+  final dynamic products;
   @override
   _SearchResultsState createState() => _SearchResultsState();
 }
 
 // SEARCH RESULTS PAGE STATE
 class _SearchResultsState extends State<SearchResults> {
-  List products = [];
   @override
   void initState() {
     super.initState();
-    products = Get.arguments;
   }
 
   @override
@@ -29,18 +29,18 @@ class _SearchResultsState extends State<SearchResults> {
         child: Container(
           child: Center(
             child: ListView.builder(
-              itemCount: products.length,
+              itemCount: widget.products['results'].length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ResultsTile(
-                    categoryId: products[index]['categoryId'],
-                    img: products[index]['img'],
-                    desc: products[index]['description'],
-                    originalPrice: products[index]['originalPrice'],
-                    productName: products[index]['name'],
-                    productSKU: products[index]['sku'],
-                    productId: products[index]['id'],
+                    categoryId: widget.products['results'][index]['category'],
+                    img: widget.products['results'][index]['img'],
+                    desc: widget.products['results'][index]['description'],
+                    originalPrice: widget.products['results'][index]['originalPrice'],
+                    productName: widget.products['results'][index]['name'],
+                    productSKU: widget.products['results'][index]['sku'],
+                    productId: widget.products['results'][index]['id'],
                   ),
                 );
               },
@@ -63,7 +63,7 @@ class ResultsTile extends StatelessWidget {
     this.categoryId,
     this.productId,
   });
-  final int categoryId;
+  final String categoryId;
   final String productName;
   final String productSKU;
   final double originalPrice;
@@ -108,7 +108,7 @@ class ResultsTile extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        '$productSKU',
+        '${productSKU.toString()}',
         textAlign: TextAlign.left,
         style: GoogleFonts.comfortaa(),
       ),

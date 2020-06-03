@@ -9,6 +9,7 @@ import 'package:foldable_sidebar/foldable_sidebar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:progress_state_button/iconed_button.dart';
 import 'package:progress_state_button/progress_button.dart';
+import 'package:realpet/components/animated_logo.dart';
 import 'package:realpet/components/categories.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,15 +18,15 @@ import 'package:realpet/components/drawer.dart';
 import 'package:realpet/components/search_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:realpet/components/spinning_button.dart';
+import 'package:realpet/pages/search_results_page.dart';
 
 bool _loading = false;
 var _currentUser;
-String _logoAnimation = 'idle';
-final FlareControls _controls = FlareControls();
 FirebaseAuth _auth = FirebaseAuth.instance;
 var db = Firestore.instance;
 
 class StoreFront extends StatefulWidget {
+
   @override
   _StoreFrontState createState() => _StoreFrontState();
 }
@@ -49,7 +50,6 @@ class _StoreFrontState extends State<StoreFront>
   }
 
   FSBStatus drawerStatus;
-  ButtonState _buttonState = ButtonState.idle;
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -76,65 +76,18 @@ class _StoreFrontState extends State<StoreFront>
                       SizedBox(
                         width: 30,
                       ),
-                      SpinningButton(
-                        onPress: () async {
-                          setState(() {
-                            _buttonState = ButtonState.loading;
-                          });
-                          await Future.delayed(Duration(seconds: 2));
-                          setState(() {
-                            _buttonState = ButtonState.fail;
-                          });
-                        },
-                        buttonState: _buttonState,
-                        idleIcon: FontAwesomeIcons.sign,
-                        idleText: "TEST",
-                      ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Material(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topLeft: Radius.elliptical(80, 80),
-                        bottomRight: Radius.elliptical(20, 20),
-                        topRight: Radius.elliptical(80, 80),
-                        bottomLeft: Radius.elliptical(20, 20),
-                      )),
-                      elevation: 40,
-                      shadowColor: Color(0xFFf1d1d1),
-                      child: Padding(
-                        padding: const EdgeInsets.all(14.0),
-                        child: Column(
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _logoAnimation = 'touch';
-                                });
-                                Future.delayed(
-                                    const Duration(milliseconds: 100), () {
-                                  setState(() {
-                                    _logoAnimation = 'idle';
-                                  });
-                                });
-                              },
-                              child: Container(
-                                width: 200,
-                                height: 120,
-                                child: FlareActor(
-                                  'assets/logo.flr',
-                                  animation: _logoAnimation,
-                                  controller: _controls,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  AnimatedLogo(
+                    height: 100,
+                    width: 150,
+                    elevation: 40,
+                    bottomLeftRadius: Radius.elliptical(20, 20),
+                    bottomRightRadius: Radius.elliptical(20, 20),
+                    topLeftRadius: Radius.elliptical(80, 80),
+                    topRightRadius: Radius.elliptical(80, 80),
+                    backGroundColor: Colors.white,
+                    logoColor: Colors.black,
                   ),
                   SizedBox(
                     height: 5,

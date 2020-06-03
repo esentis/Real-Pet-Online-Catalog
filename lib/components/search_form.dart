@@ -101,46 +101,7 @@ class _SearchFormState extends State<SearchForm> {
             buttons: [
               DialogButton(
                 color: Colors.white,
-                onPressed: () async {
-                  setState(() {
-                    if (_controller.text.isEmpty) {
-                      _validateSearch = true;
-                      snackBar(
-                          duration: 4,
-                          text: "Το πεδίο αναζήτησης δε μπορεί να είναι κενό",
-                          title: "Προσοχή !",
-                          iconData: FontAwesomeIcons.exclamationCircle,
-                          iconColor: Colors.orange);
-                    } else {
-                      _validateSearch = false;
-                      _searching = true;
-                    }
-                  });
-                  // IF THE TEXT FIELD IS NOT EMPTY
-                  if (!_validateSearch) {
-                    // WE CHECK FOR THE RESPONSE TRUE = OK RESPONSE , FALSE = ERROR
-                    var response = await searchProducts(_searchTerm);
-                    // ASSIGNING THE RESULT OF THE CHECK
-                    bool responseCheck = checkResponse(response);
-                    // IF TRUE
-                    if (responseCheck) {
-                      // IF THERE ARE NO SUCH PRODUCTS THROW A DIALOG ALERT
-                      if (response.length == 0) {
-                        snackBar(
-                            duration: 4,
-                            text:
-                                "Δέν βρέθηκαν προϊόντα με τα κριτήρια αναζήτησης",
-                            title: "Ουπς !",
-                            iconData: FontAwesomeIcons.sadCry,
-                            iconColor: Colors.redAccent);
-                      }
-                      // ELSE GO THE SEARCH PAGE TO SHOW THE RESULTS
-                      else {
-                        Get.toNamed('/search', arguments: response);
-                      }
-                    }
-                  }
-                },
+
                 radius: BorderRadius.only(
                     topLeft: Radius.circular(60),
                     bottomRight: Radius.circular(30),

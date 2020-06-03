@@ -8,7 +8,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:realpet/components/search_form.dart';
 
 import 'package:realpet/pages/storefront.dart';
-import 'general_widgets.dart';
 
 class CustomDrawer extends StatefulWidget {
   final Function closeDrawer;
@@ -38,20 +37,32 @@ class _CustomDrawerState extends State<CustomDrawer> {
               backgroundImage: AssetImage('assets/logo.png'),
               radius: 60,
             ),
-            DrawerTile(text: "Προφίλ",icon: FontAwesomeIcons.userEdit,),
-            SearchForm(
-              leadingIcon: FontAwesomeIcons.search,
-              leadingIconColor: Colors.red,
-              leadingIconSize: 30,
+            DrawerTile(
+              text: "Προφίλ",
+              icon: FontAwesomeIcons.userEdit,
+              iconSize: 30,
             ),
-            DrawerTile(text: "Αποσύνδεση",icon: FontAwesomeIcons.signOutAlt,onTapped: () async{
-              _loading = true;
-              setState(() {});
-              await FirebaseAuth.instance.signOut();
-              _loading = false;
-              setState(() {});
-              Get.offAllNamed('/login');
-            },),
+            DrawerTile(
+              text: "Αναζήτηση",
+              icon: FontAwesomeIcons.search,
+              iconSize: 30,
+              onTapped: (){
+                Get.toNamed("/search");
+              },
+            ),
+            DrawerTile(
+              text: "Αποσύνδεση",
+              icon: FontAwesomeIcons.signOutAlt,
+              iconSize: 30,
+              onTapped: () async {
+                _loading = true;
+                setState(() {});
+                await FirebaseAuth.instance.signOut();
+                _loading = false;
+                setState(() {});
+                Get.offAllNamed('/login');
+              },
+            ),
           ],
         ),
       ),
@@ -60,14 +71,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
 }
 
 class DrawerTile extends StatelessWidget {
-  DrawerTile({
-    this.onTapped,
-    this.text,
-    this.icon,
-  });
+  DrawerTile({this.onTapped, this.text, this.icon, this.iconSize});
   final Function onTapped;
   final String text;
   final IconData icon;
+  final double iconSize;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -75,6 +83,7 @@ class DrawerTile extends StatelessWidget {
       leading: Icon(
         icon,
         color: Colors.redAccent,
+        size: iconSize,
       ),
       title: Container(
         decoration: BoxDecoration(
