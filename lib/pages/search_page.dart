@@ -133,7 +133,7 @@ class _SearchPageState extends State<SearchPage> {
                             setState(() {
                               _buttonState = ButtonState.idle;
                             });
-                            Get.toNamed('/searchResults', arguments: response);
+                            Get.toNamed('/results', arguments: response);
                           }
                         }
                         setState(() {

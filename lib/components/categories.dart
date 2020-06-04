@@ -141,16 +141,12 @@ class _CategoryIconState extends State<CategoryIcon> {
           logger.i("Category tapped for search");
           _loading = true;
           setState(() {});
-//          dynamic response = await getCategoryProducts(widget.categoryId);
-//          dynamic response =
-//              await searchProducts(page: 1,category: widget.categoryId);
-          var response = await searchProducts(category:widget.categoryId,page: 1,term: "");
-          logger.i(response);
+          var response = await searchProducts(category:widget.categoryId,page: 1);
           _loading = false;
           setState(() {});
           bool responseCheck = checkResponse(response);
           if (responseCheck) {
-            Get.toNamed('/searchResults', arguments: response);
+            Get.toNamed('/results', arguments: widget.categoryId);
           }
         },
         child: Material(

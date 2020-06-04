@@ -46,14 +46,15 @@ getCategoryProducts(categoryId) async {
 // METHOD FOR SEARCHING PRODUCTS
 searchProducts({term, page, category, lowestPrice, highestPrice}) async {
   Response response;
+  FormData formData = new FormData.fromMap({
+    "page": page,
+    "category": category,
+    "lowestPrice": lowestPrice,
+    "highestPrice": highestPrice,
+    "searchTerm": term,
+  });
   try {
-    response = await dio.post("/api/product/search", data: {
-      "page": page,
-      "category": category,
-      "lowestPrice": lowestPrice,
-      "highestPrice": highestPrice,
-      "searchTerm": term ?? "",
-    });
+    response = await dio.post("/api/product/search", data: formData);
   } on DioError catch (e) {
     return e.type;
   }

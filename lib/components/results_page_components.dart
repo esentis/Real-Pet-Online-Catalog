@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
+import 'package:realpet/shop_logic.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 var logger = new Logger();
+var _currentPage = 1;
 
 // SEARCH RESULTS PAGE
 class SearchResults extends StatefulWidget {
@@ -17,18 +19,56 @@ class SearchResults extends StatefulWidget {
 
 // SEARCH RESULTS PAGE STATE
 class _SearchResultsState extends State<SearchResults> {
+
+  List productList;
+  productsList(Map<String, dynamic> products) {
+    products.forEach((key, value) {
+      if (key == "results") {
+        for (var i = 0; i < 10; i++) {
+          productList.add(value[i]['name'].toString());
+        }
+      }
+    });
+  }
+  loadNext(){
+
+  }
+
   @override
   void initState() {
     super.initState();
   }
 
+  ScrollController _scrollController = new ScrollController();
+
   @override
   Widget build(BuildContext context) {
+    productsList(widget.products);
     return Scaffold(
       body: SafeArea(
         child: Container(
           child: Center(
             child: ListView.builder(
+              controller: _scrollController
+                ..addListener(() {
+                  var triggerFetchMoreSize =
+                      0.9 * _scrollController.position.maxScrollExtent;
+                  if (_scrollController.position.pixels >
+                      triggerFetchMoreSize) {
+                    // call fetch more method here
+                    logger.i("MAX CONTENT");
+                    if (_currentPage <= widget.products['totalPages']) {
+                      searchProducts(page: ++_currentPage, category: 1);
+                      setState(() {});
+                    } else {
+                      logger.w("No more pages to load");
+                    }
+                  }
+//                  if (_scrollController.position.pixels ==
+//                      _scrollController.position.maxScrollExtent) {
+//                    logger.i("MAX CONTENT");
+//                  }
+                }),
               itemCount: widget.products['results'].length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
@@ -37,7 +77,8 @@ class _SearchResultsState extends State<SearchResults> {
                     categoryId: widget.products['results'][index]['category'],
                     img: widget.products['results'][index]['img'],
                     desc: widget.products['results'][index]['description'],
-                    originalPrice: widget.products['results'][index]['originalPrice'],
+                    originalPrice: widget.products['results'][index]
+                        ['originalPrice'],
                     productName: widget.products['results'][index]['name'],
                     productSKU: widget.products['results'][index]['sku'],
                     productId: widget.products['results'][index]['id'],

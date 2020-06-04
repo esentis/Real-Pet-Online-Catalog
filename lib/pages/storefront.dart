@@ -18,7 +18,7 @@ import 'package:realpet/components/drawer.dart';
 import 'package:realpet/components/search_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:realpet/components/spinning_button.dart';
-import 'package:realpet/pages/search_results_page.dart';
+import 'package:realpet/pages/category_results_page.dart';
 
 bool _loading = false;
 var _currentUser;
@@ -91,6 +91,12 @@ class _StoreFrontState extends State<StoreFront>
                   ),
                   SizedBox(
                     height: 5,
+                  ),
+                  FlatButton(
+                    onPressed: (){
+                      Get.toNamed('/test');
+                    },
+                      child: Text("PRESS ME"),
                   ),
                   Expanded(
                     flex: 1,
