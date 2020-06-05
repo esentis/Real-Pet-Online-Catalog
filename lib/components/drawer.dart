@@ -82,7 +82,7 @@ class DrawerTile extends StatelessWidget {
       onTap: onTapped,
       leading: Icon(
         icon,
-        color: Colors.redAccent,
+        color: Colors.white,
         size: iconSize,
       ),
       title: Container(

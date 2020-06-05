@@ -61,7 +61,7 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                 });
               },
               child: Hero(
-                tag: "TEST",
+                tag: "LOGO",
                 child: Container(
                   width: widget.width,
                   height: widget.height,

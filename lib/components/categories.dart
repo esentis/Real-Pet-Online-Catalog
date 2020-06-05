@@ -23,9 +23,9 @@ class Categories extends StatelessWidget {
           SliverPadding(
             padding: EdgeInsets.all(30),
             sliver: SliverGrid.count(
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
-              crossAxisCount: 3,
+              crossAxisSpacing: 9,
+              mainAxisSpacing: 8,
+              crossAxisCount: 4,
               children: <Widget>[
                 CategoryIcon(
                   text: 'Τροφή σκύλου',
@@ -139,15 +139,22 @@ class _CategoryIconState extends State<CategoryIcon> {
       child: GestureDetector(
         onTap: () async {
           logger.i("Category tapped for search");
-          _loading = true;
-          setState(() {});
-          var response = await searchProducts(category:widget.categoryId,page: 1);
-          _loading = false;
-          setState(() {});
-          bool responseCheck = checkResponse(response);
-          if (responseCheck) {
-            Get.toNamed('/results', arguments: widget.categoryId);
-          }
+//          _loading = true;
+//          setState(() {});
+//          var response = await searchProducts(category:widget.categoryId,page: 1);
+//          _loading = false;
+//          setState(() {});
+//          bool responseCheck = checkResponse(response);
+//          if (responseCheck) {
+//            Get.toNamed('/test', arguments: widget.categoryId);
+//          }
+//          Get.toNamed('/results', arguments: widget.categoryId);
+          Get.toNamed('/results', arguments: {
+            "category": widget.categoryId,
+            "lowestPrice": null,
+            "highestPrice": null,
+            "searchTerm": null,
+          });
         },
         child: Material(
           color: widget.color,
@@ -158,10 +165,10 @@ class _CategoryIconState extends State<CategoryIcon> {
               width: 3,
             ),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.zero,
+              topLeft: Radius.circular(30),
               topRight: Radius.elliptical(10, 90),
               bottomLeft: Radius.elliptical(10, 90),
-              bottomRight: Radius.circular(100),
+              bottomRight: Radius.circular(50),
             ),
           ),
           shadowColor: Colors.white,
@@ -174,7 +181,7 @@ class _CategoryIconState extends State<CategoryIcon> {
                   FaIcon(
                     widget.categoryIcon,
                     color: widget.iconColor,
-                    size: 18,
+                    size: 31,
                   ),
                   SizedBox(
                     height: 5,

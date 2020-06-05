@@ -1,14 +1,10 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flare_flutter/flare_actor.dart';
-import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foldable_sidebar/foldable_sidebar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:progress_state_button/iconed_button.dart';
-import 'package:progress_state_button/progress_button.dart';
 import 'package:realpet/components/animated_logo.dart';
 import 'package:realpet/components/categories.dart';
 import 'package:get/get.dart';
@@ -17,8 +13,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:realpet/components/drawer.dart';
 import 'package:realpet/components/search_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:realpet/components/spinning_button.dart';
-import 'package:realpet/pages/category_results_page.dart';
 
 bool _loading = false;
 var _currentUser;
@@ -26,7 +20,6 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 var db = Firestore.instance;
 
 class StoreFront extends StatefulWidget {
-
   @override
   _StoreFrontState createState() => _StoreFrontState();
 }
@@ -52,9 +45,9 @@ class _StoreFrontState extends State<StoreFront>
   FSBStatus drawerStatus;
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-      inAsyncCall: _loading,
-      child: SafeArea(
+    return SafeArea(
+      child: ModalProgressHUD(
+        inAsyncCall: _loading,
         child: Scaffold(
           body: FoldableSidebarBuilder(
             drawerBackgroundColor: Color(0xFF00263b),
@@ -93,10 +86,10 @@ class _StoreFrontState extends State<StoreFront>
                     height: 5,
                   ),
                   FlatButton(
-                    onPressed: (){
-                      Get.toNamed('/test');
+                    onPressed: () {
+                      Get.toNamed('/search');
                     },
-                      child: Text("PRESS ME"),
+                    child: Text("PRESS ME"),
                   ),
                   Expanded(
                     flex: 1,
@@ -130,11 +123,17 @@ class _StoreFrontState extends State<StoreFront>
             ),
             status: drawerStatus,
           ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.deepPurple[400],
+            elevation: 50,
+              splashColor: Colors.redAccent,
+              backgroundColor: Color(0xFF00263b),
+              shape: StadiumBorder(
+                  side: BorderSide(color: Colors.white, width: 3)),
               child: Icon(
-                Icons.menu,
+                FontAwesomeIcons.ellipsisH,
                 color: Colors.white,
+                size: 40,
               ),
               onPressed: () {
                 logger.i(drawerStatus);

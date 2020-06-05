@@ -18,6 +18,9 @@ class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
 }
 
+var startingRanges = RangeValues(0.0, 300);
+double startingPrice=0;
+double endingPrice=0;
 class _SearchPageState extends State<SearchPage> {
   String _logoAnimation = "idle";
   final FlareControls _controls = FlareControls();
@@ -34,11 +37,30 @@ class _SearchPageState extends State<SearchPage> {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.offAllNamed('/');
+                      },
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Icon(
+                          Icons.home,
+                          color: Color(0xFF00263b),
+                        ),
+                      ),
+                    ),
+                  ),
                   Hero(
-                    tag: "TEST",
+                    tag: "LOGO",
                     child: Container(
                       width: 150,
                       height: 90,
@@ -51,6 +73,9 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    width: 50,
+                  ),
                 ],
               ),
               SizedBox(
@@ -59,32 +84,64 @@ class _SearchPageState extends State<SearchPage> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  TextField(
-                    maxLength: 10,
-                    controller: _textController,
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      icon: Icon(FontAwesomeIcons.search, color: Colors.blue),
-                      hintText: 'Αναζήτηση προϊόντος',
-                      hintStyle: GoogleFonts.comfortaa(
-                          fontSize: 15, fontWeight: FontWeight.w900),
-                      border: OutlineInputBorder(
-                        gapPadding: 10,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(60),
-                          bottomRight: Radius.circular(60),
+                  Text(
+                    "Προϊόντα απο ${startingPrice.floor()}€ μέχρι ${endingPrice.floor()}€",
+                    style: GoogleFonts.comfortaa(
+                        fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                  Slider(
+                    onChanged: (newStartingPrice) {
+                      setState(() {
+                        startingPrice = newStartingPrice;
+                        if (startingPrice>endingPrice){
+                          endingPrice=startingPrice;
+                        }
+                      });
+                    },
+                    min: 0,
+                    max: 300,
+                    value: startingPrice,
+                  ),
+                  Slider(
+                    onChanged: (newEndingPrice) {
+                      setState(() {
+                        endingPrice = newEndingPrice;
+                        if (endingPrice<startingPrice){
+                          startingPrice=endingPrice;
+                        }
+                      });
+                    },
+                    min: 0,
+                    max: 300,
+                    value: endingPrice,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 23.0, left: 23.0),
+                    child: TextField(
+                      maxLength: 10,
+                      controller: _textController,
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        hintText: 'Αναζήτηση προϊόντος',
+                        hintStyle: GoogleFonts.comfortaa(
+                            fontSize: 15, fontWeight: FontWeight.w900),
+                        border: OutlineInputBorder(
+                          gapPadding: 10,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(60),
+                            bottomRight: Radius.circular(60),
+                          ),
                         ),
                       ),
+                      onChanged: (value) {
+                        _searchTerm = value;
+                        print(value);
+                      },
                     ),
-                    onChanged: (value) {
-                      _searchTerm = value;
-                      print(value);
-                    },
                   ),
-                  SpinningButton(
-                    onPress: () async {
-                      _buttonState = ButtonState.loading;
-                      setState(() {
+                  FlatButton(onPressed: () async{
+                    _buttonState = ButtonState.loading;
+                    setState(() {
                         if (_textController.text.isEmpty) {
                           _validateSearch = true;
                           snackBar(
@@ -99,60 +156,106 @@ class _SearchPageState extends State<SearchPage> {
                           _validateSearch = false;
                           _searching = true;
                         }
-                      });
-                      if (_buttonState == ButtonState.fail) {
-                        await Future.delayed(const Duration(milliseconds: 4000),
-                            () {
-                          setState(() {
-                            _buttonState = ButtonState.idle;
-                          });
-                        });
-                      }
-                      // IF THE TEXT FIELD IS NOT EMPTY
-                      if (!_validateSearch) {
-                        // WE CHECK FOR THE RESPONSE TRUE = OK RESPONSE , FALSE = ERROR
-                        var response =
-                            await searchProducts(term: _searchTerm, page: 1);
-                        // ASSIGNING THE RESULT OF THE CHECK
-                        bool responseCheck = checkResponse(response);
-                        // IF TRUE
-                        if (responseCheck) {
-                          // IF THERE ARE NO SUCH PRODUCTS THROW A DIALOG ALERT
-                          if (response.length == 0) {
-
-                            snackBar(
-                                duration: 4,
-                                text:
-                                    "Δέν βρέθηκαν προϊόντα με τα κριτήρια αναζήτησης",
-                                title: "Ουπς !",
-                                iconData: FontAwesomeIcons.sadCry,
-                                iconColor: Colors.redAccent);
-                          }
-                          // ELSE GO THE SEARCH PAGE TO SHOW THE RESULTS
-                          else {
+                      _validateSearch = false;
+                      _searching = true;
+                    });
+                    if (_buttonState == ButtonState.fail) {
+                      await Future.delayed(const Duration(milliseconds: 4000),
+                              () {
                             setState(() {
                               _buttonState = ButtonState.idle;
                             });
-                            Get.toNamed('/results', arguments: response);
-                          }
-                        }
-                        setState(() {
-                          _buttonState = ButtonState.fail;
-                        });
-                        if (_buttonState == ButtonState.fail) {
-                          await Future.delayed(const Duration(milliseconds: 4000),
-                                  () {
-                                setState(() {
-                                  _buttonState = ButtonState.idle;
-                                });
-                              });
-                        }
-                      }
-                    },
-                    buttonState: _buttonState,
-                    idleIcon: FontAwesomeIcons.search,
-                    idleText: "ΑΝΑΖΗΤΗΣΗ",
-                  ),
+                          });
+                    }
+                    // IF THE TEXT FIELD IS NOT EMPTY
+                      // WE CHECK FOR THE RESPONSE TRUE = OK RESPONSE , FALSE = ERROR
+                      var response =
+                          await searchProducts(term: _searchTerm, page: 1);
+                      Get.toNamed('/results', arguments: {
+                        "category": null,
+                        "lowestPrice": startingRanges.start,
+                        "highestPrice": startingRanges.end,
+                        "searchTerm": _searchTerm,
+                      });
+                  },child: Text("FLAT BUTTON"),),
+//                  SpinningButton(
+//                    onPress: () async {
+//                      _buttonState = ButtonState.loading;
+//                        setState(() {
+////                        if (_textController.text.isEmpty) {
+////                          _validateSearch = true;
+////                          snackBar(
+////                              duration: 4,
+////                              text:
+////                                  "Το πεδίο αναζήτησης δε μπορεί να είναι κενό",
+////                              title: "Προσοχή !",
+////                              iconData: FontAwesomeIcons.exclamationCircle,
+////                              iconColor: Colors.orange);
+////                          _buttonState = ButtonState.fail;
+////                        } else {
+////                          _validateSearch = false;
+////                          _searching = true;
+////                        }
+//                          _validateSearch = false;
+//                          _searching = true;
+//                        });
+//                        if (_buttonState == ButtonState.fail) {
+//                          await Future.delayed(const Duration(milliseconds: 4000),
+//                                  () {
+//                                setState(() {
+//                                  _buttonState = ButtonState.idle;
+//                                });
+//                              });
+//                        }
+//                        // IF THE TEXT FIELD IS NOT EMPTY
+//                        if (!_validateSearch) {
+//                          // WE CHECK FOR THE RESPONSE TRUE = OK RESPONSE , FALSE = ERROR
+//                          var response =
+//                              await searchProducts(term: _searchTerm, page: 1);
+//                          // ASSIGNING THE RESULT OF THE CHECK
+//                          bool responseCheck = checkResponse(response);
+//                          // IF TRUE
+//                          if (responseCheck) {
+//                            // IF THERE ARE NO SUCH PRODUCTS THROW A DIALOG ALERT
+//                            if (response.length == 0) {
+//                              snackBar(
+//                                  duration: 4,
+//                                  text:
+//                                  "Δέν βρέθηκαν προϊόντα με τα κριτήρια αναζήτησης",
+//                                  title: "Ουπς !",
+//                                  iconData: FontAwesomeIcons.sadCry,
+//                                  iconColor: Colors.redAccent);
+//                            }
+//                            // ELSE GO THE SEARCH PAGE TO SHOW THE RESULTS
+//                            else {
+//                              setState(() {
+//                                _buttonState = ButtonState.idle;
+//                              });
+//                              Get.toNamed('/results', arguments: {
+//                                "category": null,
+//                                "lowestPrice": startingRanges.start,
+//                                "highestPrice": startingRanges.end,
+//                                "searchTerm": _searchTerm,
+//                              });
+//                            }
+//                          }
+//                        setState(() {
+//                          _buttonState = ButtonState.fail;
+//                        });
+//                        if (_buttonState == ButtonState.fail) {
+//                          await Future.delayed(
+//                              const Duration(milliseconds: 4000), () {
+//                            setState(() {
+//                              _buttonState = ButtonState.idle;
+//                            });
+//                          });
+//                        }
+//                      }
+//                    },
+//                    buttonState: _buttonState,
+//                    idleIcon: FontAwesomeIcons.search,
+//                    idleText: "ΑΝΑΖΗΤΗΣΗ",
+//                  ),
                 ],
               ),
             ],
