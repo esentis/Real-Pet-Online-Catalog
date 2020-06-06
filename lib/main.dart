@@ -25,11 +25,13 @@ class MyApp extends StatelessWidget {
             create: (_) => DrawerModel(drawerStatus: FSBStatus.FSB_CLOSE)),
         ListenableProvider<BottomSearchModel>(
             create: (_) => BottomSearchModel()),
+        ListenableProvider<ResultsContainerModel>(
+            create: (_) => ResultsContainerModel()),
       ],
       child: GetMaterialApp(
-        title: 'WooCommerce Demo',
+        title: 'Real Pet Catalog App',
         theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: Color(0xFF00263b),
+          scaffoldBackgroundColor: Color(0xffcbf1f5),
           sliderTheme: SliderThemeData(
             overlayColor: Colors.black,
             inactiveTrackColor: Colors.red,

@@ -36,14 +36,19 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      shadowColor: Color(0xFFce2e6c),
       color: widget.backGroundColor,
       shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: Color(0xFFce2e6c),
+            width: 3,
+          ),
           borderRadius: BorderRadius.only(
-        topLeft: widget.topLeftRadius,
-        bottomRight: widget.bottomRightRadius,
-        topRight: widget.topRightRadius,
-        bottomLeft: widget.bottomLeftRadius,
-      )),
+            topLeft: widget.topLeftRadius,
+            bottomRight: widget.bottomRightRadius,
+            topRight: widget.topRightRadius,
+            bottomLeft: widget.bottomLeftRadius,
+          )),
       elevation: widget.elevation,
       child: Padding(
         padding: const EdgeInsets.all(14.0),

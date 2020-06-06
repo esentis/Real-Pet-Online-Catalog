@@ -53,83 +53,85 @@ class _StoreFrontState extends State<StoreFront>
         inAsyncCall: _loading,
         child: Scaffold(
           body: FoldableSidebarBuilder(
-            drawerBackgroundColor: Color(0xFF00263b),
             drawer: CustomDrawer(
               closeDrawer: () {
                 drawerModel.toggleDrawer();
               },
             ),
-            screenContents: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        width: 25,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          drawerModel.toggleDrawer();
-                        },
-                        child: Icon(
-                          FontAwesomeIcons.cog,
-                          size: 40,
+            screenContents: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 25,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        drawerModel.toggleDrawer();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xff23374d),
+                            shape: BoxShape.circle,
+                            border: Border.fromBorderSide(BorderSide(
+                              color: Color(0xFFce2e6c),
+                              width: 3,
+                            ))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Center(
+                            child: Icon(
+                              FontAwesomeIcons.cog,
+                              size: 40,
+                            ),
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                  AnimatedLogo(
-                    height: 100,
-                    width: 150,
-                    elevation: 40,
-                    bottomLeftRadius: Radius.elliptical(20, 20),
-                    bottomRightRadius: Radius.elliptical(20, 20),
-                    topLeftRadius: Radius.elliptical(80, 80),
-                    topRightRadius: Radius.elliptical(80, 80),
-                    backGroundColor: Colors.white,
-                    logoColor: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      Get.toNamed('/search');
-                    },
-                    child: Text(bottomSearchModel.textValue ?? ""),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: EdgeInsets.all(13.0),
-                      child: FadeAnimatedTextKit(
-                          onTap: () {
-                            logger.i("Animated text tap event");
-                          },
-                          text: [
-                            "Μεγάλη ποικιλία προϊόντων",
-                            "Όλα για τους μικρούς μας φίλους",
-                            "Real Pet χονδρική"
-                          ],
-                          textStyle: GoogleFonts.comfortaa(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                letterSpacing: 0,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          textAlign: TextAlign.center,
-                          alignment: AlignmentDirectional
-                              .topStart // or Alignment.topLeft
-                          ),
                     ),
-                  ),
-                  Categories(),
-                ],
-              ),
+                  ],
+                ),
+                AnimatedLogo(
+                  height: 100,
+                  width: 150,
+                  elevation: 40,
+                  bottomLeftRadius: Radius.elliptical(20, 20),
+                  bottomRightRadius: Radius.elliptical(20, 20),
+                  topLeftRadius: Radius.elliptical(80, 80),
+                  topRightRadius: Radius.elliptical(80, 80),
+                  backGroundColor: Colors.white,
+                  logoColor: Colors.black,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(13.0),
+                  child: FadeAnimatedTextKit(
+                      onTap: () {
+                        logger.i("Animated text tap event");
+                      },
+                      text: [
+                        "Μεγάλη ποικιλία προϊόντων",
+                        "Όλα για τους μικρούς μας φίλους",
+                        "Real Pet χονδρική"
+                      ],
+                      textStyle: GoogleFonts.comfortaa(
+                        textStyle: TextStyle(
+                            color: Color(0xff23374d),
+                            letterSpacing: 0,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900),
+                      ),
+                      textAlign: TextAlign.center,
+                      alignment:
+                          AlignmentDirectional.topStart // or Alignment.topLeft
+                      ),
+                ),
+                Categories(),
+              ],
             ),
             status: drawerModel.drawerStatus,
           ),
@@ -139,14 +141,18 @@ class _StoreFrontState extends State<StoreFront>
               splashColor: Colors.redAccent,
               backgroundColor: Color(0xFF00263b),
               shape: StadiumBorder(
-                  side: BorderSide(color: Colors.white, width: 3)),
+                side: BorderSide(
+                  color: Color(0xFFce2e6c),
+                  width: 3,
+                ),
+              ),
               child: Icon(
                 FontAwesomeIcons.search,
                 color: Colors.white,
                 size: 40,
               ),
               onPressed: () {
-                if (drawerModel.drawerStatus==FSBStatus.FSB_OPEN){
+                if (drawerModel.drawerStatus == FSBStatus.FSB_OPEN) {
                   drawerModel.toggleDrawer();
                 }
                 showModalBottomSheet(

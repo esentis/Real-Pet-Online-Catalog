@@ -20,6 +20,8 @@ class ProductPage extends StatelessWidget {
             //BACK BUTTON
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              textBaseline: TextBaseline.alphabetic,
               children: <Widget>[
                 SizedBox(
                   width: 15,
@@ -41,24 +43,32 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      arguments[0],
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.comfortaa(
+                          shadows: [
+                            Shadow(
+                                color: Color(0xFFce2e6c), blurRadius: 15),
+                          ],
+                          color:Color(0xff23374d),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 15,
+                ),
               ],
             ),
             SizedBox(
               height: 5,
             ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  arguments[0],
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.comfortaa(
-                    fontSize: 19,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-            ),
+
             SizedBox(
               height: 5,
             ),
@@ -67,31 +77,68 @@ class ProductPage extends StatelessWidget {
               elevation: 20,
               shadowColor: Colors.white,
               color: Colors.white,
-              shape: ContinuousRectangleBorder(
-                  side: BorderSide(
-                      color: Colors.lightBlueAccent,
-                      width: 5,
-                      style: BorderStyle.solid),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(90),
-                    bottomRight: Radius.circular(50),
-                    bottomLeft: Radius.circular(90),
-                  )),
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  color: Color(0xFFce2e6c),
+                  width: 3,
+                ),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(60),
+                  topRight: Radius.elliptical(60, 60),
+                  bottomLeft: Radius.elliptical(60, 60),
+                  bottomRight: Radius.circular(0),
+                ),
+              ),
               // Product Image
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                maxRadius: 170,
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Hero(
-                    tag: arguments[6],
-                    child: FadeInImage.memoryNetwork(
-                      placeholder: kTransparentImage,
-                      image: arguments[2],
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    maxRadius: 170,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Hero(
+                        tag: arguments[6],
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: kTransparentImage,
+                          image: arguments[2],
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Padding(
+                    padding: EdgeInsets.only(left:8.0),
+                    child: Material(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: Color(0xFFce2e6c),
+                          width: 3,
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(60),
+                          topRight: Radius.elliptical(60, 60),
+                          bottomLeft: Radius.elliptical(60, 60),
+                          bottomRight: Radius.circular(0),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Text(
+                          "${arguments[1]}€",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.comfortaa(
+                              shadows: [
+                                Shadow(color: Color(0xffeeeeee), blurRadius: 15),
+                              ],
+                              color: Color(0xffeeeeee),
+                              fontSize: 30,
+                              fontWeight: FontWeight.w900),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(
@@ -113,10 +160,10 @@ class ProductPage extends StatelessWidget {
                       '${arguments[4]}',
                       textAlign: TextAlign.left,
                       style: GoogleFonts.comfortaa(
-                        fontSize: 16,
+                        fontSize: 20,
                         letterSpacing: 1,
                         wordSpacing: 1,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ),

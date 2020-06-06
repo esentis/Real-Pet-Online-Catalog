@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:realpet/components/results_page_components.dart';
-
+import 'package:realpet/components/state_management.dart';
+import 'package:provider/provider.dart';
 import '../shop_logic.dart';
 
 var response;
@@ -101,107 +102,169 @@ class _ResultsPageState extends State<ResultsPage>
 
   @override
   Widget build(BuildContext context) {
+    var screenInfo = MediaQuery.of(context);
+    var containerModel = context.watch<ResultsContainerModel>();
     return SafeArea(
       child: Scaffold(
-
-        body: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                //BACK BUTTON
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: Color(0xFF00263b),
+        body: Center(
+          child: Column(
+            children: [
+              AnimatedContainer(
+                duration: Duration(milliseconds: 750),
+                width: screenInfo.size.width * 0.7,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0),
+                    bottomRight: Radius.circular(20.0),
+                    bottomLeft: Radius.circular(20.0),
+                  ),
+                  boxShadow: [
+                    BoxShadow(color: Color(0xff23374d), blurRadius: 25),
+                  ],
+                  border: Border.fromBorderSide(BorderSide(
+                    color: Colors.red,
+                    width: 1,
+                  )),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    //BACK BUTTON
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Color(0xFF00263b),
+                            size: 40,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Hero(
-                  tag: "LOGO",
-                  child: Container(
-                    width: 150,
-                    height: 90,
-                    child: FlareActor(
-                      'assets/logo.flr',
-                      animation: _logoAnimation,
-                      controller: _controls,
-                      color: Colors.white,
-                      fit: BoxFit.fitWidth,
+                    Padding(
+                      padding: EdgeInsets.only(top:8.0,bottom:8.0),
+                      child: Hero(
+                        tag: "LOGO",
+                        child: Container(
+                          width: 150,
+                          height: 90,
+                          child: FlareActor(
+                            'assets/logo.flr',
+                            animation: _logoAnimation,
+                            controller: _controls,
+                            color: Colors.black,
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      width: 50,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: 50,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            FutureBuilder(
-                future: _futureResultsText,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    String loadedResultsText = snapshot.data;
-                    return Text(
-                      "Βρέθηκαν συνολικά ${loadedResultsText.toString()} προϊόντα",
-                      style: GoogleFonts.comfortaa(fontSize: 16),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              // NUMBER OF RESULTS FOUND
+              FutureBuilder(
+                  future: _futureResultsText,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      String loadedResultsText = snapshot.data;
+                      return Column(
+                        children: [
+                          Text(
+                            "Βρέθηκαν συνολικά ${loadedResultsText.toString()} προϊόντα",
+                            style: GoogleFonts.comfortaa(
+                                shadows: [
+                                  Shadow(
+                                      color: Color(0xFFce2e6c), blurRadius: 15),
+                                ],
+                                color: Color(0xff23374d),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        ],
+                      );
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: animation,
+                      ),
                     );
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: animation,
+                  }),
+              SizedBox(height: 25),
+              // RESULTS
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Color(0xff23374d),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0),
+                      bottomRight: Radius.zero,
+                      bottomLeft: Radius.zero,
                     ),
-                  );
-                }),
-            SizedBox(height: 25),
-            // RESULTS
-            Expanded(
-              child: FutureBuilder(
-                future: _future,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    List<String> loaded = snapshot.data;
-                    return ListView.builder(
-                      itemCount: loaded.length,
-                      controller: _controller,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ResultsTile(
-                          categoryId: _category[index],
-                          img: _img[index],
-                          desc: _desc[index],
-                          originalPrice: double.parse(_originalPrice[index]),
-                          productName: loaded[index],
-                          productSKU: _sku[index],
-                          productId: int.parse(_id[index]),
+                    boxShadow: [
+                      BoxShadow(color: Color(0xff23374d), blurRadius: 25),
+                    ],
+                    border: Border.fromBorderSide(BorderSide(
+                      color: Colors.red,
+                      width: 1,
+                    )),
+                  ),
+                  child: Padding(
+                    padding:EdgeInsets.only(top: 30.0),
+                    child: FutureBuilder(
+                      future: _future,
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          List<String> loaded = snapshot.data;
+                          return ListView.builder(
+                            itemCount: loaded.length,
+                            controller: _controller,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ResultsTile(
+                                categoryId: _category[index],
+                                img: _img[index],
+                                desc: _desc[index],
+                                originalPrice:
+                                    double.parse(_originalPrice[index]),
+                                productName: loaded[index],
+                                productSKU: _sku[index],
+                                productId: int.parse(_id[index]),
+                              );
+                            },
+                          );
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(
+                            strokeWidth: 10,
+                            valueColor: animation,
+                          ),
                         );
                       },
-                    );
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 10,
-                      valueColor: animation,
                     ),
-                  );
-                },
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -15,13 +15,12 @@ bool _loading = false;
 class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 7,
+    return Flexible(
       child: CustomScrollView(
         primary: false,
         slivers: <Widget>[
           SliverPadding(
-            padding: EdgeInsets.all(30),
+            padding: EdgeInsets.all(10),
             sliver: SliverGrid.count(
               crossAxisSpacing: 9,
               mainAxisSpacing: 8,
@@ -32,67 +31,67 @@ class Categories extends StatelessWidget {
                   categoryId: 2,
                   categoryIcon: FontAwesomeIcons.dog,
                   iconColor: Colors.white,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
                 CategoryIcon(
                   text: 'Τροφή γάτας',
                   categoryId: 1,
                   categoryIcon: FontAwesomeIcons.cat,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
                 CategoryIcon(
                   text: 'Grooming',
                   categoryId: 4,
                   categoryIcon: FontAwesomeIcons.cut,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
                 CategoryIcon(
                   text: 'Σαμπουάν',
                   categoryId: 3,
                   categoryIcon: FontAwesomeIcons.soap,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
                 CategoryIcon(
                   text: 'Μπωλ φαγητού',
                   categoryId: 7,
                   categoryIcon: Icons.fastfood,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
                 CategoryIcon(
                   text: 'Παιχνίδια',
                   categoryId: 10,
                   categoryIcon: Icons.toys,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
                 CategoryIcon(
                   text: 'Κόκκαλα',
                   categoryId: 6,
                   categoryIcon: FontAwesomeIcons.bone,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
                 CategoryIcon(
                   text: 'Βιταμίνες',
                   categoryId: 11,
                   categoryIcon: FontAwesomeIcons.tablets,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
                 CategoryIcon(
                   text: 'Πουλιά',
                   categoryId: 5,
                   categoryIcon: FontAwesomeIcons.dove,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
                 CategoryIcon(
                   text: 'Επαγγελματικά',
                   categoryId: 8,
                   categoryIcon: FontAwesomeIcons.userMd,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
                 CategoryIcon(
                   text: 'Διάφορα',
                   categoryId: 9,
                   categoryIcon: FontAwesomeIcons.ellipsisH,
-                  color: Color(0xFF00a1ab),
+                  color: Color(0xff23374d),
                 ),
               ],
             ),
@@ -139,16 +138,6 @@ class _CategoryIconState extends State<CategoryIcon> {
       child: GestureDetector(
         onTap: () async {
           logger.i("Category tapped for search");
-//          _loading = true;
-//          setState(() {});
-//          var response = await searchProducts(category:widget.categoryId,page: 1);
-//          _loading = false;
-//          setState(() {});
-//          bool responseCheck = checkResponse(response);
-//          if (responseCheck) {
-//            Get.toNamed('/test', arguments: widget.categoryId);
-//          }
-//          Get.toNamed('/results', arguments: widget.categoryId);
           Get.toNamed('/results', arguments: {
             "category": widget.categoryId,
             "lowestPrice": null,
@@ -158,20 +147,20 @@ class _CategoryIconState extends State<CategoryIcon> {
         },
         child: Material(
           color: widget.color,
-          elevation: 12,
+          elevation: 10,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: Color(0xFFf1d1d1),
+              color: Color(0xFFce2e6c),
               width: 3,
             ),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.elliptical(10, 90),
-              bottomLeft: Radius.elliptical(10, 90),
-              bottomRight: Radius.circular(50),
+              topLeft: Radius.circular(60),
+              topRight: Radius.elliptical(60, 60),
+              bottomLeft: Radius.elliptical(60, 60),
+              bottomRight: Radius.circular(60),
             ),
           ),
-          shadowColor: Colors.white,
+          shadowColor: Color(0xFFce2e6c),
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
