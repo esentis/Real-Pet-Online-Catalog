@@ -11,8 +11,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:realpet/components/drawer.dart';
+import 'package:realpet/components/state_management.dart';
 import 'package:realpet/components/search_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 bool _loading = false;
 var _currentUser;
@@ -42,9 +44,10 @@ class _StoreFrontState extends State<StoreFront>
     checkUser();
   }
 
-  FSBStatus drawerStatus;
   @override
   Widget build(BuildContext context) {
+    final drawerModel = context.watch<DrawerModel>();
+    final bottomSearchModel = context.watch<BottomSearchModel>();
     return SafeArea(
       child: ModalProgressHUD(
         inAsyncCall: _loading,
@@ -53,9 +56,7 @@ class _StoreFrontState extends State<StoreFront>
             drawerBackgroundColor: Color(0xFF00263b),
             drawer: CustomDrawer(
               closeDrawer: () {
-                setState(() {
-                  drawerStatus = FSBStatus.FSB_CLOSE;
-                });
+                drawerModel.toggleDrawer();
               },
             ),
             screenContents: Center(
@@ -67,7 +68,16 @@ class _StoreFrontState extends State<StoreFront>
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(
-                        width: 30,
+                        width: 25,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          drawerModel.toggleDrawer();
+                        },
+                        child: Icon(
+                          FontAwesomeIcons.cog,
+                          size: 40,
+                        ),
                       ),
                     ],
                   ),
@@ -89,7 +99,7 @@ class _StoreFrontState extends State<StoreFront>
                     onPressed: () {
                       Get.toNamed('/search');
                     },
-                    child: Text("PRESS ME"),
+                    child: Text(bottomSearchModel.textValue ?? ""),
                   ),
                   Expanded(
                     flex: 1,
@@ -121,27 +131,101 @@ class _StoreFrontState extends State<StoreFront>
                 ],
               ),
             ),
-            status: drawerStatus,
+            status: drawerModel.drawerStatus,
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           floatingActionButton: FloatingActionButton(
-            elevation: 50,
+              elevation: 50,
               splashColor: Colors.redAccent,
               backgroundColor: Color(0xFF00263b),
               shape: StadiumBorder(
                   side: BorderSide(color: Colors.white, width: 3)),
               child: Icon(
-                FontAwesomeIcons.ellipsisH,
+                FontAwesomeIcons.search,
                 color: Colors.white,
                 size: 40,
               ),
               onPressed: () {
-                logger.i(drawerStatus);
-                setState(() {
-                  drawerStatus = drawerStatus == FSBStatus.FSB_OPEN
-                      ? FSBStatus.FSB_CLOSE
-                      : FSBStatus.FSB_OPEN;
-                });
+                if (drawerModel.drawerStatus==FSBStatus.FSB_OPEN){
+                  drawerModel.toggleDrawer();
+                }
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        color: Color(0xff00111b),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFF00263b),
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(50),
+                              topLeft: Radius.circular(50),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Αναζήτηση προϊόντος",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.comfortaa(
+                                    fontSize: 26,
+                                    color: Colors.white,
+                                    shadows: [
+                                      Shadow(
+                                          color: Colors.redAccent,
+                                          blurRadius: 15),
+                                    ]),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(30.0),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    TextField(
+                                      onChanged: (value) {
+                                        bottomSearchModel.setValue(value);
+                                      },
+                                      onSubmitted: (value) {
+                                        Get.toNamed('/results', arguments: {
+                                          "category": null,
+                                          "lowestPrice": null,
+                                          "highestPrice": null,
+                                          "searchTerm":
+                                              bottomSearchModel.textValue,
+                                        });
+                                      },
+                                      keyboardType: TextInputType.text,
+                                      textInputAction: TextInputAction.search,
+                                      controller:
+                                          bottomSearchModel.textController,
+                                      textAlign: TextAlign.center,
+                                      style:
+                                          GoogleFonts.comfortaa(fontSize: 26),
+                                      autofocus: true,
+                                    ),
+                                    FlatButton(
+                                      onPressed: () {
+                                        Get.toNamed('/results', arguments: {
+                                          "category": null,
+                                          "lowestPrice": null,
+                                          "highestPrice": null,
+                                          "searchTerm":
+                                              bottomSearchModel.textValue,
+                                        });
+                                      },
+                                      color: Colors.red,
+                                      child: Text("Αναζήτηση"),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    });
               }),
         ),
       ),

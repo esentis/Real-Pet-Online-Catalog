@@ -173,8 +173,8 @@ class _SearchPageState extends State<SearchPage> {
                           await searchProducts(term: _searchTerm, page: 1);
                       Get.toNamed('/results', arguments: {
                         "category": null,
-                        "lowestPrice": startingRanges.start,
-                        "highestPrice": startingRanges.end,
+                        "lowestPrice": startingPrice,
+                        "highestPrice": endingPrice,
                         "searchTerm": _searchTerm,
                       });
                   },child: Text("FLAT BUTTON"),),

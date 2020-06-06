@@ -5,9 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:realpet/components/search_form.dart';
-
-import 'package:realpet/pages/storefront.dart';
 
 class CustomDrawer extends StatefulWidget {
   final Function closeDrawer;
@@ -17,9 +14,6 @@ class CustomDrawer extends StatefulWidget {
   @override
   _CustomDrawerState createState() => _CustomDrawerState();
 }
-
-StoreFront sf = new StoreFront();
-
 class _CustomDrawerState extends State<CustomDrawer> {
   bool _loading = false;
   @override
@@ -33,22 +27,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            CircleAvatar(
-              backgroundImage: AssetImage('assets/logo.png'),
-              radius: 60,
-            ),
+            Icon(FontAwesomeIcons.dog,size: 150,),
+            SizedBox(height: 30,),
             DrawerTile(
               text: "Προφίλ",
               icon: FontAwesomeIcons.userEdit,
               iconSize: 30,
-            ),
-            DrawerTile(
-              text: "Αναζήτηση",
-              icon: FontAwesomeIcons.search,
-              iconSize: 30,
-              onTapped: (){
-                Get.toNamed("/search");
-              },
             ),
             DrawerTile(
               text: "Αποσύνδεση",
@@ -103,3 +87,5 @@ class DrawerTile extends StatelessWidget {
     );
   }
 }
+
+
