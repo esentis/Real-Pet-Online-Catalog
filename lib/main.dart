@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:realpet/components/state_management.dart';
+import 'package:realpet/pages/TEST.dart';
 import 'package:realpet/pages/login_page.dart';
 import 'package:realpet/pages/register_page.dart';
 import 'package:realpet/pages/results_page.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
           '/product': GetRoute(page: ProductPage()),
           '/results': GetRoute(page: ResultsPage()),
           '/search': GetRoute(page: SearchPage()),
+          '/test': GetRoute(page: TestResults()),
         },
       ),
     );

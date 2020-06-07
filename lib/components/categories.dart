@@ -138,7 +138,7 @@ class _CategoryIconState extends State<CategoryIcon> {
       child: GestureDetector(
         onTap: () async {
           logger.i("Category tapped for search");
-          Get.toNamed('/results', arguments: {
+          Get.toNamed('/test', arguments: {
             "category": widget.categoryId,
             "lowestPrice": null,
             "highestPrice": null,
