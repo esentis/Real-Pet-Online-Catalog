@@ -6,8 +6,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'constants.dart';
 import 'file:///D:/Flutter_apps/real_pet/lib/shop_logic.dart';
 import 'general_widgets.dart';
+
+//A DIFFERENT RESULTS DESIGN
 
 bool _loading = false;
 
@@ -31,67 +34,67 @@ class Categories extends StatelessWidget {
                   categoryId: 2,
                   categoryIcon: FontAwesomeIcons.dog,
                   iconColor: Colors.white,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
                 CategoryIcon(
                   text: 'Τροφή γάτας',
                   categoryId: 1,
                   categoryIcon: FontAwesomeIcons.cat,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
                 CategoryIcon(
                   text: 'Grooming',
                   categoryId: 4,
                   categoryIcon: FontAwesomeIcons.cut,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
                 CategoryIcon(
                   text: 'Σαμπουάν',
                   categoryId: 3,
                   categoryIcon: FontAwesomeIcons.soap,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
                 CategoryIcon(
                   text: 'Μπωλ φαγητού',
                   categoryId: 7,
                   categoryIcon: Icons.fastfood,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
                 CategoryIcon(
                   text: 'Παιχνίδια',
                   categoryId: 10,
                   categoryIcon: Icons.toys,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
                 CategoryIcon(
                   text: 'Κόκκαλα',
                   categoryId: 6,
                   categoryIcon: FontAwesomeIcons.bone,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
                 CategoryIcon(
                   text: 'Βιταμίνες',
                   categoryId: 11,
                   categoryIcon: FontAwesomeIcons.tablets,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
                 CategoryIcon(
                   text: 'Πουλιά',
                   categoryId: 5,
                   categoryIcon: FontAwesomeIcons.dove,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
                 CategoryIcon(
                   text: 'Επαγγελματικά',
                   categoryId: 8,
                   categoryIcon: FontAwesomeIcons.userMd,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
                 CategoryIcon(
                   text: 'Διάφορα',
                   categoryId: 9,
                   categoryIcon: FontAwesomeIcons.ellipsisH,
-                  color: Color(0xff23374d),
+                  color: kMainColor,
                 ),
               ],
             ),
@@ -131,14 +134,14 @@ class _CategoryIconState extends State<CategoryIcon> {
     argumentsList.add(widget.categoryIcon);
     return ModalProgressHUD(
       progressIndicator: SpinKitWave(
-        color: Color(0xFF00263b).withOpacity(0.8),
+        color: kMainColor.withOpacity(0.8),
         size: 30.0,
       ),
       inAsyncCall: _loading,
       child: GestureDetector(
         onTap: () async {
           logger.i("Category tapped for search");
-          Get.toNamed('/test', arguments: {
+          Get.toNamed('/results', arguments: {
             "category": widget.categoryId,
             "lowestPrice": null,
             "highestPrice": null,
@@ -147,20 +150,20 @@ class _CategoryIconState extends State<CategoryIcon> {
         },
         child: Material(
           color: widget.color,
-          elevation: 10,
+          elevation: kCategoryElevation,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: Color(0xFFce2e6c),
-              width: 3,
+              color: kBorderAndShadowColors,
+              width: kCategoryBorderWidth,
             ),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(60),
-              topRight: Radius.elliptical(60, 60),
-              bottomLeft: Radius.elliptical(60, 60),
-              bottomRight: Radius.circular(60),
+              topLeft: Radius.elliptical(500, 50),
+              topRight: Radius.zero,
+              bottomLeft: Radius.zero,
+              bottomRight: Radius.elliptical(50, 500),
             ),
           ),
-          shadowColor: Color(0xFFce2e6c),
+          shadowColor: kBorderAndShadowColors,
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -170,7 +173,7 @@ class _CategoryIconState extends State<CategoryIcon> {
                   FaIcon(
                     widget.categoryIcon,
                     color: widget.iconColor,
-                    size: 31,
+                    size: kCategoryIconSize,
                   ),
                   SizedBox(
                     height: 5,
@@ -179,8 +182,8 @@ class _CategoryIconState extends State<CategoryIcon> {
                     widget.text,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.comfortaa(
-                        color: Colors.white,
-                        fontSize: 10,
+                        color: kCategoryTextColor,
+                        fontSize: kCategoryTextFontSize,
                         fontWeight: FontWeight.w600),
                   ),
                 ],

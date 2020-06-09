@@ -39,10 +39,6 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
       shadowColor: Color(0xFFce2e6c),
       color: widget.backGroundColor,
       shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Color(0xFFce2e6c),
-            width: 3,
-          ),
           borderRadius: BorderRadius.only(
             topLeft: widget.topLeftRadius,
             bottomRight: widget.bottomRightRadius,

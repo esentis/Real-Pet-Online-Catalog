@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:realpet/components/constants.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ProductPage extends StatelessWidget {
@@ -32,14 +33,15 @@ class ProductPage extends StatelessWidget {
                     Get.back();
                   },
                   child: Container(
-                    width: 50,
-                    height: 50,
+                    width: kBackButtonWidth,
+                    height: kBackButtonHeight,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: kBackButtonBackgroundColor,
                         borderRadius: BorderRadius.circular(20)),
                     child: Icon(
                       Icons.arrow_back,
-                      color: Color(0xFF00263b),
+                      color: kMainColor,
+                      size: kBackButtonSize,
                     ),
                   ),
                 ),
@@ -52,10 +54,10 @@ class ProductPage extends StatelessWidget {
                       style: GoogleFonts.comfortaa(
                           shadows: [
                             Shadow(
-                                color: Color(0xFFce2e6c), blurRadius: 15),
+                                color: kBorderAndShadowColors, blurRadius: 15),
                           ],
-                          color:Color(0xff23374d),
-                          fontSize: 20,
+                          color:kProductTitleColor,
+                          fontSize: kProductTitleFontSize,
                           fontWeight: FontWeight.w900),
                     ),
                   ),
@@ -75,17 +77,17 @@ class ProductPage extends StatelessWidget {
             //PRODUCT IMAGE CONTAINER
             Material(
               elevation: 20,
-              shadowColor: Colors.white,
-              color: Colors.white,
+              shadowColor: kProductMaterialShadowColor,
+              color: kProductMaterialBackgroundColor,
               shape: RoundedRectangleBorder(
                 side: BorderSide(
-                  color: Color(0xFFce2e6c),
+                  color: kBorderAndShadowColors,
                   width: 3,
                 ),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(60),
-                  topRight: Radius.elliptical(60, 60),
-                  bottomLeft: Radius.elliptical(60, 60),
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                  bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(0),
                 ),
               ),
@@ -94,7 +96,7 @@ class ProductPage extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 children: [
                   CircleAvatar(
-                    backgroundColor: Colors.white,
+                    backgroundColor: kProductAvatarBackgroundColor,
                     maxRadius: 170,
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
@@ -112,7 +114,7 @@ class ProductPage extends StatelessWidget {
                     child: Material(
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
-                          color: Color(0xFFce2e6c),
+                          color: kBorderAndShadowColors,
                           width: 3,
                         ),
                         borderRadius: BorderRadius.only(
@@ -129,10 +131,10 @@ class ProductPage extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.comfortaa(
                               shadows: [
-                                Shadow(color: Color(0xffeeeeee), blurRadius: 15),
+                                Shadow(color: kPriceShadowColor, blurRadius: kPriceBlurRadius),
                               ],
-                              color: Color(0xffeeeeee),
-                              fontSize: 30,
+                              color: kPriceTextColor,
+                              fontSize: kPriceFontSize,
                               fontWeight: FontWeight.w900),
                         ),
                       ),
@@ -163,7 +165,7 @@ class ProductPage extends StatelessWidget {
                         fontSize: 20,
                         letterSpacing: 1,
                         wordSpacing: 1,
-                        color: Colors.black,
+                        color: kProductDescriptionColor,
                       ),
                     ),
                   ),

@@ -145,8 +145,7 @@ class ResultsTile extends StatelessWidget {
         style: GoogleFonts.comfortaa(
             color: Color(0xffeeeeee),
             fontSize: 16,
-            fontWeight: FontWeight.w900
-        ),
+            fontWeight: FontWeight.w900),
       ),
       subtitle: Text(
         '${productSKU.toString()}',
@@ -162,10 +161,9 @@ class ResultsTile extends StatelessWidget {
         '${originalPrice.toString()}€',
         textAlign: TextAlign.left,
         style: GoogleFonts.comfortaa(
-          color: Color(0xffeeeeee),
-          fontSize: 18,
-          fontWeight: FontWeight.w900
-        ),
+            color: Color(0xffeeeeee),
+            fontSize: 18,
+            fontWeight: FontWeight.w900),
       ),
     );
   }

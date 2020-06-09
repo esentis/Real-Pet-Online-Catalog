@@ -234,7 +234,13 @@ class _TestResultsState extends State<TestResults>
                       if (snapshot.hasData) {
                         List<String> loaded = snapshot.data;
                         return ListWheelScrollView.useDelegate(
-                          itemExtent: 80,
+                          clipToSize: true,
+                          diameterRatio: 1,
+                          offAxisFraction: 0.5,
+                          onSelectedItemChanged: (index){
+                            print(index);
+                          },
+                          itemExtent: 50,
                           childDelegate: ListWheelChildBuilderDelegate(
                             childCount: loaded.length,
                               builder: (BuildContext context, int index) {

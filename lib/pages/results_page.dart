@@ -5,6 +5,7 @@ import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:realpet/components/constants.dart';
 import 'package:realpet/components/results_page_components.dart';
 import 'package:realpet/components/state_management.dart';
 import 'package:provider/provider.dart';
@@ -105,33 +106,22 @@ class _ResultsPageState extends State<ResultsPage>
     var screenInfo = MediaQuery.of(context);
     var containerModel = context.watch<ResultsContainerModel>();
     return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              AnimatedContainer(
-                duration: Duration(milliseconds: 750),
-                width: screenInfo.size.width * 0.7,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
-                    bottomRight: Radius.circular(20.0),
-                    bottomLeft: Radius.circular(20.0),
-                  ),
-                  boxShadow: [
-                    BoxShadow(color: Color(0xff23374d), blurRadius: 25),
-                  ],
-                  border: Border.fromBorderSide(BorderSide(
-                    color: Colors.red,
-                    width: 1,
-                  )),
-                ),
-                child: Row(
+      child: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: kStoreFrontBackgroundImage,
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.5), BlendMode.dstATop),
+          fit: BoxFit.cover,
+        )),
+        child: Scaffold(
+          body: Center(
+            child: Column(
+              children: [
+                // LOGO CONTAINER
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    //BACK BUTTON
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0),
                       child: GestureDetector(
@@ -139,131 +129,150 @@ class _ResultsPageState extends State<ResultsPage>
                           Get.back();
                         },
                         child: Container(
-                          width: 50,
-                          height: 50,
+                          width: kBackButtonWidth,
+                          height: kBackButtonHeight,
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: kBackButtonBackgroundColor,
                               borderRadius: BorderRadius.circular(20)),
                           child: Icon(
                             Icons.arrow_back,
-                            color: Color(0xFF00263b),
-                            size: 40,
+                            color: kMainColor,
+                            size: kBackButtonSize,
                           ),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top:8.0,bottom:8.0),
-                      child: Hero(
-                        tag: "LOGO",
-                        child: Container(
-                          width: 150,
-                          height: 90,
-                          child: FlareActor(
-                            'assets/logo.flr',
-                            animation: _logoAnimation,
-                            controller: _controls,
-                            color: Colors.black,
-                            fit: BoxFit.fitWidth,
+                    // LOGO
+                    Container(
+                      height: kResultsContainerLogoHeight,
+                      width: kResultsContainerLogoWidth,
+                      decoration: BoxDecoration(
+                        color: kResultsLogoContainerColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.zero,
+                          topRight: Radius.zero,
+                          bottomRight: Radius.circular(40.0),
+                          bottomLeft: Radius.circular(40.0),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                              color: kBorderAndShadowColors, blurRadius: 25),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: 8.0, bottom: 8.0, left: 12, right: 12),
+                        child: Hero(
+                          tag: "LOGO",
+                          child: Container(
+                            width: kResultsContainerLogoWidth,
+                            height: kResultsContainerLogoHeight,
+                            child: FlareActor(
+                              'assets/logo.flr',
+                              animation: _logoAnimation,
+                              controller: _controls,
+                              color: kResultsLogoColor,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
                         ),
                       ),
                     ),
                     SizedBox(
-                      width: 50,
+                      width: 80,
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              // NUMBER OF RESULTS FOUND
-              FutureBuilder(
-                  future: _futureResultsText,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      String loadedResultsText = snapshot.data;
-                      return Column(
-                        children: [
-                          Text(
-                            "Βρέθηκαν συνολικά ${loadedResultsText.toString()} προϊόντα",
-                            style: GoogleFonts.comfortaa(
-                                shadows: [
-                                  Shadow(
-                                      color: Color(0xFFce2e6c), blurRadius: 15),
-                                ],
-                                color: Color(0xff23374d),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w900),
-                          ),
-                        ],
-                      );
-                    }
-                    return Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: animation,
-                      ),
-                    );
-                  }),
-              SizedBox(height: 25),
-              // RESULTS
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color(0xff23374d),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      topRight: Radius.circular(20.0),
-                      bottomRight: Radius.zero,
-                      bottomLeft: Radius.zero,
-                    ),
-                    boxShadow: [
-                      BoxShadow(color: Color(0xff23374d), blurRadius: 25),
-                    ],
-                    border: Border.fromBorderSide(BorderSide(
-                      color: Colors.red,
-                      width: 1,
-                    )),
-                  ),
-                  child: Padding(
-                    padding:EdgeInsets.only(top: 30.0),
-                    child: FutureBuilder(
-                      future: _future,
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          List<String> loaded = snapshot.data;
-                          return ListView.builder(
-                            itemCount: loaded.length,
-                            controller: _controller,
-                            itemBuilder: (BuildContext context, int index) {
-                              return ResultsTile(
-                                categoryId: _category[index],
-                                img: _img[index],
-                                desc: _desc[index],
-                                originalPrice:
-                                    double.parse(_originalPrice[index]),
-                                productName: loaded[index],
-                                productSKU: _sku[index],
-                                productId: int.parse(_id[index]),
-                              );
-                            },
-                          );
-                        }
-                        return Center(
-                          child: CircularProgressIndicator(
-                            strokeWidth: 10,
-                            valueColor: animation,
-                          ),
+                SizedBox(
+                  height: 10,
+                ),
+                // NUMBER OF RESULTS FOUND
+                FutureBuilder(
+                    future: _futureResultsText,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        String loadedResultsText = snapshot.data;
+                        return Column(
+                          children: [
+                            Text(
+                              "Βρέθηκαν συνολικά ${loadedResultsText.toString()} προϊόντα",
+                              style: GoogleFonts.comfortaa(
+                                  shadows: [
+                                    Shadow(
+                                        color: kBorderAndShadowColors,
+                                        blurRadius: kResultsTextBlurRadius),
+                                  ],
+                                  color: kResultsTextColor,
+                                  fontSize: kResultsTextFontSize,
+                                  fontWeight: FontWeight.w900),
+                            ),
+                          ],
                         );
-                      },
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: animation,
+                        ),
+                      );
+                    }),
+                SizedBox(height: 25),
+                // RESULTS
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: kMainColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0),
+                        bottomRight: Radius.zero,
+                        bottomLeft: Radius.zero,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            color: kBorderAndShadowColors,
+                            blurRadius: kResultsBlurRadius),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 30.0),
+                      child: FutureBuilder(
+                        future: _future,
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData) {
+                            List<String> loaded = snapshot.data;
+                            return ListView.builder(
+                              itemCount: loaded.length,
+                              controller: _controller,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ResultsTile(
+                                  categoryId: _category[index],
+                                  img: _img[index],
+                                  desc: _desc[index],
+                                  originalPrice:
+                                      double.parse(_originalPrice[index]),
+                                  productName: loaded[index],
+                                  productSKU: _sku[index],
+                                  productId: int.parse(_id[index]),
+                                );
+                              },
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 10,
+                              valueColor: animation,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
