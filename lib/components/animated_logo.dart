@@ -3,80 +3,64 @@ import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
+
 String _logoAnimation = 'idle';
 final FlareControls _controls = FlareControls();
 
-class AnimatedLogo extends StatefulWidget {
-  AnimatedLogo({
+class RealPetLogo extends StatefulWidget {
+  RealPetLogo({
+    this.blurRadius,
+    this.containerHeight,
+    this.containerWidth,
     this.bottomLeftRadius,
+    this.topRightRadius,
     this.bottomRightRadius,
     this.topLeftRadius,
-    this.topRightRadius,
-    this.elevation,
-    this.width,
-    this.height,
-    this.backGroundColor,
-    this.logoColor,
   });
+  final double blurRadius;
+  final double containerWidth;
+  final double containerHeight;
   final Radius topLeftRadius;
-  final Radius bottomRightRadius;
   final Radius topRightRadius;
   final Radius bottomLeftRadius;
-  final double elevation;
-  final double width;
-  final double height;
-  final Color backGroundColor;
-  final Color logoColor;
+  final Radius bottomRightRadius;
 
   @override
-  _AnimatedLogoState createState() => _AnimatedLogoState();
+  _RealPetLogoState createState() => _RealPetLogoState();
 }
 
-class _AnimatedLogoState extends State<AnimatedLogo> {
+class _RealPetLogoState extends State<RealPetLogo> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      shadowColor: Color(0xFFce2e6c),
-      color: widget.backGroundColor,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: widget.topLeftRadius,
-            bottomRight: widget.bottomRightRadius,
-            topRight: widget.topRightRadius,
-            bottomLeft: widget.bottomLeftRadius,
-          )),
-      elevation: widget.elevation,
+    return Container(
+      width: widget.containerWidth,
+      height: widget.containerHeight,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: widget.topLeftRadius,
+          topRight: widget.topRightRadius,
+          bottomRight: widget.bottomRightRadius,
+          bottomLeft: widget.bottomLeftRadius,
+        ),
+        boxShadow: [
+          BoxShadow(color: Colors.white, blurRadius: widget.blurRadius),
+        ],
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Column(
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  _logoAnimation = 'touch';
-                });
-                Future.delayed(const Duration(milliseconds: 100), () {
-                  setState(() {
-                    _logoAnimation = 'idle';
-                  });
-                });
-              },
-              child: Hero(
-                tag: "LOGO",
-                child: Container(
-                  width: widget.width,
-                  height: widget.height,
-                  child: FlareActor(
-                    'assets/logo.flr',
-                    animation: _logoAnimation,
-                    controller: _controls,
-                    color: widget.logoColor ?? Colors.black,
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-              ),
+        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+        child: Hero(
+          tag: "LOGO",
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FlareActor(
+              'assets/logo.flr',
+              animation: _logoAnimation,
+              controller: _controls,
+              color: kResultsLogoColor,
+              fit: BoxFit.fitWidth,
             ),
-          ],
+          ),
         ),
       ),
     );

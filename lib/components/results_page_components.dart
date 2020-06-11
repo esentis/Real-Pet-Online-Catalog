@@ -152,9 +152,8 @@ class ResultsTile extends StatelessWidget {
         textAlign: TextAlign.left,
         style: GoogleFonts.comfortaa(
           shadows: [
-            Shadow(color: Color(0xfff0134d), blurRadius: 5),
+            Shadow(color: Colors.black, blurRadius: 5),
           ],
-          color: Color(0xfff0134d),
         ),
       ),
       trailing: Text(

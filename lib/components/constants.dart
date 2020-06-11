@@ -10,10 +10,10 @@ Color kSearchButtonSplashColor = Color(0xFFce2e6c);
 Color kPriceShadowColor = Color(0xffeeeeee);
 Color kPriceTextColor = Color(0xffeeeeee);
 Color kProductMaterialBackgroundColor = Colors.white;
-Color kProductMaterialShadowColor = Colors.white;
+Color kProductMaterialShadowColor = Color(0xFFce2e6c);
 Color kProductAvatarBackgroundColor = Colors.white;
 Color kProductTitleColor = Colors.white;
-Color kProductDescriptionColor = Colors.white;
+Color kProductDescriptionColor = Colors.black;
 Color kResultsLogoContainerColor = Colors.white;
 Color kResultsLogoColor = Colors.black;
 Color kResultsTextColor = Colors.white;
@@ -22,7 +22,8 @@ Color kStoreFrontLogoColor = Colors.black;
 
 // ALL VALUES
 double kPriceBlurRadius = 15;
-double kPriceFontSize = 30;
+double kPriceFontSize = 27;
+double kSkuFontSize = 20;
 double kProductTitleFontSize = 20;
 double kBackButtonWidth = 50;
 double kBackButtonHeight = 50;
@@ -38,7 +39,7 @@ double kStoreFrontContainerLogoElevation = 40;
 double kCategoryTextFontSize = 10;
 double kCategoryIconSize = 31;
 double kCategoryElevation = 10;
-double kCategoryBorderWidth = 6;
+double kCategoryBorderWidth = 3;
 
 // ALL ASSETS
 AssetImage kStoreFrontBackgroundImage = AssetImage("assets/animals.png");

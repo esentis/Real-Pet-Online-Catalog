@@ -5,6 +5,7 @@ import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:realpet/components/animated_logo.dart';
 import 'package:realpet/components/constants.dart';
 import 'package:realpet/components/results_page_components.dart';
 import 'package:realpet/components/state_management.dart';
@@ -143,40 +144,14 @@ class _ResultsPageState extends State<ResultsPage>
                       ),
                     ),
                     // LOGO
-                    Container(
-                      height: kResultsContainerLogoHeight,
-                      width: kResultsContainerLogoWidth,
-                      decoration: BoxDecoration(
-                        color: kResultsLogoContainerColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.zero,
-                          topRight: Radius.zero,
-                          bottomRight: Radius.circular(40.0),
-                          bottomLeft: Radius.circular(40.0),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                              color: kBorderAndShadowColors, blurRadius: 25),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            top: 8.0, bottom: 8.0, left: 12, right: 12),
-                        child: Hero(
-                          tag: "LOGO",
-                          child: Container(
-                            width: kResultsContainerLogoWidth,
-                            height: kResultsContainerLogoHeight,
-                            child: FlareActor(
-                              'assets/logo.flr',
-                              animation: _logoAnimation,
-                              controller: _controls,
-                              color: kResultsLogoColor,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                        ),
-                      ),
+                    RealPetLogo(
+                      blurRadius: 15,
+                      containerHeight: 100,
+                      containerWidth: 150,
+                      topRightRadius: Radius.circular(20),
+                      topLeftRadius: Radius.circular(20),
+                      bottomRightRadius: Radius.circular(20),
+                      bottomLeftRadius: Radius.circular(20),
                     ),
                     SizedBox(
                       width: 80,
@@ -222,7 +197,6 @@ class _ResultsPageState extends State<ResultsPage>
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: kMainColor,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20.0),
                         topRight: Radius.circular(20.0),
@@ -231,7 +205,7 @@ class _ResultsPageState extends State<ResultsPage>
                       ),
                       boxShadow: [
                         BoxShadow(
-                            color: kBorderAndShadowColors,
+                            color: Color(0xFF00263b),
                             blurRadius: kResultsBlurRadius),
                       ],
                     ),

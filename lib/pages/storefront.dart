@@ -105,16 +105,14 @@ class _StoreFrontState extends State<StoreFront>
                     ],
                   ),
                   // LOGO
-                  AnimatedLogo(
-                    height: kStoreFrontContainerLogoHeight,
-                    width: kStoreFrontContainerLogoWidth,
-                    elevation: kStoreFrontContainerLogoElevation,
-                    bottomLeftRadius: Radius.elliptical(20, 20),
-                    bottomRightRadius: Radius.elliptical(20, 20),
-                    topLeftRadius: Radius.elliptical(80, 80),
-                    topRightRadius: Radius.elliptical(80, 80),
-                    backGroundColor: kStoreFrontLogoBackgroundColor,
-                    logoColor: kStoreFrontLogoColor,
+                  RealPetLogo(
+                    blurRadius: 15,
+                    containerHeight: 160,
+                    containerWidth: 260,
+                    topRightRadius: Radius.circular(60),
+                    topLeftRadius: Radius.circular(60),
+                    bottomRightRadius: Radius.circular(60),
+                    bottomLeftRadius: Radius.circular(60),
                   ),
                   SizedBox(
                     height: 15,
@@ -131,7 +129,7 @@ class _StoreFrontState extends State<StoreFront>
                         shape: RoundedRectangleBorder(
                           side: BorderSide(
                             color: Color(0xFFce2e6c),
-                            width: 6,
+                            width: 2,
                           ),
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.elliptical(500, 50),
