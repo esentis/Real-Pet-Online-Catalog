@@ -153,7 +153,7 @@ class _CategoryIconState extends State<CategoryIcon> {
           elevation: kCategoryElevation,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: kBorderAndShadowColors,
+              color: Colors.white,
               width: kCategoryBorderWidth,
             ),
             borderRadius: BorderRadius.only(

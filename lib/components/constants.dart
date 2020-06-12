@@ -39,7 +39,7 @@ double kStoreFrontContainerLogoElevation = 40;
 double kCategoryTextFontSize = 10;
 double kCategoryIconSize = 31;
 double kCategoryElevation = 10;
-double kCategoryBorderWidth = 3;
+double kCategoryBorderWidth = 2;
 
 // ALL ASSETS
 AssetImage kStoreFrontBackgroundImage = AssetImage("assets/animals.png");

@@ -88,7 +88,7 @@ class _StoreFrontState extends State<StoreFront>
                               color: kMainColor,
                               shape: BoxShape.circle,
                               border: Border.fromBorderSide(BorderSide(
-                                color: kBorderAndShadowColors,
+                                color: Colors.white,
                                 width: 3,
                               ))),
                           child: Padding(
@@ -128,8 +128,8 @@ class _StoreFrontState extends State<StoreFront>
                         shadowColor: Color(0xFFce2e6c),
                         shape: RoundedRectangleBorder(
                           side: BorderSide(
-                            color: Color(0xFFce2e6c),
-                            width: 2,
+                            color: Colors.white,
+                            width: 1,
                           ),
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.elliptical(500, 50),
@@ -178,7 +178,7 @@ class _StoreFrontState extends State<StoreFront>
                 backgroundColor: kMainColor,
                 shape: StadiumBorder(
                   side: BorderSide(
-                    color: kBorderAndShadowColors,
+                    color: Colors.white,
                     width: 3,
                   ),
                 ),
