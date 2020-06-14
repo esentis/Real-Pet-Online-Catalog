@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flare_flutter/flare_actor.dart';
+import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foldable_sidebar/foldable_sidebar.dart';
@@ -21,6 +23,8 @@ bool _loading = false;
 var _currentUser;
 FirebaseAuth _auth = FirebaseAuth.instance;
 var db = Firestore.instance;
+FlareControls _controls = FlareControls();
+var animationName = 'hamburger';
 
 class StoreFront extends StatefulWidget {
   @override
@@ -82,6 +86,13 @@ class _StoreFrontState extends State<StoreFront>
                       GestureDetector(
                         onTap: () {
                           drawerModel.toggleDrawer();
+                          setState(() {
+                            if (animationName == 'toX') {
+                              animationName = 'toHamburger';
+                            } else {
+                              animationName = 'toX';
+                            }
+                          });
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -91,13 +102,17 @@ class _StoreFrontState extends State<StoreFront>
                                 color: Colors.white,
                                 width: 3,
                               ))),
+                          width: 50,
+                          height: 50,
                           child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Center(
-                              child: Icon(
-                                FontAwesomeIcons.cog,
-                                size: 40,
-                              ),
+                            padding: const EdgeInsets.all(8.0),
+                            child: FlareActor(
+                              'assets/settings_icon.flr',
+                              animation: animationName,
+                              controller: _controls,
+                              color: Colors.white,
+                              fit: BoxFit.fitWidth,
+
                             ),
                           ),
                         ),
