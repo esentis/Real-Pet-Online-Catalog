@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controls.dart';
@@ -18,6 +19,7 @@ import 'package:realpet/components/state_management.dart';
 import 'package:realpet/components/search_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 bool _loading = false;
 var _currentUser;
@@ -77,11 +79,9 @@ class _StoreFrontState extends State<StoreFront>
                 children: <Widget>[
                   // SETTINGS
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      SizedBox(
-                        width: 25,
-                      ),
+
                       // SETTINGS TOGGLER
                       GestureDetector(
                         onTap: () {
@@ -112,74 +112,74 @@ class _StoreFrontState extends State<StoreFront>
                               controller: _controls,
                               color: Colors.white,
                               fit: BoxFit.fitWidth,
-
                             ),
                           ),
                         ),
                       ),
+                      RealPetLogo(
+                        blurRadius: 0,
+                        containerHeight: 100,
+                        containerWidth: 150,
+                        topRightRadius: Radius.circular(0),
+                        topLeftRadius: Radius.circular(60),
+                        bottomRightRadius: Radius.circular(60),
+                        bottomLeftRadius: Radius.circular(60),
+                      ),
+                      SizedBox(
+                        width: 25,
+                      ),
                     ],
                   ),
                   // LOGO
-                  RealPetLogo(
-                    blurRadius: 15,
-                    containerHeight: 160,
-                    containerWidth: 260,
-                    topRightRadius: Radius.circular(60),
-                    topLeftRadius: Radius.circular(60),
-                    bottomRightRadius: Radius.circular(60),
-                    bottomLeftRadius: Radius.circular(60),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: double.infinity,
-                      height: 100,
-                      child: Material(
-                        color: Colors.white,
-                        elevation: 20,
-                        shadowColor: Color(0xFFce2e6c),
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            color: Colors.white,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.elliptical(500, 50),
-                            topRight: Radius.zero,
-                            bottomLeft: Radius.zero,
-                            bottomRight: Radius.elliptical(50, 500),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: FadeAnimatedTextKit(
-                              repeatForever: true,
-                              onTap: () {
-                                logger.i("Animated text tap event");
-                              },
-                              text: [
-                                "Μεγάλη ποικιλία προϊόντων",
-                                "Όλα για τους μικρούς μας φίλους",
-                                "Real Pet χονδρική"
-                              ],
-                              textStyle: GoogleFonts.comfortaa(
-                                textStyle: TextStyle(
-                                    color: Color(0xff23374d),
-                                    letterSpacing: 0,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w900),
-                              ),
-                              textAlign: TextAlign.center,
-                              alignment: AlignmentDirectional
-                                  .topStart // or Alignment.topLeft
-                              ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  Expanded(child: NoonLoopingDemo()),
+//                  Padding(
+//                    padding: const EdgeInsets.all(8.0),
+//                    child: Container(
+//                      width: double.infinity,
+//                      height: 100,
+//                      child: Material(
+//                        color: Colors.white,
+//                        elevation: 20,
+//                        shadowColor: Color(0xFFce2e6c),
+//                        shape: RoundedRectangleBorder(
+//                          side: BorderSide(
+//                            color: Colors.white,
+//                            width: 1,
+//                          ),
+//                          borderRadius: BorderRadius.only(
+//                            topLeft: Radius.elliptical(500, 50),
+//                            topRight: Radius.zero,
+//                            bottomLeft: Radius.zero,
+//                            bottomRight: Radius.elliptical(50, 500),
+//                          ),
+//                        ),
+//                        child: Padding(
+//                          padding: const EdgeInsets.all(12.0),
+//                          child: FadeAnimatedTextKit(
+//                              repeatForever: true,
+//                              onTap: () {
+//                                logger.i("Animated text tap event");
+//                              },
+//                              text: [
+//                                "Μεγάλη ποικιλία προϊόντων",
+//                                "Όλα για τους μικρούς μας φίλους",
+//                                "Real Pet χονδρική"
+//                              ],
+//                              textStyle: GoogleFonts.comfortaa(
+//                                textStyle: TextStyle(
+//                                    color: Color(0xff23374d),
+//                                    letterSpacing: 0,
+//                                    fontSize: 30,
+//                                    fontWeight: FontWeight.w900),
+//                              ),
+//                              textAlign: TextAlign.center,
+//                              alignment: AlignmentDirectional
+//                                  .topStart // or Alignment.topLeft
+//                              ),
+//                        ),
+//                      ),
+//                    ),
+//                  ),
                   // ALL CATEGORIES
                   Categories(),
                 ],
@@ -288,5 +288,65 @@ class _StoreFrontState extends State<StoreFront>
         ),
       ),
     );
+  }
+}
+
+class NoonLoopingDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: CarouselSlider(
+      options: CarouselOptions(
+        aspectRatio: 2.0,
+        enlargeCenterPage: true,
+        enableInfiniteScroll: false,
+        initialPage: 1,
+        autoPlay: true,
+      ),
+      items: [
+        GestureDetector(
+          onTap: () {
+            Get.toNamed('/results', arguments: {
+              "category": null,
+              "lowestPrice": null,
+              "highestPrice": null,
+              "searchTerm": "100-10",
+            });
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              width: double.infinity,
+              child: FadeInImage.memoryNetwork(
+                fit: BoxFit.cover,
+                placeholder: kTransparentImage,
+                image: "https://i.imgur.com/xcLrJUx.jpg"
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Get.toNamed('/results', arguments: {
+              "category": null,
+              "lowestPrice": null,
+              "highestPrice": null,
+              "searchTerm": "600-1",
+            });
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(14.0),
+            child: Container(
+              width: double.infinity,
+              child: FadeInImage.memoryNetwork(
+                  fit: BoxFit.cover,
+                  placeholder: kTransparentImage,
+                  image: "https://i.imgur.com/Qh5Ypwz.png"
+              ),
+            ),
+          ),
+        ),
+      ],
+    ));
   }
 }
