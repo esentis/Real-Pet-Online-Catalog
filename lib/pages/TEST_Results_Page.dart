@@ -234,7 +234,6 @@ class _TestResultsState extends State<TestResults>
                       if (snapshot.hasData) {
                         List<String> loaded = snapshot.data;
                         return ListWheelScrollView.useDelegate(
-                          clipToSize: true,
                           diameterRatio: 1,
                           offAxisFraction: 0.5,
                           onSelectedItemChanged: (index){

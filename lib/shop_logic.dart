@@ -90,6 +90,7 @@ addProduct({
   return response;
 }
 
+// METHOD THAT RESPONDS TO SERVER ERRORS
 bool checkResponse(response) {
   if (response == DioErrorType.CONNECT_TIMEOUT) {
     logger.e("Received ERROR $response");
@@ -146,6 +147,7 @@ bool checkResponse(response) {
 }
 
 // A METHOD FOR COPYING MY FIREBASE TO postgresql
+// IT'S NOT USED ANYMORE
 copyDb() {
   Firestore.instance.collection('products').snapshots().listen(
     (products) {
