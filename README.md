@@ -1,3 +1,5 @@
+![Flutter CI](https://github.com/esentis/Real-Pet-Online-Catalog/workflows/Flutter%20CI/badge.svg)
+
 # realpet
 
 A flutter application incorporating a live WooCommerce store.
