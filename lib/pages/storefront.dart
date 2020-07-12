@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controls.dart';
@@ -156,7 +154,7 @@ class _StoreFrontState extends State<StoreFront>
                     drawerModel.toggleDrawer();
                   }
                   showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.transparent,
                       context: context,
                       builder: (BuildContext context) {
                         return Material(
