@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:realpet/components/general_widgets.dart';
-import 'components/categories.dart';
 
+var logger = new Logger();
 // CONNECTION SETTINGS WITH OUR DB
 BaseOptions dioOptions = new BaseOptions(
     baseUrl: "http://10.0.2.2:5000",

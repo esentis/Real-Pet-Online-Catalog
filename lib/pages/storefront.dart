@@ -1,22 +1,23 @@
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foldable_sidebar/foldable_sidebar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:realpet/components/animated_logo.dart';
-import 'package:realpet/components/categories.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
+import 'package:realpet/components/animated_logo.dart';
+import 'package:realpet/components/categories.dart';
 import 'package:realpet/components/constants.dart';
 import 'package:realpet/components/drawer.dart';
 import 'package:realpet/components/state_management.dart';
-import 'package:realpet/components/search_form.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
 
 bool _loading = false;
 var _currentUser;
@@ -24,6 +25,7 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 var db = Firestore.instance;
 FlareControls _controls = FlareControls();
 var animationName = 'hamburger';
+var logger = new Logger();
 
 class StoreFront extends StatefulWidget {
   @override

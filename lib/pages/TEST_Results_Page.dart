@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:realpet/components/results_page_components.dart';
-import 'package:realpet/components/state_management.dart';
-import 'package:provider/provider.dart';
+
 import '../shop_logic.dart';
 
 var response;
@@ -103,7 +102,7 @@ class _TestResultsState extends State<TestResults>
   @override
   Widget build(BuildContext context) {
     var screenInfo = MediaQuery.of(context);
-    var containerModel = context.watch<ResultsContainerModel>();
+
     return SafeArea(
       child: Scaffold(
         body: Center(

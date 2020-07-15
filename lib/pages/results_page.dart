@@ -1,15 +1,12 @@
 import 'dart:async';
 
-import 'package:flare_flutter/flare_actor.dart';
-import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:realpet/components/animated_logo.dart';
 import 'package:realpet/components/constants.dart';
 import 'package:realpet/components/results_page_components.dart';
-import 'package:realpet/components/state_management.dart';
-import 'package:provider/provider.dart';
+
 import '../shop_logic.dart';
 
 var response;
@@ -36,8 +33,6 @@ class _ResultsPageState extends State<ResultsPage>
   Map _allArguments = Get.arguments;
   Animation<Color> animation;
   AnimationController _animationController;
-  String _logoAnimation = "idle";
-  final FlareControls _controls = FlareControls();
 
   ///constructor
   _ResultsPageState() {
@@ -104,8 +99,6 @@ class _ResultsPageState extends State<ResultsPage>
 
   @override
   Widget build(BuildContext context) {
-    var screenInfo = MediaQuery.of(context);
-    var containerModel = context.watch<ResultsContainerModel>();
     return SafeArea(
       child: Container(
         decoration: BoxDecoration(

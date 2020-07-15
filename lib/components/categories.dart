@@ -6,13 +6,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+
 import 'constants.dart';
-import 'file:///D:/Flutter_apps/real_pet/lib/shop_logic.dart';
-import 'general_widgets.dart';
 
 //A DIFFERENT RESULTS DESIGN
 
 bool _loading = false;
+var logger = new Logger();
 
 // STOREFRONT'S CATEGORIES
 class Categories extends StatelessWidget {
