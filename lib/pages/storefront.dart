@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:foldable_sidebar/foldable_sidebar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +16,7 @@ import 'package:realpet/components/animated_logo.dart';
 import 'package:realpet/components/categories.dart';
 import 'package:realpet/components/constants.dart';
 import 'package:realpet/components/drawer.dart';
+import 'package:realpet/components/modalsheet.dart';
 import 'package:realpet/components/state_management.dart';
 
 bool _loading = false;
@@ -53,7 +53,6 @@ class _StoreFrontState extends State<StoreFront>
   @override
   Widget build(BuildContext context) {
     final drawerModel = context.watch<DrawerModel>();
-    final bottomSearchModel = context.watch<BottomSearchModel>();
     return SafeArea(
       child: ModalProgressHUD(
         inAsyncCall: _loading,
@@ -113,13 +112,13 @@ class _StoreFrontState extends State<StoreFront>
                         ),
                       ),
                       RealPetLogo(
-                        blurRadius: 0,
-                        containerHeight: 100,
-                        containerWidth: 150,
-                        topRightRadius: Radius.circular(0),
-                        topLeftRadius: Radius.circular(60),
-                        bottomRightRadius: Radius.circular(60),
-                        bottomLeftRadius: Radius.circular(60),
+                        blurRadius: 10,
+                        containerHeight: 150,
+                        containerWidth: 200,
+                        topRightRadius: Radius.circular(70),
+                        topLeftRadius: Radius.circular(70),
+                        bottomRightRadius: Radius.circular(20),
+                        bottomLeftRadius: Radius.circular(20),
                       ),
                       SizedBox(
                         width: 25,
@@ -159,76 +158,7 @@ class _StoreFrontState extends State<StoreFront>
                       backgroundColor: Colors.transparent,
                       context: context,
                       builder: (BuildContext context) {
-                        return Material(
-                          color: kMainColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(50),
-                              topLeft: Radius.circular(50),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Αναζήτηση προϊόντος",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.comfortaa(
-                                    fontSize: 26,
-                                    color: Colors.white,
-                                    shadows: [
-                                      Shadow(
-                                          color: Colors.redAccent,
-                                          blurRadius: 15),
-                                    ]),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(30.0),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    TextField(
-                                      onChanged: (value) {
-                                        bottomSearchModel.setValue(value);
-                                      },
-                                      onSubmitted: (value) {
-                                        Get.toNamed('/results', arguments: {
-                                          "category": null,
-                                          "lowestPrice": null,
-                                          "highestPrice": null,
-                                          "searchTerm":
-                                              bottomSearchModel.textValue,
-                                        });
-                                      },
-                                      keyboardType: TextInputType.text,
-                                      textInputAction: TextInputAction.search,
-                                      controller:
-                                          bottomSearchModel.textController,
-                                      textAlign: TextAlign.center,
-                                      style:
-                                          GoogleFonts.comfortaa(fontSize: 26),
-                                      autofocus: true,
-                                    ),
-                                    FlatButton(
-                                      onPressed: () {
-                                        Get.toNamed('/results', arguments: {
-                                          "category": null,
-                                          "lowestPrice": null,
-                                          "highestPrice": null,
-                                          "searchTerm":
-                                              bottomSearchModel.textValue,
-                                        });
-                                      },
-                                      color: Colors.red,
-                                      child: Text("Αναζήτηση"),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                        return ModalSheetSearch();
                       });
                 }),
           ),

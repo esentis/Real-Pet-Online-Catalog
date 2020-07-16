@@ -142,7 +142,7 @@ class _ResultsPageState extends State<ResultsPage>
                       containerHeight: 100,
                       containerWidth: 150,
                       topRightRadius: Radius.circular(60),
-                      topLeftRadius: Radius.circular(0),
+                      topLeftRadius: Radius.circular(60),
                       bottomRightRadius: Radius.circular(60),
                       bottomLeftRadius: Radius.circular(60),
                     ),
