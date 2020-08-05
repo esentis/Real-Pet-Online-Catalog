@@ -47,14 +47,18 @@ class MyApp extends StatelessWidget {
           ),
         ),
         initialRoute: '/',
-        namedRoutes: {
-          '/': GetRoute(page: StoreFront()),
-          '/login': GetRoute(page: LoginPage()),
-          '/register': GetRoute(page: RegisterPage()),
-          '/product': GetRoute(page: ProductPage()),
-          '/results': GetRoute(page: ResultsPage()),
-          '/test': GetRoute(page: TestResults()),
-        },
+        getPages: [
+          GetPage(name: '/', page: () => StoreFront()),
+          GetPage(name: '/login', page: () => LoginPage()),
+          GetPage(name: '/register', page: () => RegisterPage()),
+          GetPage(name: '/product', page: () => ProductPage()),
+          GetPage(name: '/results', page: () => ResultsPage()),
+          GetPage(
+              name: '/test',
+              page: () => TestResults(),
+              transition: Transition.size
+          ),
+        ],
       ),
     );
   }
