@@ -18,7 +18,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   bool _loading = false;
   @override
   Widget build(BuildContext context) {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
+    var mediaQuery = MediaQuery.of(context);
     return ModalProgressHUD(
       inAsyncCall: _loading,
       child: Container(
@@ -30,12 +30,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
             Icon(FontAwesomeIcons.dog,size: 150,),
             SizedBox(height: 30,),
             DrawerTile(
-              text: "Προφίλ",
+              text: 'Προφίλ',
               icon: FontAwesomeIcons.userEdit,
               iconSize: 30,
             ),
             DrawerTile(
-              text: "Αποσύνδεση",
+              text: 'Αποσύνδεση',
               icon: FontAwesomeIcons.signOutAlt,
               iconSize: 30,
               onTapped: () async {
@@ -44,7 +44,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 await FirebaseAuth.instance.signOut();
                 _loading = false;
                 setState(() {});
-                Get.offAllNamed('/login');
+                await Get.offAllNamed('/login');
               },
             ),
           ],

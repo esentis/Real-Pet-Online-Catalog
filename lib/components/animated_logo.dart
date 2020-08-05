@@ -50,7 +50,7 @@ class _RealPetLogoState extends State<RealPetLogo> {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
         child: Hero(
-          tag: "LOGO",
+          tag: 'LOGO',
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FlareActor(

@@ -32,10 +32,10 @@ class ModalSheetSearch extends StatelessWidget {
                   },
                   onSubmitted: (value) {
                     Get.toNamed('/results', arguments: {
-                      "category": null,
-                      "lowestPrice": null,
-                      "highestPrice": null,
-                      "searchTerm": bottomSearchModel.textValue,
+                      'category': null,
+                      'lowestPrice': null,
+                      'highestPrice': null,
+                      'searchTerm': bottomSearchModel.textValue,
                     });
                   },
                   decoration: InputDecoration(

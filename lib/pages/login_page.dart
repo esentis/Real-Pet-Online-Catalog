@@ -10,9 +10,8 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:realpet/components/constants.dart';
 import 'package:realpet/components/general_widgets.dart';
 
-final TextEditingController _emailTextController = new TextEditingController();
-final TextEditingController _passwordTextController =
-    new TextEditingController();
+final TextEditingController _emailTextController = TextEditingController();
+final TextEditingController _passwordTextController = TextEditingController();
 bool _logging = false;
 var _email;
 var _password;
@@ -29,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     _currentUser = await _auth.currentUser();
     if (_currentUser != null) {
       print('User is logged, redirecting to StoreFront');
-      Get.offAllNamed('/');
+      await Get.offAllNamed('/');
     } else {
       print('No user logged, log with your credentials');
     }
@@ -215,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                               setState(() {});
                               if (await FirebaseAuth.instance.currentUser() !=
                                   null) {
-                                Get.offAllNamed('/');
+                                await Get.offAllNamed('/');
                               }
                             },
                           ),

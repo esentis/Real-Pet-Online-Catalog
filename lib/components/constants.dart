@@ -42,4 +42,4 @@ double kCategoryElevation = 10;
 double kCategoryBorderWidth = 2;
 
 // ALL ASSETS
-AssetImage kStoreFrontBackgroundImage = AssetImage("assets/animals.png");
+AssetImage kStoreFrontBackgroundImage = AssetImage('assets/animals.png');

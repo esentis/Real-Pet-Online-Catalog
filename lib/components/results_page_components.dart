@@ -6,7 +6,7 @@ import 'package:logger/logger.dart';
 import 'package:realpet/shop_logic.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-var logger = new Logger();
+var logger = Logger();
 var _currentPage = 1;
 
 // SEARCH RESULTS PAGE
@@ -20,9 +20,9 @@ class SearchResults extends StatefulWidget {
 // SEARCH RESULTS PAGE STATE
 class _SearchResultsState extends State<SearchResults> {
   List productList;
-  productsList(Map<String, dynamic> products) {
+  void productsList(Map<String, dynamic> products) {
     products.forEach((key, value) {
-      if (key == "results") {
+      if (key == 'results') {
         for (var i = 0; i < 10; i++) {
           productList.add(value[i]['name'].toString());
         }
@@ -30,14 +30,14 @@ class _SearchResultsState extends State<SearchResults> {
     });
   }
 
-  loadNext() {}
+  void loadNext() {}
 
   @override
   void initState() {
     super.initState();
   }
 
-  ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +54,12 @@ class _SearchResultsState extends State<SearchResults> {
                   if (_scrollController.position.pixels >
                       triggerFetchMoreSize) {
                     // call fetch more method here
-                    logger.i("MAX CONTENT");
+                    logger.i('MAX CONTENT');
                     if (_currentPage <= widget.products['totalPages']) {
                       searchProducts(page: ++_currentPage, category: 1);
                       setState(() {});
                     } else {
-                      logger.w("No more pages to load");
+                      logger.w('No more pages to load');
                     }
                   }
 //                  if (_scrollController.position.pixels ==
@@ -112,7 +112,7 @@ class ResultsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List argumentsList = [
+    var argumentsList = [
       productName,
       originalPrice,
       img,

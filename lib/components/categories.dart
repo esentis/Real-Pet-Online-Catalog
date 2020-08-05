@@ -12,7 +12,7 @@ import 'constants.dart';
 //A DIFFERENT RESULTS DESIGN
 
 bool _loading = false;
-var logger = new Logger();
+var logger = Logger();
 
 // STOREFRONT'S CATEGORIES
 class Categories extends StatelessWidget {
@@ -140,12 +140,12 @@ class _CategoryIconState extends State<CategoryIcon> {
       inAsyncCall: _loading,
       child: GestureDetector(
         onTap: () async {
-          logger.i("Category tapped for search");
-          Get.toNamed('/results', arguments: {
-            "category": widget.categoryId,
-            "lowestPrice": null,
-            "highestPrice": null,
-            "searchTerm": null,
+          logger.i('Category tapped for search');
+          await Get.toNamed('/results', arguments: {
+            'category': widget.categoryId,
+            'lowestPrice': null,
+            'highestPrice': null,
+            'searchTerm': null,
           });
         },
         child: Material(

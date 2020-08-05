@@ -25,7 +25,7 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 var db = Firestore.instance;
 FlareControls _controls = FlareControls();
 var animationName = 'hamburger';
-var logger = new Logger();
+var logger = Logger();
 
 class StoreFront extends StatefulWidget {
   @override
@@ -38,7 +38,7 @@ class _StoreFrontState extends State<StoreFront>
     _currentUser = await _auth.currentUser();
     if (_currentUser == null) {
       logger.i('No authenticated user found, in the StoreFront');
-      Get.offAllNamed('/login');
+      await Get.offAllNamed('/login');
     } else {
       logger.i('${_currentUser.email} is logged');
     }

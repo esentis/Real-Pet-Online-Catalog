@@ -5,16 +5,16 @@ import 'package:foldable_sidebar/foldable_sidebar.dart';
 
 class DrawerModel extends ChangeNotifier {
   FSBStatus drawerStatus;
-  getStatus() => drawerStatus;
+  void getStatus() => drawerStatus;
   DrawerModel({this.drawerStatus});
-  toggleDrawer() {
+  void toggleDrawer() {
     if (drawerStatus == FSBStatus.FSB_CLOSE) {
       drawerStatus = FSBStatus.FSB_OPEN;
-      print("OPENING");
+      print('OPENING');
       notifyListeners();
     } else {
       drawerStatus = FSBStatus.FSB_CLOSE;
-      print("CLOSING");
+      print('CLOSING');
       notifyListeners();
     }
   }
@@ -27,58 +27,56 @@ class ResultsContainerModel extends ChangeNotifier {
 //    this.topRight,
 //    this.topLeft,
 //  });
-  Random random = new Random();
-  getRandom() => ((random.nextDouble() * 100));
+  Random random = Random();
+  void getRandom() => ((random.nextDouble() * 100));
   double topLeft;
   double topRight;
   double bottomLeft;
   double bottomRight;
   Color color;
-  getTopLeft() => topLeft;
-  getTopRight() => topRight;
-  getBottomLeft() => bottomLeft;
-  getBottomRight() => bottomRight;
-  getColor()=>color;
+  void getTopLeft() => topLeft;
+  void getTopRight() => topRight;
+  void getBottomLeft() => bottomLeft;
+  void getBottomRight() => bottomRight;
+  void getColor() => color;
 
-  setColor(newColor){
-    color=newColor;
+  void setColor(newColor) {
+    color = newColor;
     notifyListeners();
   }
 
-  setTopLeft(value) {
+  void setTopLeft(value) {
     topLeft = value;
     topLeft.toDouble();
     notifyListeners();
   }
 
-  setTopRight(value) {
+  void setTopRight(value) {
     topRight = value;
     topRight.toDouble();
     notifyListeners();
   }
 
-  setBottomLeft(value) {
+  void setBottomLeft(value) {
     bottomLeft = value;
     bottomLeft.toDouble();
     notifyListeners();
   }
 
-  setBottomRight(value) {
+  void setBottomRight(value) {
     bottomRight = value;
     bottomRight.toDouble();
     notifyListeners();
   }
-
-
 }
 
 class BottomSearchModel extends ChangeNotifier {
-  var textController = new TextEditingController();
+  var textController = TextEditingController();
   var textValue;
-  getValue() => textValue;
-  getController() => textController;
+  void getValue() => textValue;
+  void getController() => textController;
   BottomSearchModel({this.textValue, this.textController});
-  setValue(value) {
+  void setValue(value) {
     textValue = value;
     notifyListeners();
   }

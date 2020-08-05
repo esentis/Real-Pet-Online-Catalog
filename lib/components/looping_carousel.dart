@@ -19,10 +19,10 @@ class LoopingCarousel extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Get.toNamed('/results', arguments: {
-                  "category": null,
-                  "lowestPrice": null,
-                  "highestPrice": null,
-                  "searchTerm": "100-10",
+                  'category': null,
+                  'lowestPrice': null,
+                  'highestPrice': null,
+                  'searchTerm': '100-10',
                 });
               },
               child: ClipRRect(
@@ -32,7 +32,7 @@ class LoopingCarousel extends StatelessWidget {
                   child: FadeInImage.memoryNetwork(
                       fit: BoxFit.cover,
                       placeholder: kTransparentImage,
-                      image: "https://i.imgur.com/xcLrJUx.jpg"
+                      image: 'https://i.imgur.com/xcLrJUx.jpg'
                   ),
                 ),
               ),
@@ -40,10 +40,10 @@ class LoopingCarousel extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Get.toNamed('/results', arguments: {
-                  "category": null,
-                  "lowestPrice": null,
-                  "highestPrice": null,
-                  "searchTerm": "600-1",
+                  'category': null,
+                  'lowestPrice': null,
+                  'highestPrice': null,
+                  'searchTerm': '600-1',
                 });
               },
               child: ClipRRect(
@@ -53,7 +53,7 @@ class LoopingCarousel extends StatelessWidget {
                   child: FadeInImage.memoryNetwork(
                       fit: BoxFit.cover,
                       placeholder: kTransparentImage,
-                      image: "https://i.imgur.com/Qh5Ypwz.png"
+                      image: 'https://i.imgur.com/Qh5Ypwz.png'
                   ),
                 ),
               ),

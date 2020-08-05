@@ -13,24 +13,24 @@ var response;
 
 class ResultsPage extends StatefulWidget {
   @override
-  _ResultsPageState createState() => new _ResultsPageState();
+  _ResultsPageState createState() => _ResultsPageState();
 }
 
 class _ResultsPageState extends State<ResultsPage>
     with SingleTickerProviderStateMixin {
-  List<String> _data = [];
-  List<String> _sku = [];
-  List<String> _img = [];
-  List<String> _originalPrice = [];
-  List<String> _desc = [];
-  List<String> _category = [];
-  List<String> _id = [];
+  final List<String> _data = [];
+  final List<String> _sku = [];
+  final List<String> _img = [];
+  final List<String> _originalPrice = [];
+  final List<String> _desc = [];
+  final List<String> _category = [];
+  final List<String> _id = [];
   Future<List<String>> _future;
   Future _futureResultsText;
   int _currentPage = 1, _limit;
-  ScrollController _controller =
+  final ScrollController _controller =
       ScrollController(initialScrollOffset: 0.0, keepScrollOffset: true);
-  Map _allArguments = Get.arguments;
+  final Map _allArguments = Get.arguments;
   Animation<Color> animation;
   AnimationController _animationController;
 
@@ -38,10 +38,11 @@ class _ResultsPageState extends State<ResultsPage>
   _ResultsPageState() {
     _controller.addListener(() {
       var isEnd = _controller.offset == _controller.position.maxScrollExtent;
-      if (isEnd && _currentPage <= _limit)
+      if (isEnd && _currentPage <= _limit) {
         setState(() {
           _future = loadData();
         });
+      }
     });
     _future = loadData();
     _futureResultsText = resultsText();
@@ -55,10 +56,10 @@ class _ResultsPageState extends State<ResultsPage>
         highestPrice: _allArguments['highestPrice'],
         lowestPrice: _allArguments['lowestPrice'],
         page: _currentPage);
-    bool responseCheck = checkResponse(response);
+    var responseCheck = checkResponse(response);
     // If we fail getting a response from the server we redirect to the storefront
     if (!responseCheck) {
-      Get.offAllNamed('/');
+      await Get.offAllNamed('/');
     }
     _limit = response['totalPages'];
     for (var i = 0; i < response['results'].length; i++) {
@@ -163,7 +164,7 @@ class _ResultsPageState extends State<ResultsPage>
                         return Column(
                           children: [
                             Text(
-                              "Βρέθηκαν συνολικά ${loadedResultsText.toString()} προϊόντα",
+                                'Βρέθηκαν συνολικά ${loadedResultsText.toString()} προϊόντα',
                               style: GoogleFonts.comfortaa(
                                   shadows: [
                                     Shadow(

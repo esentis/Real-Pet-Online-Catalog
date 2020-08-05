@@ -142,7 +142,7 @@ class ProductPage extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.all(12.0),
                               child: Text(
-                                "${arguments[1]}€",
+                                '${arguments[1]}€',
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.comfortaa(
                                     shadows: [
@@ -182,7 +182,7 @@ class ProductPage extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.all(12.0),
                               child: Text(
-                                "${arguments[3]}",
+                                '${arguments[3]}',
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.comfortaa(
                                     shadows: [

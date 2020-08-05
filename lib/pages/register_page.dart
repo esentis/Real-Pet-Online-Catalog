@@ -175,7 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               _registering = false;
                               setState(() {
                                 snackBar(
-                                  title: "Σφάλμα εγγραφής",
+                                  title: 'Σφάλμα εγγραφής',
                                   duration: 4,
                                   text: e.toString(),
                                   iconColor: Colors.redAccent,
@@ -187,7 +187,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             setState(() {});
                             if (await FirebaseAuth.instance.currentUser() !=
                                 null) {
-                              Get.offAllNamed('/');
+                              await Get.offAllNamed('/');
                             }
                           },
                         ),

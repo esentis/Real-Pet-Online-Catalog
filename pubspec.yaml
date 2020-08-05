@@ -46,6 +46,7 @@ dependencies:
   foldable_sidebar: ^1.0.0
   progress_state_button: ^1.0.1
   carousel_slider: ^2.1.0
+  pedantic: ^1.9.0
   provider:
 
 dev_dependencies:
