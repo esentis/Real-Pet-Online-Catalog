@@ -51,8 +51,8 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/', page: () => StoreFront()),
           GetPage(name: '/login', page: () => LoginPage()),
           GetPage(name: '/register', page: () => RegisterPage()),
-          GetPage(name: '/product', page: () => ProductPage()),
-          GetPage(name: '/results', page: () => ResultsPage()),
+          GetPage(name: '/product', page: () => ProductPage(),transition: Transition.size),
+          GetPage(name: '/results', page: () => ResultsPage(),transition: Transition.fade),
           GetPage(
               name: '/test',
               page: () => TestResults(),
