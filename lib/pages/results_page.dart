@@ -138,7 +138,7 @@ class _ResultsPageState extends State<ResultsPage>
                       ),
                     ),
                     // LOGO
-                    RealPetLogo(
+                    const RealPetLogo(
                       blurRadius: 0,
                       containerHeight: 100,
                       containerWidth: 150,
@@ -147,12 +147,12 @@ class _ResultsPageState extends State<ResultsPage>
                       bottomRightRadius: Radius.circular(60),
                       bottomLeftRadius: Radius.circular(60),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 80,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 // NUMBER OF RESULTS FOUND
@@ -164,7 +164,7 @@ class _ResultsPageState extends State<ResultsPage>
                         return Column(
                           children: [
                             Text(
-                                'Βρέθηκαν συνολικά ${loadedResultsText.toString()} προϊόντα',
+                              'Βρέθηκαν συνολικά ${loadedResultsText.toString()} προϊόντα',
                               style: GoogleFonts.comfortaa(
                                   shadows: [
                                     Shadow(
@@ -185,13 +185,15 @@ class _ResultsPageState extends State<ResultsPage>
                         ),
                       );
                     }),
-                SizedBox(height: 25),
+                const SizedBox(
+                  height: 25,
+                ),
                 // RESULTS
                 Expanded(
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20.0),
                         topRight: Radius.circular(20.0),
                         bottomRight: Radius.zero,
@@ -199,12 +201,12 @@ class _ResultsPageState extends State<ResultsPage>
                       ),
                       boxShadow: [
                         BoxShadow(
-                            color: Color(0xFF00263b),
+                            color: const Color(0xFF00263b),
                             blurRadius: kResultsBlurRadius),
                       ],
                     ),
                     child: Padding(
-                      padding: EdgeInsets.only(top: 30.0),
+                      padding: const EdgeInsets.only(top: 30.0),
                       child: FutureBuilder(
                         future: _future,
                         builder:

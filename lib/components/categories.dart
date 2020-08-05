@@ -23,7 +23,7 @@ class Categories extends StatelessWidget {
         primary: false,
         slivers: <Widget>[
           SliverPadding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             sliver: SliverGrid.count(
               crossAxisSpacing: 9,
               mainAxisSpacing: 8,
@@ -107,7 +107,7 @@ class Categories extends StatelessWidget {
 
 // CATEGORIES' ICON
 class CategoryIcon extends StatefulWidget {
-  CategoryIcon({
+  const CategoryIcon({
     this.text,
     this.categoryId,
     this.color,
@@ -156,7 +156,7 @@ class _CategoryIconState extends State<CategoryIcon> {
               color: Colors.white,
               width: kCategoryBorderWidth,
             ),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.elliptical(500, 50),
               topRight: Radius.zero,
               bottomLeft: Radius.zero,
@@ -175,7 +175,7 @@ class _CategoryIconState extends State<CategoryIcon> {
                     color: widget.iconColor,
                     size: kCategoryIconSize,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(

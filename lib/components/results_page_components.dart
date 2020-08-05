@@ -11,7 +11,7 @@ var _currentPage = 1;
 
 // SEARCH RESULTS PAGE
 class SearchResults extends StatefulWidget {
-  SearchResults({this.products});
+  const SearchResults({this.products});
   final dynamic products;
   @override
   _SearchResultsState createState() => _SearchResultsState();
@@ -93,7 +93,7 @@ class _SearchResultsState extends State<SearchResults> {
 
 // RESULTS' TILE
 class ResultsTile extends StatelessWidget {
-  ResultsTile({
+  const ResultsTile({
     this.productName,
     this.originalPrice,
     this.productSKU,
@@ -140,19 +140,19 @@ class ResultsTile extends StatelessWidget {
         ),
       ),
       title: Text(
-        '$productName',
+        productName,
         textAlign: TextAlign.left,
         style: GoogleFonts.comfortaa(
-            color: Color(0xffeeeeee),
+            color: const Color(0xffeeeeee),
             fontSize: 16,
             fontWeight: FontWeight.w900),
       ),
       subtitle: Text(
-        '${productSKU.toString()}',
+        productSKU.toString(),
         textAlign: TextAlign.left,
         style: GoogleFonts.comfortaa(
           shadows: [
-            Shadow(color: Colors.black, blurRadius: 5),
+            const Shadow(color: Colors.black, blurRadius: 5),
           ],
         ),
       ),
@@ -160,7 +160,7 @@ class ResultsTile extends StatelessWidget {
         '${originalPrice.toString()}€',
         textAlign: TextAlign.left,
         style: GoogleFonts.comfortaa(
-            color: Color(0xffeeeeee),
+            color: const Color(0xffeeeeee),
             fontSize: 18,
             fontWeight: FontWeight.w900),
       ),

@@ -32,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: <Widget>[
                 Material(
                   color: Colors.white,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                     topLeft: Radius.elliptical(80, 80),
                     bottomRight: Radius.elliptical(20, 20),
@@ -40,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     bottomLeft: Radius.elliptical(20, 20),
                   )),
                   elevation: 40,
-                  shadowColor: Color(0xFFf1d1d1),
+                  shadowColor: const Color(0xFFf1d1d1),
                   child: Padding(
                     padding: const EdgeInsets.all(14.0),
                     child: Column(
@@ -48,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         Container(
                           width: 200,
                           height: 120,
-                          child: FlareActor(
+                          child: const FlareActor(
                             'assets/logo.flr',
                             animation: 'idle',
                           ),
@@ -59,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Column(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 2,
                     ),
                     Text(
@@ -68,11 +68,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontSize: 25,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 30.0, right: 30),
+                      padding: const EdgeInsets.only(left: 30.0, right: 30),
                       child: TextField(
                         style: GoogleFonts.comfortaa(fontSize: 20),
                         onChanged: (email) {
@@ -81,16 +81,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         keyboardType: TextInputType.emailAddress,
                         cursorColor: Colors.red,
-                        cursorRadius: Radius.circular(20),
+                        cursorRadius: const Radius.circular(20),
                         enabled: true,
                         keyboardAppearance: Brightness.dark,
                         decoration: InputDecoration(
-                          icon: Icon(FontAwesomeIcons.user),
+                          icon: const Icon(FontAwesomeIcons.user),
                           hintText: 'E-Mail',
                           hintStyle: GoogleFonts.comfortaa(
                             fontSize: 20,
                           ),
-                          border: OutlineInputBorder(
+                          border: const OutlineInputBorder(
                             gapPadding: 15,
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(60),
@@ -102,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 30.0, right: 30),
+                      padding: const EdgeInsets.only(left: 30.0, right: 30),
                       child: TextField(
                         style: GoogleFonts.comfortaa(
                           fontSize: 20,
@@ -113,16 +113,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         obscureText: true,
                         cursorColor: Colors.red,
-                        cursorRadius: Radius.circular(20),
+                        cursorRadius: const Radius.circular(20),
                         enabled: true,
                         keyboardAppearance: Brightness.dark,
                         decoration: InputDecoration(
-                          icon: Icon(FontAwesomeIcons.lock),
+                          icon: const Icon(FontAwesomeIcons.lock),
                           hintText: 'Κωδικός',
                           hintStyle: GoogleFonts.comfortaa(
                             fontSize: 20,
                           ),
-                          border: OutlineInputBorder(
+                          border: const OutlineInputBorder(
                             gapPadding: 15,
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(60),
@@ -133,7 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
@@ -152,7 +152,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         RaisedButton(
@@ -161,7 +161,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: GoogleFonts.comfortaa(
                                 fontSize: 20, color: Colors.white),
                           ),
-                          shape: StadiumBorder(),
+                          shape: const StadiumBorder(),
                           onPressed: () async {
                             _registering = true;
                             setState(() {});

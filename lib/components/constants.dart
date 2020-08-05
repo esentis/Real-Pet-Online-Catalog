@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 // ALL COLORS
 Color kBackButtonBackgroundColor = Colors.white;
-Color kBorderAndShadowColors = Color(0xFFce2e6c);
-Color kMainColor = Color(0xFF00263b);
+Color kBorderAndShadowColors = const Color(0xFFce2e6c);
+Color kMainColor = const Color(0xFF00263b);
 Color kCategoryTextColor = Colors.white;
 Color kIconColor = Colors.white;
-Color kSearchButtonSplashColor = Color(0xFFce2e6c);
-Color kPriceShadowColor = Color(0xffeeeeee);
-Color kPriceTextColor = Color(0xffeeeeee);
+Color kSearchButtonSplashColor = const Color(0xFFce2e6c);
+Color kPriceShadowColor = const Color(0xffeeeeee);
+Color kPriceTextColor = const Color(0xffeeeeee);
 Color kProductMaterialBackgroundColor = Colors.white;
-Color kProductMaterialShadowColor = Color(0xFFce2e6c);
+Color kProductMaterialShadowColor = const Color(0xFFce2e6c);
 Color kProductAvatarBackgroundColor = Colors.white;
 Color kProductTitleColor = Colors.white;
 Color kProductDescriptionColor = Colors.black;
@@ -42,4 +42,4 @@ double kCategoryElevation = 10;
 double kCategoryBorderWidth = 2;
 
 // ALL ASSETS
-AssetImage kStoreFrontBackgroundImage = AssetImage('assets/animals.png');
+AssetImage kStoreFrontBackgroundImage = const AssetImage('assets/animals.png');

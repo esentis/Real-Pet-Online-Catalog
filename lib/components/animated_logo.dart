@@ -9,7 +9,7 @@ String _logoAnimation = 'idle';
 final FlareControls _controls = FlareControls();
 
 class RealPetLogo extends StatefulWidget {
-  RealPetLogo({
+  const RealPetLogo({
     this.blurRadius,
     this.containerHeight,
     this.containerWidth,
@@ -48,7 +48,7 @@ class _RealPetLogoState extends State<RealPetLogo> {
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
         child: Hero(
           tag: 'LOGO',
           child: Padding(

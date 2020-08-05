@@ -52,3 +52,45 @@ linter:
     - use_function_type_syntax_for_parameters
     - use_rethrow_when_possible
     - valid_regexps
+    - avoid_web_libraries_in_flutter
+    - await_only_futures
+    - camel_case_types
+    - cancel_subscriptions
+    - close_sinks
+    - control_flow_in_finally
+    - empty_statements
+    - hash_and_equals
+    - implementation_imports
+    - non_constant_identifier_names
+    - package_api_docs
+    - package_names
+    - package_prefixed_library_names
+    - test_types_in_equals
+    - throw_in_finally
+    - unnecessary_brace_in_string_interps
+    - unnecessary_getters_setters
+    - unnecessary_statements
+    - constant_identifier_names
+    - prefer_const_constructors
+    - prefer_const_constructors_in_immutables
+    - unnecessary_final
+    - unnecessary_await_in_return
+    - unnecessary_lambdas
+    - unnecessary_null_aware_assignments
+    - unnecessary_overrides
+    - unnecessary_parenthesis
+    - unnecessary_raw_strings
+    - unnecessary_string_escapes
+    - unnecessary_string_interpolations
+    - use_is_even_rather_than_modulo
+    - use_raw_strings
+    - use_setters_to_change_properties
+    - void_checks
+    - sort_pub_dependencies
+    - avoid_returning_null_for_future
+    - avoid_slow_async_io
+    - unsafe_html
+    - always_put_control_body_on_new_line
+    - always_put_required_named_parameters_first
+    - avoid_annotating_with_dynamic
+    - avoid_escaping_inner_quotes

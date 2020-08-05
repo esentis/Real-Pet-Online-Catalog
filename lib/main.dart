@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             overlayColor: Colors.black,
             inactiveTrackColor: Colors.red,
             activeTrackColor: Colors.white,
-            overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
+            overlayShape: const RoundSliderOverlayShape(overlayRadius: 30),
             valueIndicatorColor: Colors.green,
             activeTickMarkColor: Colors.cyan,
             trackHeight: 10,

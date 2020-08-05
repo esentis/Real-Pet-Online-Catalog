@@ -52,7 +52,7 @@ class _StoreFrontState extends State<StoreFront>
 
   @override
   Widget build(BuildContext context) {
-    final drawerModel = context.watch<DrawerModel>();
+    var drawerModel = context.watch<DrawerModel>();
     return SafeArea(
       child: ModalProgressHUD(
         inAsyncCall: _loading,
@@ -93,7 +93,7 @@ class _StoreFrontState extends State<StoreFront>
                           decoration: BoxDecoration(
                               color: kMainColor,
                               shape: BoxShape.circle,
-                              border: Border.fromBorderSide(BorderSide(
+                              border: const Border.fromBorderSide(BorderSide(
                                 color: Colors.white,
                                 width: 3,
                               ))),
@@ -111,7 +111,7 @@ class _StoreFrontState extends State<StoreFront>
                           ),
                         ),
                       ),
-                      RealPetLogo(
+                      const RealPetLogo(
                         blurRadius: 10,
                         containerHeight: 150,
                         containerWidth: 200,
@@ -120,13 +120,13 @@ class _StoreFrontState extends State<StoreFront>
                         bottomRightRadius: Radius.circular(20),
                         bottomLeftRadius: Radius.circular(20),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 25,
                       ),
                     ],
                   ),
                   // ALL CATEGORIES
-                  SizedBox(
+                  const SizedBox(
                     height: 150,
                   ),
                   Categories(),
@@ -139,7 +139,7 @@ class _StoreFrontState extends State<StoreFront>
                 elevation: 50,
                 splashColor: kSearchButtonSplashColor,
                 backgroundColor: kMainColor,
-                shape: StadiumBorder(
+                shape: const StadiumBorder(
                   side: BorderSide(
                     color: Colors.white,
                     width: 3,

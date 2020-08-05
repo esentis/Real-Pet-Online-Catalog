@@ -29,14 +29,14 @@ class _SpinningButtonState extends State<SpinningButton> {
             icon: Icon(widget.idleIcon, color: Colors.white),
             color: Colors.green),
         ButtonState.loading:
-            IconedButton(text: 'ΦΟΡΤΩΣΗ', color: Colors.lightBlueAccent),
+            const IconedButton(text: 'ΦΟΡΤΩΣΗ', color: Colors.lightBlueAccent),
         ButtonState.fail: IconedButton(
             text: 'ΣΦΑΛΜΑ',
-            icon: Icon(Icons.cancel, color: Colors.white),
+            icon: const Icon(Icons.cancel, color: Colors.white),
             color: Colors.red.shade300),
         ButtonState.success: IconedButton(
             text: 'Success',
-            icon: Icon(
+            icon: const Icon(
               Icons.check_circle,
               color: Colors.white,
             ),

@@ -24,7 +24,7 @@ void snackBar({
       titleText: Text(
         title,
         style: GoogleFonts.comfortaa(
-          textStyle: TextStyle(color: Colors.white, letterSpacing: .5),
+          textStyle: const TextStyle(color: Colors.white, letterSpacing: .5),
         ),
       ),
       messageText: Text(text),

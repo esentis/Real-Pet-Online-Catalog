@@ -21,14 +21,8 @@ class DrawerModel extends ChangeNotifier {
 }
 
 class ResultsContainerModel extends ChangeNotifier {
-//  ResultsContainerModel({
-//    this.bottomLeft,
-//    this.bottomRight,
-//    this.topRight,
-//    this.topLeft,
-//  });
   Random random = Random();
-  void getRandom() => ((random.nextDouble() * 100));
+  void getRandom() => random.nextDouble() * 100;
   double topLeft;
   double topRight;
   double bottomLeft;

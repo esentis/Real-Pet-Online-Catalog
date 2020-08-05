@@ -8,7 +8,7 @@ import 'package:transparent_image/transparent_image.dart';
 class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final List arguments = Get.arguments;
+    List arguments = Get.arguments;
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -23,7 +23,7 @@ class ProductPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               //BACK BUTTON
@@ -32,7 +32,7 @@ class ProductPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 textBaseline: TextBaseline.alphabetic,
                 children: <Widget>[
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   //BACK BUTTON
@@ -71,16 +71,16 @@ class ProductPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               //PRODUCT IMAGE CONTAINER
@@ -93,7 +93,7 @@ class ProductPage extends StatelessWidget {
                     color: kBorderAndShadowColors,
                     width: 3,
                   ),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
                     bottomLeft: Radius.circular(40),
@@ -124,7 +124,7 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: Material(
                             color: Colors.black,
                             shape: RoundedRectangleBorder(
@@ -132,7 +132,7 @@ class ProductPage extends StatelessWidget {
                                 color: kBorderAndShadowColors,
                                 width: 3,
                               ),
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(60),
                                 topRight: Radius.elliptical(0, 0),
                                 bottomLeft: Radius.elliptical(60, 60),
@@ -140,7 +140,7 @@ class ProductPage extends StatelessWidget {
                               ),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(12.0),
+                              padding: const EdgeInsets.all(12.0),
                               child: Text(
                                 '${arguments[1]}€',
                                 textAlign: TextAlign.center,
@@ -164,7 +164,7 @@ class ProductPage extends StatelessWidget {
                       alignment: Alignment.bottomLeft,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: Material(
                             color: Colors.black,
                             shape: RoundedRectangleBorder(
@@ -172,7 +172,7 @@ class ProductPage extends StatelessWidget {
                                 color: kBorderAndShadowColors,
                                 width: 3,
                               ),
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(0),
                                 topRight: Radius.elliptical(360, 360),
                                 bottomLeft: Radius.elliptical(50, 50),
@@ -180,7 +180,7 @@ class ProductPage extends StatelessWidget {
                               ),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(12.0),
+                              padding: const EdgeInsets.all(12.0),
                               child: Text(
                                 '${arguments[3]}',
                                 textAlign: TextAlign.center,
@@ -202,14 +202,14 @@ class ProductPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               //PRODUCT DESCRIPTION
               Expanded(
                 flex: 3,
                 child: ListView.separated(
-                  separatorBuilder: (context, index) => Divider(
+                  separatorBuilder: (context, index) => const Divider(
                     color: Colors.white,
                     thickness: 1,
                   ),
@@ -220,15 +220,13 @@ class ProductPage extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
-                          BoxShadow(
-                              color: Color(0xFF00263b),
-                              blurRadius: 15),
+                          const BoxShadow(
+                              color: Color(0xFF00263b), blurRadius: 15),
                         ],
                       ),
-
                       child: Center(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 15.0, vertical: 10),
                           child: Text(
                             '${arguments[4]}',

@@ -27,9 +27,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Icon(FontAwesomeIcons.dog,size: 150,),
-            SizedBox(height: 30,),
-            DrawerTile(
+            const Icon(FontAwesomeIcons.dog,size: 150,),
+            const SizedBox(height: 30,),
+            const DrawerTile(
               text: 'Προφίλ',
               icon: FontAwesomeIcons.userEdit,
               iconSize: 30,
@@ -55,7 +55,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
 }
 
 class DrawerTile extends StatelessWidget {
-  DrawerTile({this.onTapped, this.text, this.icon, this.iconSize});
+  const DrawerTile({this.onTapped, this.text, this.icon, this.iconSize});
   final Function onTapped;
   final String text;
   final IconData icon;

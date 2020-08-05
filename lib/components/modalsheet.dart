@@ -9,10 +9,10 @@ import 'package:provider/provider.dart';
 class ModalSheetSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bottomSearchModel = context.watch<BottomSearchModel>();
+    var bottomSearchModel = context.watch<BottomSearchModel>();
     return Material(
       color: kMainColor,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(50),
           topLeft: Radius.circular(50),
@@ -38,7 +38,7 @@ class ModalSheetSearch extends StatelessWidget {
                       'searchTerm': bottomSearchModel.textValue,
                     });
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Αναζήτηση προϊόντος',
                     enabled: true
                   ),
