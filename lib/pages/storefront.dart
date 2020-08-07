@@ -21,11 +21,12 @@ import 'package:realpet/components/state_management.dart';
 
 bool _loading = false;
 var _currentUser;
-FirebaseAuth _auth = FirebaseAuth.instance;
-var db = Firestore.instance;
+FirebaseAuth auth = FirebaseAuth.instance;
+var _db = Firestore.instance;
 FlareControls _controls = FlareControls();
 var animationName = 'hamburger';
 var logger = Logger();
+String _displayName = 'No logged user';
 
 class StoreFront extends StatefulWidget {
   @override
@@ -35,12 +36,34 @@ class StoreFront extends StatefulWidget {
 class _StoreFrontState extends State<StoreFront>
     with SingleTickerProviderStateMixin {
   Future checkUser() async {
-    _currentUser = await _auth.currentUser();
+    _currentUser = await auth.currentUser();
+
+    print(_currentUser.runtimeType);
     if (_currentUser == null) {
-      logger.i('No authenticated user found, in the StoreFront');
+      logger.w('No authenticated user found, in the StoreFront');
       await Get.offAllNamed('/login');
     } else {
-      logger.i('${_currentUser.email} is logged');
+      logger.wtf('${_currentUser.email} is logged');
+      logger.wtf('${_currentUser.displayName} is the display name');
+      logger.wtf('${_currentUser.providerId} is the provider name');
+//      await _currentUser
+//          .updateEmail('esentakos@yahoo.gr')
+//          .then(
+//            (value) => print('Success'),
+//          )
+//          .catchError((onError) => print('error'));
+//
+//      var userUpdateInfo = UserUpdateInfo();
+//      userUpdateInfo.displayName = 'esentis';
+//      userUpdateInfo.photoUrl = 'url';
+//      _currentUser
+//          .updateProfile(userUpdateInfo)
+//          .then((_) => print('Username changed'));
+      if (_currentUser.displayName == null) {
+        _displayName = 'No display name specified';
+      } else {
+        _displayName = _currentUser.displayName;
+      }
     }
   }
 
@@ -53,20 +76,21 @@ class _StoreFrontState extends State<StoreFront>
   @override
   Widget build(BuildContext context) {
     var drawerModel = context.watch<DrawerModel>();
-    return SafeArea(
-      child: ModalProgressHUD(
-        inAsyncCall: _loading,
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: kStoreFrontBackgroundImage,
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.5), BlendMode.dstATop),
-            fit: BoxFit.cover,
-          )),
+    return ModalProgressHUD(
+      inAsyncCall: _loading,
+      child: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: kStoreFrontBackgroundImage,
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.5), BlendMode.dstATop),
+          fit: BoxFit.cover,
+        )),
+        child: SafeArea(
           child: Scaffold(
             body: FoldableSidebarBuilder(
               drawer: CustomDrawer(
+                currentUser: _currentUser,
                 closeDrawer: () {
                   drawerModel.toggleDrawer();
                 },

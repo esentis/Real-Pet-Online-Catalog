@@ -8,6 +8,7 @@ import 'package:realpet/pages/login_page.dart';
 import 'package:realpet/pages/product_page.dart';
 import 'package:realpet/pages/register_page.dart';
 import 'package:realpet/pages/results_page.dart';
+import 'package:realpet/pages/user_page.dart';
 
 import 'pages/storefront.dart';
 
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/register', page: () => RegisterPage()),
           GetPage(name: '/product', page: () => ProductPage(),transition: Transition.size),
           GetPage(name: '/results', page: () => ResultsPage(),transition: Transition.fade),
+          GetPage(name: '/user', page: () => UserPage(),transition: Transition.fade),
         ],
       ),
     );

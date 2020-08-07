@@ -100,15 +100,15 @@ class _ResultsPageState extends State<ResultsPage>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: kStoreFrontBackgroundImage,
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.5), BlendMode.dstATop),
-          fit: BoxFit.cover,
-        )),
+    return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+        image: kStoreFrontBackgroundImage,
+        colorFilter: ColorFilter.mode(
+            Colors.black.withOpacity(0.5), BlendMode.dstATop),
+        fit: BoxFit.cover,
+      )),
+      child: SafeArea(
         child: Scaffold(
           body: Center(
             child: Column(

@@ -7,13 +7,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class CustomDrawer extends StatefulWidget {
+  const CustomDrawer({Key key, this.closeDrawer,this.currentUser})
+      : super(key: key);
   final Function closeDrawer;
-
-  const CustomDrawer({Key key, this.closeDrawer}) : super(key: key);
-
+  final currentUser;
   @override
   _CustomDrawerState createState() => _CustomDrawerState();
 }
+
 class _CustomDrawerState extends State<CustomDrawer> {
   bool _loading = false;
   @override
@@ -27,12 +28,31 @@ class _CustomDrawerState extends State<CustomDrawer> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            const Icon(FontAwesomeIcons.dog,size: 150,),
-            const SizedBox(height: 30,),
-            const DrawerTile(
-              text: 'Προφίλ',
-              icon: FontAwesomeIcons.userEdit,
-              iconSize: 30,
+            Card(
+                shadowColor: Colors.white,
+                color: Colors.white,
+                elevation: 20,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      widget.currentUser.displayName,
+                      style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 30, color: Colors.black),
+                    ),
+                  ),
+                )),
+            const SizedBox(
+              height: 30,
+            ),
+            GestureDetector(
+              onTap: () => Get.toNamed('/user',arguments: widget.currentUser),
+              child: const DrawerTile(
+                text: 'Προφίλ',
+                icon: FontAwesomeIcons.userEdit,
+                iconSize: 30,
+              ),
             ),
             DrawerTile(
               text: 'Αποσύνδεση',
@@ -87,5 +107,3 @@ class DrawerTile extends StatelessWidget {
     );
   }
 }
-
-
