@@ -103,6 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Colors.white,
                             hintStyle: GoogleFonts.comfortaa(
                               fontSize: 20,
+                              color: Colors.black,
                             ),
                             border: UnderlineInputBorder(
                                 borderRadius: BorderRadius.circular(20)),
@@ -130,6 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             hintText: 'Κωδικός',
                             hintStyle: GoogleFonts.comfortaa(
                               fontSize: 20,
+                              color: Colors.white,
                             ),
                             border: const UnderlineInputBorder(
                               borderRadius: BorderRadius.only(
@@ -164,10 +166,14 @@ class _RegisterPageState extends State<RegisterPage> {
                             width: 20,
                           ),
                           RaisedButton(
+                            color: Colors.white,
                             child: Text(
                               'Εγγραφή',
                               style: GoogleFonts.comfortaa(
-                                  fontSize: 20, color: Colors.white),
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             shape: const StadiumBorder(),
                             onPressed: () async {

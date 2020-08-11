@@ -101,8 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                         child: TextField(
                           controller: _emailTextController,
                           style: GoogleFonts.comfortaa(
-                            fontSize: 20,
-                          ),
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
                           onChanged: (email) {
                             logger.i('Password value is $email');
                             _email = email;
@@ -112,17 +113,14 @@ class _LoginPageState extends State<LoginPage> {
                           enabled: true,
                           keyboardAppearance: Brightness.dark,
                           decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
                             icon: const Icon(FontAwesomeIcons.user),
                             hintText: 'E-Mail',
                             hintStyle: GoogleFonts.comfortaa(
-                              fontSize: 20,
-                            ),
-                            border: const OutlineInputBorder(
-                              gapPadding: 15,
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(60),
-                                bottomLeft: Radius.circular(60),
-                              ),
+                                fontSize: 20, color: Colors.black),
+                            border: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
                           textAlign: TextAlign.center,
@@ -148,14 +146,9 @@ class _LoginPageState extends State<LoginPage> {
                             icon: const Icon(FontAwesomeIcons.lock),
                             hintText: 'Κωδικός',
                             hintStyle: GoogleFonts.comfortaa(
-                              fontSize: 20,
-                            ),
-                            border: const OutlineInputBorder(
-                              gapPadding: 15,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(60),
-                                bottomRight: Radius.circular(60),
-                              ),
+                                fontSize: 20, color: Colors.white),
+                            border: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
                           textAlign: TextAlign.center,
@@ -183,10 +176,14 @@ class _LoginPageState extends State<LoginPage> {
                             width: 20,
                           ),
                           RaisedButton(
+                            color: Colors.white,
                             child: Text(
                               'Είσοδος',
                               style: GoogleFonts.comfortaa(
-                                  fontSize: 20, color: Colors.white),
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             shape: const StadiumBorder(),
                             onPressed: () async {
