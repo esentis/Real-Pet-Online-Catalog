@@ -2,7 +2,9 @@
 ![alt text](https://i.imgur.com/dcVYosv.png "Real Pet inc.")
 
 # Real Pet Online Shop Catalog
+
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+
 ![Flutter CI](https://github.com/esentis/Real-Pet-Online-Catalog/workflows/Flutter%20CI/badge.svg)
 
 ## Overview
