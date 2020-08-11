@@ -2,11 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:logger/logger.dart';
 import 'package:realpet/shop_logic.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-var logger = Logger();
 var _currentPage = 1;
 
 // SEARCH RESULTS PAGE

@@ -32,22 +32,22 @@ class EditProfileModalSheet extends StatelessWidget {
       userUpdateInfo.displayName = value;
       await _currentUser
           .updateProfile(userUpdateInfo)
-          .then((_) => print('Display name changed'))
-          .catchError((onError) => print('error changing display name'));
+          .then((_) => logger.i('Display name changed'))
+          .catchError((onError) => logger.e('error changing display name'));
     } else if (editingField == 'email') {
       await _currentUser
           .updateEmail(value)
           .then(
-            (value) => print('Email has changed'),
+            (value) => logger.i('Email has changed'),
           )
-          .catchError((onError) => print('error changing email'));
+          .catchError((onError) => logger.e('error changing email'));
     } else if (editingField == 'password') {
       await _currentUser
           .updatePassword(value)
           .then(
-            (value) => print('Password has changed'),
+            (value) => logger.i('Password has changed'),
           )
-          .catchError((onError) => print('error changing password'));
+          .catchError((onError) => logger.e('error changing password'));
     } else if (editingField == null) {
       return 'Page needs refresh';
     }

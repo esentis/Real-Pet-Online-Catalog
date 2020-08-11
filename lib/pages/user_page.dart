@@ -16,28 +16,14 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   Future checkUser() async {
     var _currentUser = await auth.currentUser();
-
-    print(_currentUser.runtimeType);
     if (_currentUser == null) {
       logger.w('No authenticated user found, in the StoreFront');
       await Get.offAllNamed('/login');
     } else {
-      logger.wtf('${_currentUser.email} is logged');
-      logger.wtf('${_currentUser.displayName} is the display name');
-      logger.wtf('${_currentUser.providerId} is the provider name');
-//      await _currentUser
-//          .updateEmail('esentakos@yahoo.gr')
-//          .then(
-//            (value) => print('Success'),
-//          )
-//          .catchError((onError) => print('error'));
-//
-//      var userUpdateInfo = UserUpdateInfo();
-//      userUpdateInfo.displayName = 'esentis';
-//      userUpdateInfo.photoUrl = 'url';
-//      _currentUser
-//          .updateProfile(userUpdateInfo)
-//          .then((_) => print('Username changed'));
+      logger.i('${_currentUser.email} is logged');
+      logger.i('${_currentUser.displayName} is the display name');
+      logger.i('${_currentUser.providerId} is the provider name');
+
       if (_currentUser.displayName == null) {
         displayName = 'No display name specified';
       } else {

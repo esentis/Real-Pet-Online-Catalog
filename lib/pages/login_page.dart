@@ -27,10 +27,10 @@ class _LoginPageState extends State<LoginPage> {
   Future checkUser() async {
     _currentUser = await _auth.currentUser();
     if (_currentUser != null) {
-      print('User is logged, redirecting to StoreFront');
+      logger.i('User is logged, redirecting to StoreFront');
       await Get.offAllNamed('/');
     } else {
-      print('No user logged, log with your credentials');
+      logger.w('No user logged, log with your credentials');
     }
   }
 
@@ -42,16 +42,16 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-      inAsyncCall: _logging,
-      child: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: kStoreFrontBackgroundImage,
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.5), BlendMode.dstATop),
-          fit: BoxFit.cover,
-        )),
+    return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+        image: kStoreFrontBackgroundImage,
+        colorFilter:
+            ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
+        fit: BoxFit.cover,
+      )),
+      child: ModalProgressHUD(
+        inAsyncCall: _logging,
         child: Scaffold(
           body: SafeArea(
             child: Center(
@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontSize: 20,
                           ),
                           onChanged: (email) {
-                            print('Password value is $email');
+                            logger.i('Password value is $email');
                             _email = email;
                           },
                           cursorColor: Colors.red,
@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText: true,
                           controller: _passwordTextController,
                           onChanged: (password) {
-                            print('Password value is $password');
+                            logger.i('Password value is $password');
                             _password = password;
                           },
                           style: GoogleFonts.comfortaa(
@@ -199,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                                   password: _password,
                                 );
                               } catch (e) {
-                                print(e);
+                                logger.e(e);
                                 _logging = false;
                                 setState(() {
                                   snackBar(

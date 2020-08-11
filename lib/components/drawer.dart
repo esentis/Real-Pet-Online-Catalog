@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({Key key, this.closeDrawer,this.currentUser})
+  const CustomDrawer({Key key, this.closeDrawer, this.currentUser})
       : super(key: key);
   final Function closeDrawer;
   final currentUser;
@@ -37,7 +37,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      widget.currentUser.displayName,
+                      'Καλώς ήρθατε',
                       style: GoogleFonts.gfsNeohellenic(
                           fontSize: 30, color: Colors.black),
                     ),
@@ -47,7 +47,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               height: 30,
             ),
             GestureDetector(
-              onTap: () => Get.toNamed('/user',arguments: widget.currentUser),
+              onTap: () => Get.toNamed('/user', arguments: widget.currentUser),
               child: const DrawerTile(
                 text: 'Προφίλ',
                 icon: FontAwesomeIcons.userEdit,

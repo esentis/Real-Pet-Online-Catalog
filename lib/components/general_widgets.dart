@@ -29,7 +29,7 @@ void snackBar({
       ),
       messageText: Text(text),
       shouldIconPulse: true, onTap: (value) {
-    print(value);
+    logger.i(value);
   },
       showProgressIndicator: true,
       isDismissible: true,

@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:foldable_sidebar/foldable_sidebar.dart';
 
+import '../shop_logic.dart';
+
 class DrawerModel extends ChangeNotifier {
   FSBStatus drawerStatus;
   void getStatus() => drawerStatus;
@@ -10,11 +12,11 @@ class DrawerModel extends ChangeNotifier {
   void toggleDrawer() {
     if (drawerStatus == FSBStatus.FSB_CLOSE) {
       drawerStatus = FSBStatus.FSB_OPEN;
-      print('OPENING');
+      logger.i('OPENING');
       notifyListeners();
     } else {
       drawerStatus = FSBStatus.FSB_CLOSE;
-      print('CLOSING');
+      logger.i('CLOSING');
       notifyListeners();
     }
   }

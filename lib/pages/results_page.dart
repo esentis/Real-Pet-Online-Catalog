@@ -6,8 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:realpet/components/animated_logo.dart';
 import 'package:realpet/components/constants.dart';
 import 'package:realpet/components/results_page_components.dart';
-
-import '../shop_logic.dart';
+import 'package:realpet/shop_logic.dart';
 
 var response;
 
@@ -104,8 +103,8 @@ class _ResultsPageState extends State<ResultsPage>
       decoration: BoxDecoration(
           image: DecorationImage(
         image: kStoreFrontBackgroundImage,
-        colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.5), BlendMode.dstATop),
+        colorFilter:
+            ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
         fit: BoxFit.cover,
       )),
       child: SafeArea(

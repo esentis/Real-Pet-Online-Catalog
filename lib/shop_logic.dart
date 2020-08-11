@@ -20,9 +20,9 @@ Future getProducts() async {
   Response response;
   try {
     response = await dio.get('/api/product');
-    print(response.statusCode);
-    print(response.data.length);
+    logger.i(response.statusCode);
   } on DioError catch (e) {
+    logger.e(e.type);
     return e.type;
   }
   return response.data;
@@ -33,9 +33,9 @@ Future getCategoryProducts(categoryId) async {
   Response response;
   try {
     response = await dio.get('/api/product/category/$categoryId');
-    print(response.statusCode);
-    print(response.data.length);
+    logger.i(response.statusCode);
   } on DioError catch (e) {
+    logger.e(e.type);
     return e.type;
   }
   return response.data;
@@ -53,10 +53,11 @@ Future searchProducts({term, page, category, lowestPrice, highestPrice}) async {
   });
   try {
     response = await dio.post('/api/product/search', data: formData);
+    logger.i(response.statusCode);
   } on DioError catch (e) {
+    logger.e(e.type);
     return e.type;
   }
-
   return response.data;
 }
 
@@ -81,8 +82,9 @@ Future<Object> addProduct({
       'sku': sku,
       'description': description,
     });
-    print(response);
+    logger.v(response);
   } on DioError catch (e) {
+    logger.e(e.type);
     return e.type;
   }
   return response;

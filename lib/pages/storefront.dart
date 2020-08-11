@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controls.dart';
@@ -22,10 +20,10 @@ import 'package:realpet/components/state_management.dart';
 bool _loading = false;
 var _currentUser;
 FirebaseAuth auth = FirebaseAuth.instance;
-var _db = Firestore.instance;
 FlareControls _controls = FlareControls();
 var animationName = 'hamburger';
 var logger = Logger();
+// ignore: unused_element
 String _displayName = 'No logged user';
 
 class StoreFront extends StatefulWidget {
@@ -37,33 +35,18 @@ class _StoreFrontState extends State<StoreFront>
     with SingleTickerProviderStateMixin {
   Future checkUser() async {
     _currentUser = await auth.currentUser();
-
-    print(_currentUser.runtimeType);
     if (_currentUser == null) {
       logger.w('No authenticated user found, in the StoreFront');
       await Get.offAllNamed('/login');
+      return;
+    }
+    // logger.i('${_currentUser.email ?? ''} is logged');
+    // logger.i('${_currentUser.displayName ?? ''} is the display name');
+    // logger.i('${_currentUser.providerId ?? ''} is the provider name');
+    if (_currentUser.displayName == null) {
+      _displayName = 'No display name specified';
     } else {
-      logger.wtf('${_currentUser.email} is logged');
-      logger.wtf('${_currentUser.displayName} is the display name');
-      logger.wtf('${_currentUser.providerId} is the provider name');
-//      await _currentUser
-//          .updateEmail('esentakos@yahoo.gr')
-//          .then(
-//            (value) => print('Success'),
-//          )
-//          .catchError((onError) => print('error'));
-//
-//      var userUpdateInfo = UserUpdateInfo();
-//      userUpdateInfo.displayName = 'esentis';
-//      userUpdateInfo.photoUrl = 'url';
-//      _currentUser
-//          .updateProfile(userUpdateInfo)
-//          .then((_) => print('Username changed'));
-      if (_currentUser.displayName == null) {
-        _displayName = 'No display name specified';
-      } else {
-        _displayName = _currentUser.displayName;
-      }
+      _displayName = _currentUser.displayName;
     }
   }
 

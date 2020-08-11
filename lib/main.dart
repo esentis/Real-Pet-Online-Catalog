@@ -38,22 +38,39 @@ class MyApp extends StatelessWidget {
             inactiveTrackColor: Colors.red,
             activeTrackColor: Colors.white,
             overlayShape: const RoundSliderOverlayShape(overlayRadius: 30),
-            valueIndicatorColor: Colors.green,
-            activeTickMarkColor: Colors.cyan,
             trackHeight: 10,
             valueIndicatorTextStyle: GoogleFonts.comfortaa(),
             inactiveTickMarkColor: Colors.black,
             thumbColor: Colors.yellow,
           ),
         ),
-        initialRoute: '/',
+        initialRoute: '/login',
         getPages: [
-          GetPage(name: '/', page: () => StoreFront()),
-          GetPage(name: '/login', page: () => LoginPage()),
-          GetPage(name: '/register', page: () => RegisterPage()),
-          GetPage(name: '/product', page: () => ProductPage(),transition: Transition.size),
-          GetPage(name: '/results', page: () => ResultsPage(),transition: Transition.fade),
-          GetPage(name: '/user', page: () => UserPage(),transition: Transition.fade),
+          GetPage(
+            name: '/',
+            page: () => StoreFront(),
+          ),
+          GetPage(
+              name: '/login',
+              page: () => LoginPage(),
+              transition: Transition.leftToRight),
+          GetPage(
+            name: '/register',
+            page: () => RegisterPage(),
+            transition: Transition.rightToLeft,
+          ),
+          GetPage(
+              name: '/product',
+              page: () => ProductPage(),
+              transition: Transition.size),
+          GetPage(
+              name: '/results',
+              page: () => ResultsPage(),
+              transition: Transition.fade),
+          GetPage(
+              name: '/user',
+              page: () => UserPage(),
+              transition: Transition.fade),
         ],
       ),
     );
