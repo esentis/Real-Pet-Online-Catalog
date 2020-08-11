@@ -168,7 +168,9 @@ class _LoginPageState extends State<LoginPage> {
                               'Δεν είστε μέλος;\nΕγγραφή',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.comfortaa(
-                                fontSize: 15,
+                                fontSize: 17,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),

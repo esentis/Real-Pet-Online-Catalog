@@ -158,7 +158,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               'Είστε ήδη μέλος;\nΕίσοδος',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.comfortaa(
-                                fontSize: 15,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
