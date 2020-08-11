@@ -17,17 +17,28 @@ void snackBar({
   return Get.snackbar(
       '', // title
       '', // message
+      backgroundColor: Colors.white,
       icon: Icon(
         iconData,
         color: iconColor,
       ),
+      borderRadius: 20,
+      borderColor: Colors.black,
+      borderWidth: 3,
       titleText: Text(
         title,
         style: GoogleFonts.comfortaa(
           textStyle: const TextStyle(color: Colors.white, letterSpacing: .5),
         ),
       ),
-      messageText: Text(text),
+      messageText: Text(
+        text,
+        style: const TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 17,
+        ),
+      ),
       shouldIconPulse: true, onTap: (value) {
     logger.i(value);
   },
