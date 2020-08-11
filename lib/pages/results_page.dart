@@ -90,11 +90,13 @@ class _ResultsPageState extends State<ResultsPage>
     super.initState();
     _animationController =
         AnimationController(duration: const Duration(seconds: 2), vsync: this);
-    animation = Tween<Color>(begin: Colors.white, end: Colors.blueAccent)
-        .animate(_animationController)
-          ..addListener(() {
-            setState(() {});
-          });
+    animation = Tween<Color>(
+      begin: Colors.white,
+      end: Colors.blueAccent,
+    ).animate(_animationController)
+      ..addListener(() {
+        setState(() {});
+      });
   }
 
   @override

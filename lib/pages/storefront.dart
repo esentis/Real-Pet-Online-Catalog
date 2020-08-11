@@ -81,56 +81,59 @@ class _StoreFrontState extends State<StoreFront>
               screenContents: Column(
                 children: <Widget>[
                   // MENU AND LOGO
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      // SETTINGS TOGGLER
-                      GestureDetector(
-                        onTap: () {
-                          drawerModel.toggleDrawer();
-                          setState(() {
-                            if (animationName == 'toX') {
-                              animationName = 'toHamburger';
-                            } else {
-                              animationName = 'toX';
-                            }
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: kMainColor,
-                              shape: BoxShape.circle,
-                              border: const Border.fromBorderSide(BorderSide(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        // SETTINGS TOGGLER
+                        GestureDetector(
+                          onTap: () {
+                            drawerModel.toggleDrawer();
+                            setState(() {
+                              if (animationName == 'toX') {
+                                animationName = 'toHamburger';
+                              } else {
+                                animationName = 'toX';
+                              }
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: kMainColor,
+                                shape: BoxShape.circle,
+                                border: const Border.fromBorderSide(BorderSide(
+                                  color: Colors.white,
+                                  width: 3,
+                                ))),
+                            width: 50,
+                            height: 50,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FlareActor(
+                                'assets/settings_icon.flr',
+                                animation: animationName,
+                                controller: _controls,
                                 color: Colors.white,
-                                width: 3,
-                              ))),
-                          width: 50,
-                          height: 50,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: FlareActor(
-                              'assets/settings_icon.flr',
-                              animation: animationName,
-                              controller: _controls,
-                              color: Colors.white,
-                              fit: BoxFit.fitWidth,
+                                fit: BoxFit.fitWidth,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const RealPetLogo(
-                        blurRadius: 10,
-                        containerHeight: 150,
-                        containerWidth: 200,
-                        topRightRadius: Radius.circular(70),
-                        topLeftRadius: Radius.circular(70),
-                        bottomRightRadius: Radius.circular(20),
-                        bottomLeftRadius: Radius.circular(20),
-                      ),
-                      const SizedBox(
-                        width: 25,
-                      ),
-                    ],
+                        const RealPetLogo(
+                          blurRadius: 10,
+                          containerHeight: 150,
+                          containerWidth: 200,
+                          topRightRadius: Radius.circular(70),
+                          topLeftRadius: Radius.circular(70),
+                          bottomRightRadius: Radius.circular(20),
+                          bottomLeftRadius: Radius.circular(20),
+                        ),
+                        const SizedBox(
+                          width: 25,
+                        ),
+                      ],
+                    ),
                   ),
                   // ALL CATEGORIES
                   const SizedBox(
