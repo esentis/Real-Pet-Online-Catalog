@@ -6,7 +6,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
 ![Flutter CI](https://github.com/esentis/Real-Pet-Online-Catalog/workflows/Flutter%20CI/badge.svg)
-
+[![Codemagic build status](https://api.codemagic.io/apps/5f347ebdb4e2d165a893e3c7/5f347ebdb4e2d165a893e3c6/status_badge.svg)](https://codemagic.io/apps/5f347ebdb4e2d165a893e3c7/5f347ebdb4e2d165a893e3c6/latest_build)
 ## Overview
 
 An Android / iOS petshop catalog app made with Flutter / Dart.
