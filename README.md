@@ -7,6 +7,7 @@
 
 ![Flutter CI](https://github.com/esentis/Real-Pet-Online-Catalog/workflows/Flutter%20CI/badge.svg)
 [![Codemagic build status](https://api.codemagic.io/apps/5f347ebdb4e2d165a893e3c7/5f347ebdb4e2d165a893e3c6/status_badge.svg)](https://codemagic.io/apps/5f347ebdb4e2d165a893e3c7/5f347ebdb4e2d165a893e3c6/latest_build)
+
 ## Overview
 
 An Android / iOS petshop catalog app made with Flutter / Dart.
@@ -15,27 +16,28 @@ An Android / iOS petshop catalog app made with Flutter / Dart.
 
 Login / Register| Successful login | User Page (work in progress)
 ------------ | -------------| ------------- |
-![Alt text](/screenshots/1.gif?raw=true "1") | ![Alt text](/screenshots/2.gif?raw=true "2") | ![Alt text](/screenshots/6.gif?raw=true "3")
+![Login / Register](/screenshots/1.gif?raw=true "Login / Register") | ![Success login](/screenshots/2.gif?raw=true "Success login") | ![User page](/screenshots/6.gif?raw=true "User page")
 
 Category Products |Product Page| Search Product |
------------- |------------ | -------------| 
-![Alt text](/screenshots/3.gif?raw=true "1") | ![Alt text](/screenshots/4.gif?raw=true "2") |![Alt text](/screenshots/5.gif?raw=true "2")
+------------ |------------ | -------------|
+![Category products](/screenshots/3.gif?raw=true "Category products") | ![Product page](/screenshots/4.gif?raw=true "Product page") |![Search product](/screenshots/5.gif?raw=true "Search product")
 
 ## Features
 
-* User authentication / registration with Firebase.
-* User info editing.
-* Backend is made with  EF Core and C# (repo link coming soon).
-* Search supports both Greek and English characters.
-* Smooth 60 FPS animations.
+>Backend is made with  EF Core and C# (repo link coming soon)
 
-***
-
-> Coming soon CUD operations and user roles
-> * Edit a product
-> * Add a new product
-> * Delete a product
-> * Create user roles
+- [x] User authentication / registration with Firebase
+- [x] User info editing
+- [x] Product  categories
+- [x] Product  page
+- [x] Infinite scrolling
+- [x] Search supports both Greek and English characters.
+- [x] Smooth 60 FPS animations.
+- [ ] Edit a product
+- [ ] Add a new product
+- [ ] Delete a product
+- [ ] Create user roles
+- [ ] Rate / review product
 
 ## Libraries
 
