@@ -40,7 +40,7 @@ class ModalSheetSearch extends StatelessWidget {
                   },
                   decoration: const InputDecoration(
                     hintText: 'Αναζήτηση προϊόντος',
-                    enabled: true
+                    enabled: true,
                   ),
                   cursorWidth: 10,
                   cursorColor: Colors.white,
@@ -48,7 +48,9 @@ class ModalSheetSearch extends StatelessWidget {
                   textInputAction: TextInputAction.search,
                   controller: bottomSearchModel.textController,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.comfortaa(fontSize: 26),
+                  style: GoogleFonts.comfortaa(
+                    fontSize: 26,
+                  ),
                   autofocus: true,
                 ),
               ],

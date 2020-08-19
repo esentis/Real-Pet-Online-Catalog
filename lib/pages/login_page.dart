@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:realpet/components/constants.dart';
-import 'package:realpet/components/general_widgets.dart';
+import 'package:realpet/components/snackbar.dart';
 
 final TextEditingController _emailTextController = TextEditingController();
 final TextEditingController _passwordTextController = TextEditingController();
