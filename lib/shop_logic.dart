@@ -3,10 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
-import 'package:realpet/components/general_widgets.dart';
+import 'package:realpet/components/snackbar.dart';
 
 var logger = Logger();
-// CONNECTION SETTINGS WITH OUR DB
+
+/// HTTP connection settings.
 BaseOptions dioOptions = BaseOptions(
     baseUrl: 'http://10.0.2.2:5000',
     receiveDataWhenStatusError: true,
@@ -15,7 +16,7 @@ BaseOptions dioOptions = BaseOptions(
     );
 Dio dio = Dio(dioOptions);
 
-// METHOD FOR RETRIEVING ALL PRODUCTS
+/// Returns all products.
 Future getProducts() async {
   Response response;
   try {
@@ -28,7 +29,7 @@ Future getProducts() async {
   return response.data;
 }
 
-// METHOD FOR RETRIEVING ALL PRODUCTS ON A SPECIFIC CATEGORY
+/// Returns products from a specific __[categoryId]__.
 Future getCategoryProducts(categoryId) async {
   Response response;
   try {
@@ -41,7 +42,13 @@ Future getCategoryProducts(categoryId) async {
   return response.data;
 }
 
-// METHOD FOR SEARCHING PRODUCTS
+/// Advanced search,
+/// searches products based on criteria:
+/// * __[term]__ : Text to search.
+/// * __[page]__ : The page of the results.
+/// * __[category]__ : Category name.
+/// * __[lowestPrice]__ : Lowest price of the product.
+/// * __[highestPrice]__ : Highest price of the product.
 Future searchProducts({term, page, category, lowestPrice, highestPrice}) async {
   Response response;
   var formData = FormData.fromMap({
@@ -61,7 +68,14 @@ Future searchProducts({term, page, category, lowestPrice, highestPrice}) async {
   return response.data;
 }
 
-// METHOD FOR ADDING A NEW PRODUCT
+/// Adds a new product.
+/// * @required __[categoryId]__ : The id of the category to add the product.
+/// * @required __[name]__ : Name of the product.
+/// * @required __[img]__ : The image source.
+/// * @required __[originalPrice]__ : The starting price.
+/// * @required __[sellingPrice]__ : The final selling price.
+/// * @required __[description]__ : Detailed product description.
+/// * @required __[sku]__ : Product stock keeping unit.
 Future<Object> addProduct({
   @required int categoryId,
   @required String name,
@@ -90,7 +104,12 @@ Future<Object> addProduct({
   return response;
 }
 
-// METHOD THAT RESPONDS TO SERVER ERRORS
+/// Checks for server __[response]__ codes.
+/// *  __[DioErrorType.CONNECT_TIMEOUT]__
+/// *  __[DioErrorType.RECEIVE_TIMEOUT]__
+/// *  __[DioErrorType.RESPONSE]__
+/// *  __[DioErrorType.CANCEL]__
+/// *  __[DioErrorType.DEFAUL]__
 bool checkResponse(response) {
   if (response == DioErrorType.CONNECT_TIMEOUT) {
     logger.e('Received ERROR $response');
@@ -145,92 +164,3 @@ bool checkResponse(response) {
   }
   return true;
 }
-
-// A METHOD FOR COPYING MY FIREBASE TO postgresql
-// IT'S NOT USED ANYMORE
-//copyDb() {
-//  Firestore.instance.collection('products').snapshots().listen(
-//    (products) {
-//      products.documents.forEach((productFound) async {
-//        var category;
-//        switch (productFound['category']) {
-//          case 'catFood':
-//            {
-//              category = 1;
-//            }
-//            break;
-//          case 'dogFood':
-//            {
-//              category = 2;
-//            }
-//            break;
-//          case 'shampoo':
-//            {
-//              category = 3;
-//            }
-//            break;
-//          case 'grooming':
-//            {
-//              category = 4;
-//            }
-//            break;
-//          case 'bird':
-//            {
-//              category = 5;
-//            }
-//            break;
-//          case 'bones':
-//            {
-//              category = 6;
-//            }
-//            break;
-//          case 'bowl':
-//            {
-//              category = 7;
-//            }
-//            break;
-//          case 'pro':
-//            {
-//              category = 8;
-//            }
-//            break;
-//          case 'misc':
-//            {
-//              category = 9;
-//            }
-//            break;
-//          case 'toys':
-//            {
-//              category = 10;
-//            }
-//            break;
-//          case 'vitamines':
-//            {
-//              category = 11;
-//            }
-//            break;
-//          default:
-//            {
-//              print('Product not found so it defaulted to 1');
-//              category = 1;
-//            }
-//        }
-//        Response response;
-//        try {
-//          response = await dio.post("http://10.0.2.2:5000/api/product", data: {
-//            "categoryId": category,
-//            "name": productFound['name'],
-//            "img": productFound['img'],
-//            "originalPrice": double.parse(productFound['price'][0]),
-//            "sellingPrice": double.parse(productFound['price'][1]),
-//            "sku": productFound['sku'],
-//            "description": productFound['desc'],
-//          });
-//          print(response);
-//        } catch (e) {
-//          print(e);
-//        }
-//      });
-//    },
-//  );
-//} // A list of Maps with Product info

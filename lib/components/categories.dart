@@ -14,7 +14,7 @@ import 'constants.dart';
 bool _loading = false;
 var logger = Logger();
 
-// STOREFRONT'S CATEGORIES
+/// Storefront's categories is a widget that takes as children a List of CategoryIcon widgets.
 class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -105,7 +105,14 @@ class Categories extends StatelessWidget {
   }
 }
 
-// CATEGORIES' ICON
+/// Category icon Widget.
+///
+/// Parameters:
+/// * String __[text]__
+/// * int __[categoryId]__
+/// * Color __[color]__
+/// * IconData __[categoryIcon]__
+/// * Color __[iconColor]__
 class CategoryIcon extends StatefulWidget {
   const CategoryIcon({
     this.text,

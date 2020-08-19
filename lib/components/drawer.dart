@@ -6,6 +6,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
+/// Drawer widget that takes parameters:
+///
+/// * Function __[closeDrawer]__
+/// * FirebaseUser __[currentUser]__.
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({Key key, this.closeDrawer, this.currentUser})
       : super(key: key);
@@ -74,6 +78,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
   }
 }
 
+/// DrawerTile Widget, is basically a ListTile that takes parameters:
+///
+/// * Function __[onTapped]__.
+/// * String __[text]__.
+/// * IconData __[icon]__.
+/// * double __[iconSize]__.
 class DrawerTile extends StatelessWidget {
   const DrawerTile({this.onTapped, this.text, this.icon, this.iconSize});
   final Function onTapped;

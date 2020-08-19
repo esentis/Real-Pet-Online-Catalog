@@ -8,6 +8,16 @@ import 'constants.dart';
 String _logoAnimation = 'idle';
 final FlareControls _controls = FlareControls();
 
+/// __Animated Logo__
+///
+/// Parameters:
+/// * double __[blurRadius]__
+/// * double __[containerWidth]__
+/// * double __[containerHeight]__
+/// * Radius __[topLeftRadius]__
+/// * Radius __[topRightRadius]__
+/// * Radius __[bottomLeftRadius]__
+/// * Radius __[bottomRightRadius]__
 class RealPetLogo extends StatefulWidget {
   const RealPetLogo({
     this.blurRadius,
