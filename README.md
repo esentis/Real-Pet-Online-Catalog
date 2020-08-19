@@ -1,7 +1,7 @@
 
-![alt text](https://i.imgur.com/dcVYosv.png "Real Pet inc.")
-
 # Real Pet Online Shop Catalog
+
+![alt text](https://i.imgur.com/dcVYosv.png "Real Pet inc.")
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
