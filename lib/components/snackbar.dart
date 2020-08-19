@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
 var logger = Logger();
-// A BEAUTIFUL SNACKBAR CONSTRUCTOR
+
 void snackBar({
   String text,
   String title,
