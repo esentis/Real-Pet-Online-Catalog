@@ -11,12 +11,13 @@ class ProductPage extends StatelessWidget {
     List arguments = Get.arguments;
     return Container(
       decoration: BoxDecoration(
-          image: DecorationImage(
-        image: kStoreFrontBackgroundImage,
-        colorFilter:
-            ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
-        fit: BoxFit.cover,
-      )),
+        image: DecorationImage(
+          image: kStoreFrontBackgroundImage,
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.5), BlendMode.dstATop),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: Scaffold(
           body: SafeArea(
         child: Center(
@@ -187,8 +188,9 @@ class ProductPage extends StatelessWidget {
                                 style: GoogleFonts.comfortaa(
                                     shadows: [
                                       Shadow(
-                                          color: kPriceShadowColor,
-                                          blurRadius: kPriceBlurRadius),
+                                        color: kPriceShadowColor,
+                                        blurRadius: kPriceBlurRadius,
+                                      ),
                                     ],
                                     color: kPriceTextColor,
                                     fontSize: kSkuFontSize,

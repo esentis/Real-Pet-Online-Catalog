@@ -60,10 +60,6 @@ class _SearchResultsState extends State<SearchResults> {
                       logger.w('No more pages to load');
                     }
                   }
-//                  if (_scrollController.position.pixels ==
-//                      _scrollController.position.maxScrollExtent) {
-//                    logger.i("MAX CONTENT");
-//                  }
                 }),
               itemCount: widget.products['results'].length,
               itemBuilder: (BuildContext context, int index) {

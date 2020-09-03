@@ -103,12 +103,13 @@ class _ResultsPageState extends State<ResultsPage>
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          image: DecorationImage(
-        image: kStoreFrontBackgroundImage,
-        colorFilter:
-            ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
-        fit: BoxFit.cover,
-      )),
+        image: DecorationImage(
+          image: kStoreFrontBackgroundImage,
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.5), BlendMode.dstATop),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: SafeArea(
         child: Scaffold(
           body: Center(

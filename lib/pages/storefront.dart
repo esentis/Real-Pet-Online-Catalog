@@ -40,9 +40,6 @@ class _StoreFrontState extends State<StoreFront>
       await Get.offAllNamed('/login');
       return;
     }
-    // logger.i('${_currentUser.email ?? ''} is logged');
-    // logger.i('${_currentUser.displayName ?? ''} is the display name');
-    // logger.i('${_currentUser.providerId ?? ''} is the provider name');
     if (_currentUser.displayName == null) {
       _displayName = 'No display name specified';
     } else {
@@ -63,12 +60,15 @@ class _StoreFrontState extends State<StoreFront>
       inAsyncCall: _loading,
       child: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
-          image: kStoreFrontBackgroundImage,
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.5), BlendMode.dstATop),
-          fit: BoxFit.cover,
-        )),
+          image: DecorationImage(
+            image: kStoreFrontBackgroundImage,
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.5),
+              BlendMode.dstATop,
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: SafeArea(
           child: Scaffold(
             body: FoldableSidebarBuilder(
@@ -100,12 +100,15 @@ class _StoreFrontState extends State<StoreFront>
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                                color: kMainColor,
-                                shape: BoxShape.circle,
-                                border: const Border.fromBorderSide(BorderSide(
+                              color: kMainColor,
+                              shape: BoxShape.circle,
+                              border: const Border.fromBorderSide(
+                                BorderSide(
                                   color: Colors.white,
                                   width: 3,
-                                ))),
+                                ),
+                              ),
+                            ),
                             width: 50,
                             height: 50,
                             child: Padding(
