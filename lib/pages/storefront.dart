@@ -14,6 +14,7 @@ import 'package:realpet/components/animated_logo.dart';
 import 'package:realpet/components/categories.dart';
 import 'package:realpet/components/constants.dart';
 import 'package:realpet/components/drawer.dart';
+import 'package:realpet/components/drawer_icon.dart';
 import 'package:realpet/components/modalsheet.dart';
 import 'package:realpet/components/state_management.dart';
 
@@ -98,29 +99,10 @@ class _StoreFrontState extends State<StoreFront>
                               }
                             });
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: kMainColor,
-                              shape: BoxShape.circle,
-                              border: const Border.fromBorderSide(
-                                BorderSide(
-                                  color: Colors.white,
-                                  width: 3,
-                                ),
-                              ),
-                            ),
-                            width: 50,
-                            height: 50,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: FlareActor(
-                                'assets/settings_icon.flr',
-                                animation: animationName,
-                                controller: _controls,
-                                color: Colors.white,
-                                fit: BoxFit.fitWidth,
-                              ),
-                            ),
+                          child: DrawerIcon(
+                            color: kMainColor,
+                            flareController: _controls,
+                            animationName: animationName,
                           ),
                         ),
                         const RealPetLogo(
