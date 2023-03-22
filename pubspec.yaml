@@ -37,7 +37,7 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   flare_flutter: ^2.0.3
   transparent_image: ^1.0.0
-  dio: ^3.0.9
+  dio: ^5.0.0
   logger: ^0.9.1
   flutter_spinkit: ^4.1.2+1
   foldable_sidebar: ^1.0.0
